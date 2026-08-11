@@ -1,4 +1,15 @@
+use base64::engine::general_purpose::STANDARD;
+use base64::Engine;
 use krypto_wasm::crypto;
+
+/// Ändert ein Byte, ohne Base64-Format oder Länge zu zerstören.
+/// So prüfen die AEAD-Tests tatsächlich die Authentifizierung und nicht nur
+/// die Eingabevalidierung des Base64-Decoders.
+fn manipulate_base64(value: &str) -> String {
+    let mut bytes = STANDARD.decode(value).unwrap();
+    bytes[0] ^= 0b0000_0001;
+    STANDARD.encode(bytes)
+}
 
 #[test]
 fn caesar_verwendet_bekanntes_beispiel() {
@@ -77,12 +88,15 @@ fn aes_gcm_roundtrip_erhaelt_den_text() {
     .unwrap();
 
     assert_eq!(decrypted, "Geheimer Text");
+    assert_eq!(STANDARD.decode(&key).unwrap().len(), 32);
+    assert_eq!(STANDARD.decode(&encrypted.nonce).unwrap().len(), 12);
+    assert_eq!(STANDARD.decode(&encrypted.tag).unwrap().len(), 16);
 }
 
 #[test]
 fn aes_gcm_erkennt_falschen_schluessel_und_manipulation() {
     let key = crypto::aes::generate_key().unwrap();
-    let wrong_key = crypto::aes::generate_key().unwrap();
+    let wrong_key = manipulate_base64(&key);
     let encrypted = crypto::aes::encrypt("Manipulationstest", &key).unwrap();
 
     assert!(crypto::aes::decrypt(
@@ -95,9 +109,32 @@ fn aes_gcm_erkennt_falschen_schluessel_und_manipulation() {
 
     assert!(crypto::aes::decrypt(&encrypted.ciphertext, &key, "abc", &encrypted.tag).is_err());
 
-    let mut tampered = encrypted.ciphertext.clone();
-    tampered.push('A');
-    assert!(crypto::aes::decrypt(&tampered, &key, &encrypted.nonce, &encrypted.tag).is_err());
+    let tampered_ciphertext = manipulate_base64(&encrypted.ciphertext);
+    assert!(crypto::aes::decrypt(
+        &tampered_ciphertext,
+        &key,
+        &encrypted.nonce,
+        &encrypted.tag,
+    )
+    .is_err());
+
+    let tampered_nonce = manipulate_base64(&encrypted.nonce);
+    assert!(crypto::aes::decrypt(
+        &encrypted.ciphertext,
+        &key,
+        &tampered_nonce,
+        &encrypted.tag,
+    )
+    .is_err());
+
+    let tampered_tag = manipulate_base64(&encrypted.tag);
+    assert!(crypto::aes::decrypt(
+        &encrypted.ciphertext,
+        &key,
+        &encrypted.nonce,
+        &tampered_tag,
+    )
+    .is_err());
 }
 
 #[test]
@@ -113,12 +150,15 @@ fn chacha20_poly1305_roundtrip_erhaelt_den_text() {
     .unwrap();
 
     assert_eq!(decrypted, "Schneller Geheimtext");
+    assert_eq!(STANDARD.decode(&key).unwrap().len(), 32);
+    assert_eq!(STANDARD.decode(&encrypted.nonce).unwrap().len(), 12);
+    assert_eq!(STANDARD.decode(&encrypted.tag).unwrap().len(), 16);
 }
 
 #[test]
 fn chacha20_poly1305_erkennt_falschen_schluessel_und_manipulation() {
     let key = crypto::chacha::generate_key().unwrap();
-    let wrong_key = crypto::chacha::generate_key().unwrap();
+    let wrong_key = manipulate_base64(&key);
     let encrypted = crypto::chacha::encrypt("Manipulationstest", &key).unwrap();
 
     assert!(crypto::chacha::decrypt(
@@ -131,7 +171,30 @@ fn chacha20_poly1305_erkennt_falschen_schluessel_und_manipulation() {
 
     assert!(crypto::chacha::decrypt(&encrypted.ciphertext, &key, "abc", &encrypted.tag).is_err());
 
-    let mut tampered = encrypted.ciphertext.clone();
-    tampered.push('A');
-    assert!(crypto::chacha::decrypt(&tampered, &key, &encrypted.nonce, &encrypted.tag).is_err());
+    let tampered_ciphertext = manipulate_base64(&encrypted.ciphertext);
+    assert!(crypto::chacha::decrypt(
+        &tampered_ciphertext,
+        &key,
+        &encrypted.nonce,
+        &encrypted.tag,
+    )
+    .is_err());
+
+    let tampered_nonce = manipulate_base64(&encrypted.nonce);
+    assert!(crypto::chacha::decrypt(
+        &encrypted.ciphertext,
+        &key,
+        &tampered_nonce,
+        &encrypted.tag,
+    )
+    .is_err());
+
+    let tampered_tag = manipulate_base64(&encrypted.tag);
+    assert!(crypto::chacha::decrypt(
+        &encrypted.ciphertext,
+        &key,
+        &encrypted.nonce,
+        &tampered_tag,
+    )
+    .is_err());
 }
