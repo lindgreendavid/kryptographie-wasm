@@ -1,23 +1,12 @@
 import init, { skytale_decrypt, skytale_encrypt, skytale_table } from "../pkg/krypto_wasm.js";
-
-function value(id) {
-    return document.getElementById(id).value;
-}
+import { element, setText, showMessage, value } from "./dom.js";
 
 function columns() {
     return Number.parseInt(value("skytale-columns"), 10);
 }
 
-function setText(id, text) {
-    document.getElementById(id).textContent = text;
-}
-
-function showError(message) {
-    setText("skytale-message", message || "");
-}
-
 function renderTable(rows) {
-    const target = document.getElementById("skytale-table");
+    const target = element("skytale-table");
     target.innerHTML = "";
 
     const table = document.createElement("table");
@@ -46,29 +35,28 @@ async function start() {
     await init();
     updateTable("");
 
-    document.getElementById("skytale-encrypt").addEventListener("click", () => {
+    element("skytale-encrypt").addEventListener("click", () => {
         try {
             const result = skytale_encrypt(value("skytale-plain"), columns());
             setText("skytale-cipher-output", result);
-            document.getElementById("skytale-cipher").value = result;
+            element("skytale-cipher").value = result;
             updateTable(value("skytale-plain"));
-            showError("");
+            showMessage("skytale-message", "");
         } catch (error) {
-            showError(String(error));
+            showMessage("skytale-message", String(error));
         }
     });
 
-    document.getElementById("skytale-decrypt").addEventListener("click", () => {
+    element("skytale-decrypt").addEventListener("click", () => {
         try {
             const result = skytale_decrypt(value("skytale-cipher"), columns());
             setText("skytale-plain-output", result);
             updateTable(result);
-            showError("");
+            showMessage("skytale-message", "");
         } catch (error) {
-            showError(String(error));
+            showMessage("skytale-message", String(error));
         }
     });
 }
 
-start().catch((error) => showError(`WASM konnte nicht geladen werden: ${error}`));
-
+start().catch((error) => showMessage("skytale-message", `WASM konnte nicht geladen werden: ${error}`));

@@ -4,24 +4,13 @@ import init, {
     substitution_random_alphabet,
     substitution_validate,
 } from "../pkg/krypto_wasm.js";
+import { element, setText, showMessage, value } from "./dom.js";
 
 const normalAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const exampleAlphabet = "QWERTZUIOPASDFGHJKLYXCVBNM";
 
-function value(id) {
-    return document.getElementById(id).value;
-}
-
-function setText(id, text) {
-    document.getElementById(id).textContent = text;
-}
-
-function showError(message) {
-    setText("substitution-message", message || "");
-}
-
 function renderAlphabetTable(secret) {
-    const target = document.getElementById("substitution-table");
+    const target = element("substitution-table");
     target.innerHTML = "";
 
     const table = document.createElement("table");
@@ -59,53 +48,53 @@ function alphabet() {
 
 async function start() {
     await init();
-    document.getElementById("substitution-alphabet").value = exampleAlphabet;
+    element("substitution-alphabet").value = exampleAlphabet;
     renderAlphabetTable(exampleAlphabet);
 
-    document.getElementById("substitution-example").addEventListener("click", () => {
-        document.getElementById("substitution-alphabet").value = exampleAlphabet;
+    element("substitution-example").addEventListener("click", () => {
+        element("substitution-alphabet").value = exampleAlphabet;
         renderAlphabetTable(exampleAlphabet);
-        showError("");
+        showMessage("substitution-message", "");
     });
 
-    document.getElementById("substitution-random").addEventListener("click", () => {
+    element("substitution-random").addEventListener("click", () => {
         try {
             const generated = substitution_random_alphabet();
-            document.getElementById("substitution-alphabet").value = generated;
+            element("substitution-alphabet").value = generated;
             renderAlphabetTable(generated);
-            showError("");
+            showMessage("substitution-message", "");
         } catch (error) {
-            showError(String(error));
+            showMessage("substitution-message", String(error));
         }
     });
 
-    document.getElementById("substitution-alphabet").addEventListener("input", () => {
+    element("substitution-alphabet").addEventListener("input", () => {
         renderAlphabetTable(alphabet());
     });
 
-    document.getElementById("substitution-encrypt").addEventListener("click", () => {
+    element("substitution-encrypt").addEventListener("click", () => {
         try {
             substitution_validate(alphabet());
             const result = substitution_encrypt(value("substitution-plain"), alphabet());
             setText("substitution-cipher-output", result);
-            document.getElementById("substitution-cipher").value = result;
+            element("substitution-cipher").value = result;
             renderAlphabetTable(alphabet());
-            showError("");
+            showMessage("substitution-message", "");
         } catch (error) {
-            showError(String(error));
+            showMessage("substitution-message", String(error));
         }
     });
 
-    document.getElementById("substitution-decrypt").addEventListener("click", () => {
+    element("substitution-decrypt").addEventListener("click", () => {
         try {
             substitution_validate(alphabet());
             setText("substitution-plain-output", substitution_decrypt(value("substitution-cipher"), alphabet()));
             renderAlphabetTable(alphabet());
-            showError("");
+            showMessage("substitution-message", "");
         } catch (error) {
-            showError(String(error));
+            showMessage("substitution-message", String(error));
         }
     });
 }
 
-start().catch((error) => showError(`WASM konnte nicht geladen werden: ${error}`));
+start().catch((error) => showMessage("substitution-message", `WASM konnte nicht geladen werden: ${error}`));
