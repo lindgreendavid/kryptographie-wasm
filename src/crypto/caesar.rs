@@ -1,14 +1,16 @@
+use super::{CryptoError, CryptoResult};
+
 const ALPHABET: &str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 /// Verschiebt lateinische Buchstaben um `shift` Positionen.
 /// Andere Unicode-Zeichen bleiben unverändert.
-pub fn encrypt(input: &str, shift: u8) -> Result<String, String> {
+pub fn encrypt(input: &str, shift: u8) -> CryptoResult<String> {
     validate_shift(shift)?;
     Ok(input.chars().map(|ch| shift_char(ch, shift)).collect())
 }
 
 /// Kehrt die Verschiebung durch eine Gegenrotation um.
-pub fn decrypt(input: &str, shift: u8) -> Result<String, String> {
+pub fn decrypt(input: &str, shift: u8) -> CryptoResult<String> {
     validate_shift(shift)?;
     Ok(input
         .chars()
@@ -17,7 +19,7 @@ pub fn decrypt(input: &str, shift: u8) -> Result<String, String> {
 }
 
 /// Formatiert das verschobene Alphabet für die Weboberfläche.
-pub fn shifted_alphabet(shift: u8) -> Result<String, String> {
+pub fn shifted_alphabet(shift: u8) -> CryptoResult<String> {
     validate_shift(shift)?;
     Ok(ALPHABET
         .chars()
@@ -29,11 +31,11 @@ pub fn shifted_alphabet(shift: u8) -> Result<String, String> {
         .join(" "))
 }
 
-fn validate_shift(shift: u8) -> Result<(), String> {
+fn validate_shift(shift: u8) -> CryptoResult<()> {
     if (1..=25).contains(&shift) {
         Ok(())
     } else {
-        Err("Der Caesar-Schlüssel muss zwischen 1 und 25 liegen.".to_string())
+        Err(CryptoError::InvalidCaesarShift)
     }
 }
 

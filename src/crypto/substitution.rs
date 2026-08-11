@@ -1,9 +1,11 @@
 use getrandom::getrandom;
 
+use super::{CryptoError, CryptoResult};
+
 const NORMAL_ALPHABET: &str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 /// Ersetzt jeden lateinischen Buchstaben anhand eines geprüften Geheimalphabets.
-pub fn encrypt(input: &str, secret_alphabet: &str) -> Result<String, String> {
+pub fn encrypt(input: &str, secret_alphabet: &str) -> CryptoResult<String> {
     let secret = validate_secret_alphabet(secret_alphabet)?;
     Ok(input
         .chars()
@@ -12,7 +14,7 @@ pub fn encrypt(input: &str, secret_alphabet: &str) -> Result<String, String> {
 }
 
 /// Kehrt die monoalphabetische Substitution um.
-pub fn decrypt(input: &str, secret_alphabet: &str) -> Result<String, String> {
+pub fn decrypt(input: &str, secret_alphabet: &str) -> CryptoResult<String> {
     let secret = validate_secret_alphabet(secret_alphabet)?;
     Ok(input
         .chars()
@@ -21,15 +23,15 @@ pub fn decrypt(input: &str, secret_alphabet: &str) -> Result<String, String> {
 }
 
 /// Normalisiert und validiert eine Permutation der 26 ASCII-Großbuchstaben.
-pub fn validate_secret_alphabet(secret_alphabet: &str) -> Result<String, String> {
+pub fn validate_secret_alphabet(secret_alphabet: &str) -> CryptoResult<String> {
     let normalized = secret_alphabet.trim().to_ascii_uppercase();
 
     if normalized.chars().count() != 26 {
-        return Err("Das Geheimalphabet muss genau 26 Buchstaben enthalten.".to_string());
+        return Err(CryptoError::InvalidAlphabetLength);
     }
 
     if !normalized.chars().all(|ch| ch.is_ascii_uppercase()) {
-        return Err("Das Geheimalphabet darf nur die Buchstaben A bis Z enthalten.".to_string());
+        return Err(CryptoError::InvalidAlphabetCharacter);
     }
 
     // Eine gültige Substitution ist eine Permutation: jeder Buchstabe
@@ -40,10 +42,10 @@ pub fn validate_secret_alphabet(secret_alphabet: &str) -> Result<String, String>
             .filter(|candidate| *candidate == letter)
             .count();
         if count > 1 {
-            return Err(format!("Der Buchstabe {letter} kommt mehrfach vor."));
+            return Err(CryptoError::DuplicateAlphabetLetter(letter));
         }
         if count == 0 {
-            return Err(format!("Der Buchstabe {letter} fehlt im Geheimalphabet."));
+            return Err(CryptoError::MissingAlphabetLetter(letter));
         }
     }
 
@@ -51,7 +53,7 @@ pub fn validate_secret_alphabet(secret_alphabet: &str) -> Result<String, String>
 }
 
 /// Erzeugt mittels Fisher-Yates eine zufällige Permutation von A bis Z.
-pub fn random_alphabet() -> Result<String, String> {
+pub fn random_alphabet() -> CryptoResult<String> {
     let mut letters: Vec<char> = NORMAL_ALPHABET.chars().collect();
 
     // Rejection Sampling vermeidet den kleinen Modulo-Bias, der entstehen
@@ -64,14 +66,13 @@ pub fn random_alphabet() -> Result<String, String> {
     Ok(letters.into_iter().collect())
 }
 
-fn random_index_inclusive(max: usize) -> Result<usize, String> {
+fn random_index_inclusive(max: usize) -> CryptoResult<usize> {
     let range = max + 1;
     let acceptance_limit = 256 - (256 % range);
 
     loop {
         let mut byte = [0_u8; 1];
-        getrandom(&mut byte)
-            .map_err(|_| "Das zufällige Geheimalphabet konnte nicht erzeugt werden.".to_string())?;
+        getrandom(&mut byte).map_err(|_| CryptoError::RandomAlphabetUnavailable)?;
 
         let candidate = byte[0] as usize;
         if candidate < acceptance_limit {

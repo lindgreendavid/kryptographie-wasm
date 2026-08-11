@@ -1,6 +1,7 @@
 use base64::engine::general_purpose::STANDARD;
 use base64::Engine;
 use krypto_wasm::crypto;
+use krypto_wasm::crypto::CryptoError;
 
 /// Ändert ein Byte, ohne Base64-Format oder Länge zu zerstören.
 /// So prüfen die AEAD-Tests tatsächlich die Authentifizierung und nicht nur
@@ -27,8 +28,14 @@ fn caesar_roundtrip_erhaelt_den_text() {
 
 #[test]
 fn caesar_lehnt_ungueltige_schluessel_ab() {
-    assert!(crypto::caesar::encrypt("ABC", 0).is_err());
-    assert!(crypto::caesar::encrypt("ABC", 26).is_err());
+    assert_eq!(
+        crypto::caesar::encrypt("ABC", 0),
+        Err(CryptoError::InvalidCaesarShift)
+    );
+    assert_eq!(
+        crypto::caesar::encrypt("ABC", 26),
+        Err(CryptoError::InvalidCaesarShift)
+    );
 }
 
 #[test]
@@ -47,15 +54,27 @@ fn skytale_verschluesselt_und_entschluesselt() {
 
 #[test]
 fn skytale_lehnt_ungueltige_spaltenzahlen_ab() {
-    assert!(crypto::skytale::encrypt("ABC", 1).is_err());
-    assert!(crypto::skytale::decrypt("ABC", 31).is_err());
+    assert_eq!(
+        crypto::skytale::encrypt("ABC", 1),
+        Err(CryptoError::InvalidSkytaleColumns)
+    );
+    assert_eq!(
+        crypto::skytale::decrypt("ABC", 31),
+        Err(CryptoError::InvalidSkytaleColumns)
+    );
 }
 
 #[test]
 fn substitution_validiert_das_geheimalphabet() {
     assert!(crypto::substitution::validate_secret_alphabet("QWERTZUIOPASDFGHJKLYXCVBNM").is_ok());
-    assert!(crypto::substitution::validate_secret_alphabet("ABC").is_err());
-    assert!(crypto::substitution::validate_secret_alphabet("AAAAAAAAAAAAAAAAAAAAAAAAAA").is_err());
+    assert_eq!(
+        crypto::substitution::validate_secret_alphabet("ABC"),
+        Err(CryptoError::InvalidAlphabetLength)
+    );
+    assert_eq!(
+        crypto::substitution::validate_secret_alphabet("AAAAAAAAAAAAAAAAAAAAAAAAAA"),
+        Err(CryptoError::DuplicateAlphabetLetter('A'))
+    );
 }
 
 #[test]
@@ -99,32 +118,37 @@ fn aes_gcm_erkennt_falschen_schluessel_und_manipulation() {
     let wrong_key = manipulate_base64(&key);
     let encrypted = crypto::aes::encrypt("Manipulationstest", &key).unwrap();
 
-    assert!(crypto::aes::decrypt(
-        &encrypted.ciphertext,
-        &wrong_key,
-        &encrypted.nonce,
-        &encrypted.tag,
-    )
-    .is_err());
+    assert_eq!(
+        crypto::aes::decrypt(
+            &encrypted.ciphertext,
+            &wrong_key,
+            &encrypted.nonce,
+            &encrypted.tag,
+        ),
+        Err(CryptoError::AuthenticationFailed)
+    );
 
-    assert!(crypto::aes::decrypt(&encrypted.ciphertext, &key, "abc", &encrypted.tag).is_err());
+    assert_eq!(
+        crypto::aes::decrypt(&encrypted.ciphertext, &key, "abc", &encrypted.tag),
+        Err(CryptoError::InvalidNonce)
+    );
 
     let tampered_ciphertext = manipulate_base64(&encrypted.ciphertext);
-    assert!(
-        crypto::aes::decrypt(&tampered_ciphertext, &key, &encrypted.nonce, &encrypted.tag,)
-            .is_err()
+    assert_eq!(
+        crypto::aes::decrypt(&tampered_ciphertext, &key, &encrypted.nonce, &encrypted.tag,),
+        Err(CryptoError::AuthenticationFailed)
     );
 
     let tampered_nonce = manipulate_base64(&encrypted.nonce);
-    assert!(
-        crypto::aes::decrypt(&encrypted.ciphertext, &key, &tampered_nonce, &encrypted.tag,)
-            .is_err()
+    assert_eq!(
+        crypto::aes::decrypt(&encrypted.ciphertext, &key, &tampered_nonce, &encrypted.tag,),
+        Err(CryptoError::AuthenticationFailed)
     );
 
     let tampered_tag = manipulate_base64(&encrypted.tag);
-    assert!(
-        crypto::aes::decrypt(&encrypted.ciphertext, &key, &encrypted.nonce, &tampered_tag,)
-            .is_err()
+    assert_eq!(
+        crypto::aes::decrypt(&encrypted.ciphertext, &key, &encrypted.nonce, &tampered_tag,),
+        Err(CryptoError::AuthenticationFailed)
     );
 }
 
@@ -152,31 +176,36 @@ fn chacha20_poly1305_erkennt_falschen_schluessel_und_manipulation() {
     let wrong_key = manipulate_base64(&key);
     let encrypted = crypto::chacha::encrypt("Manipulationstest", &key).unwrap();
 
-    assert!(crypto::chacha::decrypt(
-        &encrypted.ciphertext,
-        &wrong_key,
-        &encrypted.nonce,
-        &encrypted.tag,
-    )
-    .is_err());
+    assert_eq!(
+        crypto::chacha::decrypt(
+            &encrypted.ciphertext,
+            &wrong_key,
+            &encrypted.nonce,
+            &encrypted.tag,
+        ),
+        Err(CryptoError::AuthenticationFailed)
+    );
 
-    assert!(crypto::chacha::decrypt(&encrypted.ciphertext, &key, "abc", &encrypted.tag).is_err());
+    assert_eq!(
+        crypto::chacha::decrypt(&encrypted.ciphertext, &key, "abc", &encrypted.tag),
+        Err(CryptoError::InvalidNonce)
+    );
 
     let tampered_ciphertext = manipulate_base64(&encrypted.ciphertext);
-    assert!(
-        crypto::chacha::decrypt(&tampered_ciphertext, &key, &encrypted.nonce, &encrypted.tag,)
-            .is_err()
+    assert_eq!(
+        crypto::chacha::decrypt(&tampered_ciphertext, &key, &encrypted.nonce, &encrypted.tag,),
+        Err(CryptoError::AuthenticationFailed)
     );
 
     let tampered_nonce = manipulate_base64(&encrypted.nonce);
-    assert!(
-        crypto::chacha::decrypt(&encrypted.ciphertext, &key, &tampered_nonce, &encrypted.tag,)
-            .is_err()
+    assert_eq!(
+        crypto::chacha::decrypt(&encrypted.ciphertext, &key, &tampered_nonce, &encrypted.tag,),
+        Err(CryptoError::AuthenticationFailed)
     );
 
     let tampered_tag = manipulate_base64(&encrypted.tag);
-    assert!(
-        crypto::chacha::decrypt(&encrypted.ciphertext, &key, &encrypted.nonce, &tampered_tag,)
-            .is_err()
+    assert_eq!(
+        crypto::chacha::decrypt(&encrypted.ciphertext, &key, &encrypted.nonce, &tampered_tag,),
+        Err(CryptoError::AuthenticationFailed)
     );
 }

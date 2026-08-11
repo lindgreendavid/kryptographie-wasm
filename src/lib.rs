@@ -10,8 +10,44 @@ pub mod crypto;
 use wasm_bindgen::prelude::*;
 
 /// Wandelt interne, deutschsprachige Fehlermeldungen in JavaScript-Fehler um.
-fn to_js_error(message: String) -> JsValue {
-    JsValue::from_str(&message)
+fn to_js_error(error: crypto::CryptoError) -> JsValue {
+    JsValue::from_str(&error.to_string())
+}
+
+/// Typisiertes AEAD-Ergebnis für JavaScript ohne JSON-Zwischenschritt.
+#[wasm_bindgen]
+pub struct WasmAeadResult {
+    ciphertext: String,
+    nonce: String,
+    tag: String,
+}
+
+#[wasm_bindgen]
+impl WasmAeadResult {
+    #[wasm_bindgen(getter)]
+    pub fn ciphertext(&self) -> String {
+        self.ciphertext.clone()
+    }
+
+    #[wasm_bindgen(getter)]
+    pub fn nonce(&self) -> String {
+        self.nonce.clone()
+    }
+
+    #[wasm_bindgen(getter)]
+    pub fn tag(&self) -> String {
+        self.tag.clone()
+    }
+}
+
+impl From<crypto::aead::AeadEncryptionResult> for WasmAeadResult {
+    fn from(result: crypto::aead::AeadEncryptionResult) -> Self {
+        Self {
+            ciphertext: result.ciphertext,
+            nonce: result.nonce,
+            tag: result.tag,
+        }
+    }
 }
 
 #[wasm_bindgen]
@@ -85,11 +121,11 @@ pub fn aes_generate_key() -> Result<String, JsValue> {
 }
 
 #[wasm_bindgen]
-/// Verschlüsselt Text mit AES-256-GCM und liefert JSON mit Geheimtext, Nonce und Tag.
-pub fn aes_encrypt(plaintext: &str, key_base64: &str) -> Result<String, JsValue> {
-    let result = crypto::aes::encrypt(plaintext, key_base64).map_err(to_js_error)?;
-    serde_json::to_string(&result)
-        .map_err(|_| JsValue::from_str("Das AES-Ergebnis konnte nicht serialisiert werden."))
+/// Verschlüsselt Text mit AES-256-GCM und liefert ein typisiertes Ergebnis.
+pub fn aes_encrypt(plaintext: &str, key_base64: &str) -> Result<WasmAeadResult, JsValue> {
+    crypto::aes::encrypt(plaintext, key_base64)
+        .map(WasmAeadResult::from)
+        .map_err(to_js_error)
 }
 
 #[wasm_bindgen]
@@ -111,12 +147,11 @@ pub fn chacha_generate_key() -> Result<String, JsValue> {
 }
 
 #[wasm_bindgen]
-/// Verschlüsselt Text mit ChaCha20-Poly1305 und liefert ein JSON-Ergebnis.
-pub fn chacha_encrypt(plaintext: &str, key_base64: &str) -> Result<String, JsValue> {
-    let result = crypto::chacha::encrypt(plaintext, key_base64).map_err(to_js_error)?;
-    serde_json::to_string(&result).map_err(|_| {
-        JsValue::from_str("Das ChaCha20-Poly1305-Ergebnis konnte nicht serialisiert werden.")
-    })
+/// Verschlüsselt Text mit ChaCha20-Poly1305 und liefert ein typisiertes Ergebnis.
+pub fn chacha_encrypt(plaintext: &str, key_base64: &str) -> Result<WasmAeadResult, JsValue> {
+    crypto::chacha::encrypt(plaintext, key_base64)
+        .map(WasmAeadResult::from)
+        .map_err(to_js_error)
 }
 
 #[wasm_bindgen]

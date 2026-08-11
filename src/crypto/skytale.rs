@@ -1,5 +1,7 @@
+use super::{CryptoError, CryptoResult};
+
 /// Schreibt den Text zeilenweise und liest ihn anschließend spaltenweise aus.
-pub fn encrypt(input: &str, columns: usize) -> Result<String, String> {
+pub fn encrypt(input: &str, columns: usize) -> CryptoResult<String> {
     validate_columns(columns)?;
     if input.is_empty() {
         return Ok(String::new());
@@ -20,7 +22,7 @@ pub fn encrypt(input: &str, columns: usize) -> Result<String, String> {
 }
 
 /// Rekonstruiert die ursprüngliche zeilenweise Zeichenfolge.
-pub fn decrypt(input: &str, columns: usize) -> Result<String, String> {
+pub fn decrypt(input: &str, columns: usize) -> CryptoResult<String> {
     validate_columns(columns)?;
     if input.is_empty() {
         return Ok(String::new());
@@ -66,7 +68,7 @@ pub fn decrypt(input: &str, columns: usize) -> Result<String, String> {
 }
 
 /// Liefert die Matrixdarstellung für die didaktische Visualisierung.
-pub fn table_rows(input: &str, columns: usize) -> Result<Vec<Vec<Option<char>>>, String> {
+pub fn table_rows(input: &str, columns: usize) -> CryptoResult<Vec<Vec<Option<char>>>> {
     validate_columns(columns)?;
     if input.is_empty() {
         return Ok(vec![vec![None; columns]]);
@@ -86,10 +88,10 @@ pub fn table_rows(input: &str, columns: usize) -> Result<Vec<Vec<Option<char>>>,
     Ok(rows)
 }
 
-fn validate_columns(columns: usize) -> Result<(), String> {
+fn validate_columns(columns: usize) -> CryptoResult<()> {
     if (2..=30).contains(&columns) {
         Ok(())
     } else {
-        Err("Die Spaltenzahl muss zwischen 2 und 30 liegen.".to_string())
+        Err(CryptoError::InvalidSkytaleColumns)
     }
 }
