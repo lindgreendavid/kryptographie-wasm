@@ -11,13 +11,26 @@ body {
     line-height: 1.45;
 }
 
+body.dark-mode {
+    background: #1b1b1b;
+    color: #e8e8e8;
+}
+
 a {
     color: #0645ad;
     text-decoration: underline;
 }
 
+body.dark-mode a {
+    color: #8fb7ff;
+}
+
 a:visited {
     color: #0b0080;
+}
+
+body.dark-mode a:visited {
+    color: #c1a8ff;
 }
 
 .site {
@@ -31,6 +44,12 @@ a:visited {
     padding: 0 22px 36px;
 }
 
+body.dark-mode .site {
+    background: #262626;
+    border-left-color: #666;
+    border-right-color: #666;
+}
+
 .topnav {
     border: 2px solid #222;
     background: linear-gradient(#eeeeee, #d7d7d7);
@@ -39,10 +58,32 @@ a:visited {
     text-align: center;
 }
 
+body.dark-mode .topnav {
+    border-color: #aaa;
+    background: linear-gradient(#444444, #2b2b2b);
+}
+
 .topnav a {
     display: inline-block;
     margin: 3px 12px;
     font-weight: bold;
+}
+
+.theme-choice {
+    display: inline-block;
+    margin: 3px 12px;
+    white-space: nowrap;
+}
+
+.theme-choice label {
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.theme-choice select {
+    width: auto;
+    min-width: 92px;
+    padding: 4px 6px;
 }
 
 .main-title,
@@ -79,10 +120,22 @@ a:visited {
     padding: 28px 12px;
 }
 
+body.dark-mode .method-box {
+    background: #202020;
+    color: #eeeeee;
+    border-color: #d0d0d0;
+}
+
 .method-box:hover,
 .method-box:focus {
     background: #eeeeee;
     outline: 3px solid #666;
+}
+
+body.dark-mode .method-box:hover,
+body.dark-mode .method-box:focus {
+    background: #333333;
+    outline-color: #dddddd;
 }
 
 .method-name {
@@ -96,6 +149,10 @@ a:visited {
     color: #444;
 }
 
+body.dark-mode .method-era {
+    color: #c9c9c9;
+}
+
 .modern-row {
     width: 52%;
     min-width: 360px;
@@ -107,6 +164,11 @@ a:visited {
     background: #fff;
     padding: 18px;
     margin: 24px 0;
+}
+
+body.dark-mode .classic-panel {
+    background: #202020;
+    border-color: #d0d0d0;
 }
 
 .classic-panel h2,
@@ -140,6 +202,11 @@ a:visited {
     padding: 15px;
 }
 
+body.dark-mode .work-box {
+    background: #202020;
+    border-color: #d0d0d0;
+}
+
 .work-box label {
     display: block;
     font-weight: bold;
@@ -158,6 +225,14 @@ select {
     padding: 7px;
 }
 
+body.dark-mode textarea,
+body.dark-mode input,
+body.dark-mode select {
+    border-color: #b8b8b8;
+    background: #111111;
+    color: #f0f0f0;
+}
+
 textarea {
     min-height: 116px;
     resize: vertical;
@@ -170,6 +245,12 @@ textarea {
     padding: 8px;
     white-space: pre-wrap;
     word-break: break-word;
+}
+
+body.dark-mode .output {
+    border-color: #a8a8a8;
+    background: #151515;
+    color: #f0f0f0;
 }
 
 .arrow {
@@ -192,10 +273,22 @@ button {
     cursor: pointer;
 }
 
+body.dark-mode button {
+    border-color: #d0d0d0;
+    background: linear-gradient(#4b4b4b, #252525);
+    color: #f2f2f2;
+}
+
 button:hover,
 button:focus {
     background: #eaeaea;
     outline: 2px solid #555;
+}
+
+body.dark-mode button:hover,
+body.dark-mode button:focus {
+    background: #3a3a3a;
+    outline-color: #dddddd;
 }
 
 .message {
@@ -205,9 +298,17 @@ button:focus {
     font-weight: bold;
 }
 
+body.dark-mode .message {
+    color: #ffb0b0;
+}
+
 .hint {
     color: #444;
     font-size: 13px;
+}
+
+body.dark-mode .hint {
+    color: #c7c7c7;
 }
 
 .classic-table {
@@ -216,6 +317,10 @@ button:focus {
     margin-top: 12px;
     background: #fff;
     table-layout: fixed;
+}
+
+body.dark-mode .classic-table {
+    background: #1a1a1a;
 }
 
 .classic-table th,
@@ -227,6 +332,11 @@ button:focus {
     word-break: break-word;
 }
 
+body.dark-mode .classic-table th,
+body.dark-mode .classic-table td {
+    border-color: #b8b8b8;
+}
+
 .alphabet-line {
     border: 1px solid #666;
     background: #f9f9f9;
@@ -236,12 +346,23 @@ button:focus {
     word-break: break-word;
 }
 
+body.dark-mode .alphabet-line {
+    border-color: #a8a8a8;
+    background: #151515;
+}
+
 .server-warning {
     border: 2px solid #8a0000;
     color: #8a0000;
     background: #fff2f2;
     padding: 10px;
     margin: 12px 0;
+}
+
+body.dark-mode .server-warning {
+    border-color: #ffb0b0;
+    color: #ffb0b0;
+    background: #321818;
 }
 
 .hidden {

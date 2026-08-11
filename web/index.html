@@ -18,15 +18,12 @@
 
         <main>
             <h1 class="main-title">Kryptographie</h1>
-            <p class="page-intro">
-                Drei klassische Verfahren werden jetzt durch AES-GCM als modernes authentifiziertes Verfahren ergänzt.
-            </p>
 
             <p id="server-warning" class="server-warning hidden">
-                Diese Seite verwendet WebAssembly. Bitte starte sie über den lokalen Server.
+                Diese Seite verwendet WebAssembly. Bitte starte sie über den lokalen Server, zum Beispiel mit scripts/start.ps1.
             </p>
 
-            <section class="landing-grid" aria-label="Verfügbare Verfahren">
+            <section class="landing-grid" aria-label="Historische Verfahren">
                 <a class="method-box" href="caesar.html">
                     <span class="method-name">Caesar</span>
                     <span class="method-era">Antik</span>
@@ -37,26 +34,33 @@
                 </a>
                 <a class="method-box" href="substitution.html">
                     <span class="method-name">Substitution</span>
-                    <span class="method-era">Klassisch</span>
+                    <span class="method-era">Antik</span>
                 </a>
             </section>
 
-            <section class="modern-grid" aria-label="Moderne Verfahren">
+            <section class="modern-row" aria-label="Modernes Verfahren">
                 <a class="method-box" href="aes.html">
-                    <span class="method-name">AES-GCM</span>
+                    <span class="method-name">AES</span>
                     <span class="method-era">Modern</span>
                 </a>
             </section>
 
             <section class="classic-panel">
-                <h2>Projektziel</h2>
+                <h2>Grundbegriffe</h2>
                 <p>
-                    Klassische und moderne Verschlüsselungsverfahren werden mit Rust implementiert und über
-                    WebAssembly im Browser interaktiv erklärt.
+                    Kryptographie beschäftigt sich mit Verfahren, die Informationen vor unbefugtem Lesen schützen.
+                    Bei der Verschlüsselung wird normaler Text mit einem Schlüssel in Geheimtext umgewandelt.
+                    Bei der Entschlüsselung wird dieser Geheimtext mit dem passenden Verfahren wieder lesbar gemacht.
+                </p>
+                <p>
+                    Dieses Projekt zeigt drei historische Verfahren und AES-GCM als modernes authentifiziertes Verfahren.
+                    Die historische Verfahren sind didaktisch gut nachvollziehbar, aber heute nicht mehr sicher.
                 </p>
             </section>
         </main>
     </div>
+    <script type="module" src="js/theme.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
+

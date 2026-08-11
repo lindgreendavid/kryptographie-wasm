@@ -11,6 +11,7 @@ Dieses Hochschulprojekt entwickelt eine deutschsprachige Lernanwendung für Kryp
 - Skytale als Transpositionsverfahren mit dynamischer Tabellenansicht
 - Monoalphabetische Substitution mit Alphabetvalidierung und Zufallsgenerator
 - AES-256-GCM mit zufälligem Schlüssel, Nonce und Authentifizierungstag
+- Umschaltbare Hell- und Dunkelansicht mit lokaler Speicherung
 
 Weitere Kryptographieverfahren folgen in getrennten, nachvollziehbaren Commits.
 
