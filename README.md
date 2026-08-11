@@ -8,6 +8,7 @@ Dieses Hochschulprojekt entwickelt eine deutschsprachige Lernanwendung für Kryp
 - Statische Weboberfläche vorbereitet
 - Lokaler Build- und Startprozess eingerichtet
 - Caesar-Verschlüsselung mit Validierung, Roundtrip-Tests und interaktiver Alphabetdarstellung
+- Skytale als Transpositionsverfahren mit dynamischer Tabellenansicht
 
 Weitere Kryptographieverfahren folgen in getrennten, nachvollziehbaren Commits.
 

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Skytale</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="site">
+        <nav class="topnav" aria-label="Hauptnavigation">
+            <a href="index.html">Startseite</a>
+            <a href="caesar.html">Caesar</a>
+            <a href="skytale.html">Skytale</a>
+        </nav>
+
+        <main>
+            <h1 class="procedure-title">Skytale</h1>
+            <p id="skytale-message" class="message" role="status"></p>
+
+            <section class="classic-panel">
+                <label for="skytale-columns">Spaltenzahl / Stabbreite</label>
+                <input id="skytale-columns" type="number" min="2" max="30" value="4">
+                <p class="hint">Gültig sind Werte von 2 bis 30.</p>
+            </section>
+
+            <section class="flow">
+                <h2>Verschlüsseln</h2>
+                <div class="flow-row">
+                    <div class="work-box">
+                        <label for="skytale-plain">Normaler Text</label>
+                        <textarea id="skytale-plain">HALLO WELT</textarea>
+                        <div class="controls"><button id="skytale-encrypt" type="button">Verschlüsseln</button></div>
+                    </div>
+                    <div class="arrow" aria-hidden="true">→</div>
+                    <div class="work-box">
+                        <label>Verschlüsselter Text</label>
+                        <div id="skytale-cipher-output" class="output" aria-live="polite"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="flow">
+                <h2>Entschlüsseln</h2>
+                <div class="flow-row">
+                    <div class="work-box">
+                        <label for="skytale-cipher">Verschlüsselter Text</label>
+                        <textarea id="skytale-cipher"></textarea>
+                        <div class="controls"><button id="skytale-decrypt" type="button">Entschlüsseln</button></div>
+                    </div>
+                    <div class="arrow" aria-hidden="true">→</div>
+                    <div class="work-box">
+                        <label>Normaler Text</label>
+                        <div id="skytale-plain-output" class="output" aria-live="polite"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="classic-panel">
+                <h2>Zeichenanordnung</h2>
+                <div id="skytale-table" aria-live="polite"></div>
+            </section>
+
+            <section class="classic-panel">
+                <h2>Erklärung des Verfahrens</h2>
+                <p>
+                    Die Skytale ist ein Transpositionsverfahren. Der Text wird zeilenweise in eine feste Breite geschrieben
+                    und anschließend spaltenweise ausgelesen. Die Buchstaben werden nicht ersetzt, sondern ihre Reihenfolge
+                    wird verändert.
+                </p>
+            </section>
+
+            <section class="classic-panel">
+                <h2>Historie</h2>
+                <p>
+                    Die Skytale wird mit Sparta verbunden. Als Schlüssel dient die Breite des Stabes beziehungsweise hier
+                    die Spaltenzahl. Nur mit derselben Breite lässt sich die ursprüngliche Reihenfolge wiederherstellen.
+                </p>
+            </section>
+
+            <section class="classic-panel">
+                <h2>Sicherheitsbewertung</h2>
+                <p>
+                    Die Skytale ist für moderne Angriffe nicht sicher. Sie ist aber ein gutes Beispiel für Transposition:
+                    Die Zeichen bleiben gleich, nur ihre Positionen ändern sich.
+                </p>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="js/skytale.js"></script>
+</body>
+</html>

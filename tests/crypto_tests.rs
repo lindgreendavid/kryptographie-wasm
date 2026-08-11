@@ -19,3 +19,20 @@ fn caesar_lehnt_ungueltige_schluessel_ab() {
     assert!(crypto::caesar::encrypt("ABC", 0).is_err());
     assert!(crypto::caesar::encrypt("ABC", 26).is_err());
 }
+
+#[test]
+fn skytale_verschluesselt_und_entschluesselt() {
+    assert_eq!(crypto::skytale::encrypt("HALLO WELT", 4).unwrap(), "HOLA TLWLE");
+
+    for columns in [2, 3, 4, 7] {
+        let text = "SKYTALE TEST MIT RESTZEILE";
+        let encrypted = crypto::skytale::encrypt(text, columns).unwrap();
+        assert_eq!(crypto::skytale::decrypt(&encrypted, columns).unwrap(), text);
+    }
+}
+
+#[test]
+fn skytale_lehnt_ungueltige_spaltenzahlen_ab() {
+    assert!(crypto::skytale::encrypt("ABC", 1).is_err());
+    assert!(crypto::skytale::decrypt("ABC", 31).is_err());
+}

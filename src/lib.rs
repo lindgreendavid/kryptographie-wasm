@@ -23,3 +23,20 @@ pub fn caesar_decrypt(input: &str, shift: u8) -> Result<String, JsValue> {
 pub fn caesar_shifted_alphabet(shift: u8) -> Result<String, JsValue> {
     crypto::caesar::shifted_alphabet(shift).map_err(to_js_error)
 }
+
+#[wasm_bindgen]
+pub fn skytale_encrypt(input: &str, columns: usize) -> Result<String, JsValue> {
+    crypto::skytale::encrypt(input, columns).map_err(to_js_error)
+}
+
+#[wasm_bindgen]
+pub fn skytale_decrypt(input: &str, columns: usize) -> Result<String, JsValue> {
+    crypto::skytale::decrypt(input, columns).map_err(to_js_error)
+}
+
+#[wasm_bindgen]
+pub fn skytale_table(input: &str, columns: usize) -> Result<String, JsValue> {
+    let table = crypto::skytale::table_rows(input, columns).map_err(to_js_error)?;
+    serde_json::to_string(&table)
+        .map_err(|_| JsValue::from_str("Die Tabelle konnte nicht erzeugt werden."))
+}
