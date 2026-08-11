@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Caesar-Verschlüsselung</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="site">
+        <nav class="topnav" aria-label="Hauptnavigation">
+            <a href="index.html">Startseite</a>
+            <a href="caesar.html">Caesar</a>
+        </nav>
+
+        <main>
+            <h1 class="procedure-title">Caesar-Verschlüsselung</h1>
+            <p id="caesar-message" class="message" role="status"></p>
+
+            <section class="classic-panel">
+                <label for="caesar-shift">Schlüssel: Verschiebung 1 bis 25</label>
+                <select id="caesar-shift">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                </select>
+                <div class="alphabet-line">Normal: <span id="caesar-normal-alphabet"></span></div>
+                <div class="alphabet-line">Verschoben: <span id="caesar-shifted-alphabet"></span></div>
+            </section>
+
+            <section class="flow">
+                <h2>Verschlüsseln</h2>
+                <div class="flow-row">
+                    <div class="work-box">
+                        <label for="caesar-plain">Normaler Text</label>
+                        <textarea id="caesar-plain">ABC</textarea>
+                        <div class="controls"><button id="caesar-encrypt" type="button">Verschlüsseln</button></div>
+                    </div>
+                    <div class="arrow" aria-hidden="true">→</div>
+                    <div class="work-box">
+                        <label>Verschlüsselter Text</label>
+                        <div id="caesar-cipher-output" class="output" aria-live="polite"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="flow">
+                <h2>Entschlüsseln</h2>
+                <div class="flow-row">
+                    <div class="work-box">
+                        <label for="caesar-cipher">Verschlüsselter Text</label>
+                        <textarea id="caesar-cipher"></textarea>
+                        <div class="controls"><button id="caesar-decrypt" type="button">Entschlüsseln</button></div>
+                    </div>
+                    <div class="arrow" aria-hidden="true">→</div>
+                    <div class="work-box">
+                        <label>Normaler Text</label>
+                        <div id="caesar-plain-output" class="output" aria-live="polite"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="classic-panel">
+                <h2>Erklärung des Verfahrens</h2>
+                <p>
+                    Die Caesar-Verschlüsselung ersetzt jeden Buchstaben durch einen Buchstaben, der im Alphabet um eine feste
+                    Anzahl von Stellen verschoben ist. Beim Schlüssel 3 wird aus A der Buchstabe D, aus B wird E und aus C wird F.
+                    Zeichen außerhalb des lateinischen Alphabets bleiben hier unverändert.
+                </p>
+            </section>
+
+            <section class="classic-panel">
+                <h2>Historie</h2>
+                <p>
+                    Das Verfahren wird Julius Caesar zugeschrieben und gehört zu den bekanntesten antiken
+                    Verschlüsselungsverfahren. Es zeigt anschaulich, dass Sender und Empfänger denselben Schlüssel kennen müssen.
+                </p>
+            </section>
+
+            <section class="classic-panel">
+                <h2>Sicherheitsbewertung</h2>
+                <p>
+                    Caesar ist heute unsicher, weil nur 25 sinnvolle Schlüssel geprüft werden müssen. Für Lernzwecke ist das
+                    Verfahren trotzdem nützlich, weil Substitution, Schlüssel und Rückumwandlung sehr gut sichtbar werden.
+                </p>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="js/caesar.js"></script>
+</body>
+</html>

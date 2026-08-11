@@ -7,8 +7,9 @@ Dieses Hochschulprojekt entwickelt eine deutschsprachige Lernanwendung für Kryp
 - Rust-Projekt und WebAssembly-Schnittstelle angelegt
 - Statische Weboberfläche vorbereitet
 - Lokaler Build- und Startprozess eingerichtet
+- Caesar-Verschlüsselung mit Validierung, Roundtrip-Tests und interaktiver Alphabetdarstellung
 
-Die einzelnen Kryptographieverfahren folgen in getrennten, nachvollziehbaren Commits.
+Weitere Kryptographieverfahren folgen in getrennten, nachvollziehbaren Commits.
 
 ## Voraussetzungen
 
@@ -24,4 +25,3 @@ powershell -ExecutionPolicy Bypass -File .\scripts\start.ps1
 ```
 
 Anschließend ist die Anwendung unter `http://127.0.0.1:8080/index.html` erreichbar.
-

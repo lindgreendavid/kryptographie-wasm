@@ -10,17 +10,25 @@
     <div class="site">
         <nav class="topnav" aria-label="Hauptnavigation">
             <a href="index.html">Startseite</a>
+            <a href="caesar.html">Caesar</a>
         </nav>
 
         <main>
             <h1 class="main-title">Kryptographie</h1>
             <p class="page-intro">
-                Diese Webanwendung entsteht schrittweise. Jedes Verfahren wird in einem eigenen Entwicklungsschritt ergänzt.
+                Das erste Verfahren ist implementiert: Die Caesar-Chiffre macht einfache Buchstabenverschiebungen sichtbar.
             </p>
 
             <p id="server-warning" class="server-warning hidden">
                 Diese Seite verwendet WebAssembly. Bitte starte sie über den lokalen Server.
             </p>
+
+            <section class="landing-grid" aria-label="Verfügbare Verfahren">
+                <a class="method-box" href="caesar.html">
+                    <span class="method-name">Caesar</span>
+                    <span class="method-era">Antik</span>
+                </a>
+            </section>
 
             <section class="classic-panel">
                 <h2>Projektziel</h2>
@@ -34,4 +42,3 @@
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
-
