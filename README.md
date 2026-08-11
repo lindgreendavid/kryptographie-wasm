@@ -12,6 +12,7 @@ Dieses Hochschulprojekt entwickelt eine deutschsprachige Lernanwendung für Kryp
 - Monoalphabetische Substitution mit Alphabetvalidierung und Zufallsgenerator
 - AES-256-GCM mit zufälligem Schlüssel, Nonce und Authentifizierungstag
 - Umschaltbare Hell- und Dunkelansicht mit lokaler Speicherung
+- Aktive Navigation, sichtbare Tastaturfoki und verbesserte Statusmeldungen
 
 Weitere Kryptographieverfahren folgen in getrennten, nachvollziehbaren Commits.
 
