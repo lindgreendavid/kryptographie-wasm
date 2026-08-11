@@ -7,6 +7,15 @@ Eine deutschsprachige Lernanwendung, die drei klassische und zwei moderne Krypto
 
 **[Live-Demo öffnen](https://lindgreendavid.github.io/kryptographie-wasm/)**
 
+## Abgabeangaben
+
+| | |
+| --- | --- |
+| Bearbeiter | David Lindgreen (E039), Viktor Edelmann (E045) |
+| Hochschule | Provadis Hochschule, Frankfurt am Main |
+| Prüfer | Prof. Dr. Olaf Grebner |
+| Projekt | Kryptographie mit Rust und WebAssembly |
+
 > Dieses Projekt dient ausschließlich der Lehre. Caesar, Skytale und monoalphabetische Substitution sind nicht für reale Sicherheitsanwendungen geeignet. Auch die modernen Demonstrationen ersetzen keine geprüfte Produktarchitektur oder professionelles Schlüsselmanagement.
 
 ## Verfahren
@@ -104,6 +113,7 @@ Die aus sechs gelieferten Arbeitsständen rekonstruierte Entwicklung wurde bewus
 | `v0.8.0` | ChaCha20-Poly1305 |
 | `v0.9.0` | Gehärtete Zufalls- und Fehlerbehandlung |
 | `v1.0.0` | Dokumentierte, geprüfte Abgabeversion |
+| `v1.0.1` | Ergänzte Abgabe- und Autorenangaben |
 
 Die [Versionshistorie](docs/versionshistorie.md) erklärt Rekonstruktion, Commit-Prinzipien und Tags transparent. Änderungen der Abgabeversion stehen im [Changelog](CHANGELOG.md).
 
@@ -128,4 +138,4 @@ Die [Versionshistorie](docs/versionshistorie.md) erklärt Rekonstruktion, Commit
 
 ## Autor und Transparenz
 
-Hochschulprojekt von **David Lindgreen**. Codex wurde bei Strukturierung, Implementierung, Tests und Dokumentation eingesetzt. Umfang und Verantwortungsgrenzen sind in [KI-Nutzung.md](docs/KI-Nutzung.md) offengelegt.
+Hochschulprojekt von **David Lindgreen (E039)** und **Viktor Edelmann (E045)** an der Provadis Hochschule. Codex wurde bei Strukturierung, Implementierung, Tests und Dokumentation eingesetzt. Umfang und Verantwortungsgrenzen sind in [KI-Nutzung.md](docs/KI-Nutzung.md) offengelegt.

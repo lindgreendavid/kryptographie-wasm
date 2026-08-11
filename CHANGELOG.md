@@ -2,6 +2,12 @@
 
 Alle wesentlichen Projektstände werden über annotierte Git-Tags nachvollziehbar gemacht.
 
+## 1.0.1 – Abgabeangaben
+
+- David Lindgreen (E039) und Viktor Edelmann (E045) als Bearbeiter ergänzt
+- Provadis Hochschule, Frankfurt am Main, als Hochschule ergänzt
+- Prof. Dr. Olaf Grebner als Prüfer ergänzt
+
 ## 1.0.0 – Abgabeversion
 
 - vollständige deutsche Projekt-, Architektur- und Testdokumentation
@@ -37,4 +43,3 @@ Alle wesentlichen Projektstände werden über annotierte Git-Tags nachvollziehba
 ## 0.0.1 – Projektgrundlage
 
 - Rust-/WebAssembly-Struktur, Weboberfläche und lokale Skripte
-

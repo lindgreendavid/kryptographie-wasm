@@ -1,5 +1,9 @@
 # Projekt- und Architekturdokumentation
 
+**Bearbeiter:** David Lindgreen (E039), Viktor Edelmann (E045)<br>
+**Hochschule:** Provadis Hochschule, Frankfurt am Main<br>
+**Prüfer:** Prof. Dr. Olaf Grebner
+
 ## 1. Anforderungen und Ziele
 
 Ziel ist eine kleine Webanwendung zum Thema Kryptographie. Benutzer können fünf Verfahren ausprobieren und Texte verschlüsseln sowie entschlüsseln.

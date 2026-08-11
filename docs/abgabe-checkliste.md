@@ -1,5 +1,9 @@
 # Abgabe-Checkliste
 
+**Bearbeiter:** David Lindgreen (E039), Viktor Edelmann (E045)<br>
+**Hochschule:** Provadis Hochschule, Frankfurt am Main<br>
+**Prüfer:** Prof. Dr. Olaf Grebner
+
 ## Repository
 
 - [x] aussagekräftiger deutscher Projektname und Kurzbeschreibung
@@ -33,4 +37,3 @@
 - [x] Primärquellen für moderne Verfahren
 - [x] transparente KI-Nutzung
 - [x] transparente Rekonstruktion der Versionshistorie
-
