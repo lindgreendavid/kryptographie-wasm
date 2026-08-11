@@ -36,3 +36,18 @@ fn skytale_lehnt_ungueltige_spaltenzahlen_ab() {
     assert!(crypto::skytale::encrypt("ABC", 1).is_err());
     assert!(crypto::skytale::decrypt("ABC", 31).is_err());
 }
+
+#[test]
+fn substitution_validiert_das_geheimalphabet() {
+    assert!(crypto::substitution::validate_secret_alphabet("QWERTZUIOPASDFGHJKLYXCVBNM").is_ok());
+    assert!(crypto::substitution::validate_secret_alphabet("ABC").is_err());
+    assert!(crypto::substitution::validate_secret_alphabet("AAAAAAAAAAAAAAAAAAAAAAAAAA").is_err());
+}
+
+#[test]
+fn substitution_roundtrip_erhaelt_den_text() {
+    let alphabet = "QWERTZUIOPASDFGHJKLYXCVBNM";
+    let text = "Angriff um 12 Uhr!";
+    let encrypted = crypto::substitution::encrypt(text, alphabet).unwrap();
+    assert_eq!(crypto::substitution::decrypt(&encrypted, alphabet).unwrap(), text);
+}

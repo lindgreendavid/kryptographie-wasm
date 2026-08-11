@@ -40,3 +40,25 @@ pub fn skytale_table(input: &str, columns: usize) -> Result<String, JsValue> {
     serde_json::to_string(&table)
         .map_err(|_| JsValue::from_str("Die Tabelle konnte nicht erzeugt werden."))
 }
+
+#[wasm_bindgen]
+pub fn substitution_encrypt(input: &str, secret_alphabet: &str) -> Result<String, JsValue> {
+    crypto::substitution::encrypt(input, secret_alphabet).map_err(to_js_error)
+}
+
+#[wasm_bindgen]
+pub fn substitution_decrypt(input: &str, secret_alphabet: &str) -> Result<String, JsValue> {
+    crypto::substitution::decrypt(input, secret_alphabet).map_err(to_js_error)
+}
+
+#[wasm_bindgen]
+pub fn substitution_validate(secret_alphabet: &str) -> Result<String, JsValue> {
+    crypto::substitution::validate_secret_alphabet(secret_alphabet)
+        .map(|_| "Das Geheimalphabet ist gültig.".to_string())
+        .map_err(to_js_error)
+}
+
+#[wasm_bindgen]
+pub fn substitution_random_alphabet() -> String {
+    crypto::substitution::random_alphabet()
+}
