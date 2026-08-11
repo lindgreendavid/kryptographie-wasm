@@ -85,3 +85,27 @@ pub fn aes_decrypt(
     crypto::aes::decrypt(ciphertext_base64, key_base64, nonce_base64, tag_base64)
         .map_err(to_js_error)
 }
+
+#[wasm_bindgen]
+pub fn chacha_generate_key() -> Result<String, JsValue> {
+    crypto::chacha::generate_key().map_err(to_js_error)
+}
+
+#[wasm_bindgen]
+pub fn chacha_encrypt(plaintext: &str, key_base64: &str) -> Result<String, JsValue> {
+    let result = crypto::chacha::encrypt(plaintext, key_base64).map_err(to_js_error)?;
+    serde_json::to_string(&result).map_err(|_| {
+        JsValue::from_str("Das ChaCha20-Poly1305-Ergebnis konnte nicht serialisiert werden.")
+    })
+}
+
+#[wasm_bindgen]
+pub fn chacha_decrypt(
+    ciphertext_base64: &str,
+    key_base64: &str,
+    nonce_base64: &str,
+    tag_base64: &str,
+) -> Result<String, JsValue> {
+    crypto::chacha::decrypt(ciphertext_base64, key_base64, nonce_base64, tag_base64)
+        .map_err(to_js_error)
+}

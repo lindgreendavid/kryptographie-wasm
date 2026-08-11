@@ -14,12 +14,13 @@
             <a href="skytale.html">Skytale</a>
             <a href="substitution.html">Substitution</a>
             <a href="aes.html">AES</a>
+            <a href="chacha.html">ChaCha20</a>
         </nav>
 
         <main>
             <h1 class="main-title">Kryptographie</h1>
             <p class="page-intro">
-                Vier Verfahren, ein gemeinsames Ziel: sichtbar machen, wie aus lesbarem Text ein Geheimtext wird.
+                Fünf Verfahren, ein gemeinsames Ziel: sichtbar machen, wie aus lesbarem Text ein Geheimtext wird.
             </p>
 
             <p id="server-warning" class="server-warning hidden">
@@ -41,9 +42,13 @@
                 </a>
             </section>
 
-            <section class="modern-row" aria-label="Modernes Verfahren">
+            <section class="modern-grid" aria-label="Moderne Verfahren">
                 <a class="method-box" href="aes.html">
                     <span class="method-name">AES</span>
+                    <span class="method-era">Modern</span>
+                </a>
+                <a class="method-box" href="chacha.html">
+                    <span class="method-name">ChaCha20</span>
                     <span class="method-era">Modern</span>
                 </a>
             </section>
@@ -56,8 +61,9 @@
                     Bei der Entschlüsselung wird dieser Geheimtext mit dem passenden Verfahren wieder lesbar gemacht.
                 </p>
                 <p>
-                    Dieses Projekt zeigt drei historische Verfahren und AES-GCM als modernes authentifiziertes Verfahren.
-                    Die historische Verfahren sind didaktisch gut nachvollziehbar, aber heute nicht mehr sicher.
+                    Dieses Projekt zeigt drei historische Verfahren sowie AES-GCM und ChaCha20-Poly1305 als moderne
+                    authentifizierte Verfahren. Die historischen Verfahren sind didaktisch gut nachvollziehbar,
+                    aber heute nicht mehr sicher.
                 </p>
             </section>
         </main>
@@ -66,4 +72,3 @@
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
-

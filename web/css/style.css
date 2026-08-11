@@ -336,6 +336,14 @@ body.cyber-mode .method-era {
     margin: 0 auto 34px;
 }
 
+.modern-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 28px;
+    width: 72%;
+    margin: 0 auto 34px;
+}
+
 .classic-panel {
     border: 3px solid #222;
     background: #fff;
@@ -740,6 +748,10 @@ body.cyber-mode .site-footer span {
         min-width: 0;
     }
 
+    .modern-grid {
+        width: 88%;
+    }
+
     .flow-row {
         grid-template-columns: 1fr;
     }
@@ -773,6 +785,12 @@ body.cyber-mode .site-footer span {
 
     .landing-grid {
         grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .modern-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
         gap: 18px;
     }
 

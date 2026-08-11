@@ -85,3 +85,37 @@ fn aes_gcm_erkennt_falschen_schluessel_und_manipulation() {
     tampered.push('A');
     assert!(crypto::aes::decrypt(&tampered, &key, &encrypted.nonce, &encrypted.tag).is_err());
 }
+
+#[test]
+fn chacha20_poly1305_roundtrip_erhaelt_den_text() {
+    let key = crypto::chacha::generate_key().unwrap();
+    let encrypted = crypto::chacha::encrypt("Schneller Geheimtext", &key).unwrap();
+    let decrypted = crypto::chacha::decrypt(
+        &encrypted.ciphertext,
+        &key,
+        &encrypted.nonce,
+        &encrypted.tag,
+    )
+    .unwrap();
+
+    assert_eq!(decrypted, "Schneller Geheimtext");
+}
+
+#[test]
+fn chacha20_poly1305_erkennt_falschen_schluessel_und_manipulation() {
+    let key = crypto::chacha::generate_key().unwrap();
+    let wrong_key = crypto::chacha::generate_key().unwrap();
+    let encrypted = crypto::chacha::encrypt("Manipulationstest", &key).unwrap();
+
+    assert!(crypto::chacha::decrypt(
+        &encrypted.ciphertext,
+        &wrong_key,
+        &encrypted.nonce,
+        &encrypted.tag,
+    )
+    .is_err());
+
+    let mut tampered = encrypted.ciphertext.clone();
+    tampered.push('A');
+    assert!(crypto::chacha::decrypt(&tampered, &key, &encrypted.nonce, &encrypted.tag).is_err());
+}

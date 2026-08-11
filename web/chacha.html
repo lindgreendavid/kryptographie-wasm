@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ChaCha20-Poly1305</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="site">
+        <nav class="topnav" aria-label="Hauptnavigation">
+            <a href="index.html">Startseite</a>
+            <a href="caesar.html">Caesar</a>
+            <a href="skytale.html">Skytale</a>
+            <a href="substitution.html">Substitution</a>
+            <a href="aes.html">AES</a>
+            <a href="chacha.html">ChaCha20</a>
+        </nav>
+
+        <main>
+            <h1 class="procedure-title">ChaCha20-Poly1305</h1>
+            <p class="page-intro">
+                Ein modernes authentifiziertes Verfahren: ChaCha20 verschlüsselt, Poly1305 schützt vor Manipulation.
+            </p>
+            <p id="chacha-message" class="message" role="status"></p>
+
+            <section class="flow">
+                <h2>Verschlüsseln</h2>
+                <div class="flow-row">
+                    <div class="work-box">
+                        <label for="chacha-plain">Normaler Text</label>
+                        <textarea id="chacha-plain">Geheimer Text</textarea>
+                        <label for="chacha-key">Schlüssel Base64, 32 Byte</label>
+                        <input id="chacha-key" autocomplete="off">
+                        <div class="controls">
+                            <button id="chacha-generate-key" type="button">Schlüssel erzeugen</button>
+                            <button id="chacha-encrypt-button" type="button">Verschlüsseln</button>
+                        </div>
+                    </div>
+                    <div class="arrow" aria-hidden="true">→</div>
+                    <div class="work-box">
+                        <label>Geheimtext</label>
+                        <div id="chacha-cipher-output" class="output" aria-live="polite"></div>
+                        <label>Nonce</label>
+                        <div id="chacha-nonce-output" class="output" aria-live="polite"></div>
+                        <label>Authentifizierungstag</label>
+                        <div id="chacha-tag-output" class="output" aria-live="polite"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="flow">
+                <h2>Entschlüsseln</h2>
+                <div class="flow-row">
+                    <div class="work-box">
+                        <label for="chacha-cipher">Verschlüsselter Text</label>
+                        <textarea id="chacha-cipher"></textarea>
+                        <label for="chacha-key-decrypt">Schlüssel</label>
+                        <input id="chacha-key-decrypt" autocomplete="off">
+                        <label for="chacha-nonce">Nonce</label>
+                        <input id="chacha-nonce" autocomplete="off">
+                        <label for="chacha-tag">Authentifizierungstag</label>
+                        <input id="chacha-tag" autocomplete="off">
+                        <div class="controls"><button id="chacha-decrypt-button" type="button">Entschlüsseln</button></div>
+                    </div>
+                    <div class="arrow" aria-hidden="true">→</div>
+                    <div class="work-box">
+                        <label>Normaler Text</label>
+                        <div id="chacha-plain-output" class="output" aria-live="polite"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="classic-panel">
+                <h2>Erklärung des Verfahrens</h2>
+                <p>
+                    ChaCha20-Poly1305 kombiniert eine Stromchiffre mit einem Nachrichtenauthentifizierungscode.
+                    ChaCha20 erzeugt einen Schlüsselstrom, der mit dem Klartext verknüpft wird. Poly1305 prüft,
+                    ob Geheimtext, Nonce oder Tag verändert wurden.
+                </p>
+            </section>
+
+            <section class="classic-panel">
+                <h2>Historie</h2>
+                <p>
+                    ChaCha20 wurde von Daniel J. Bernstein entworfen. Die Kombination mit Poly1305 ist heute
+                    in modernen Protokollen verbreitet und wird häufig als Alternative zu AES-GCM eingesetzt.
+                </p>
+            </section>
+
+            <section class="classic-panel">
+                <h2>Sicherheitsbewertung</h2>
+                <p>
+                    ChaCha20-Poly1305 gilt bei korrekter Verwendung als starkes authentifiziertes Verfahren.
+                    Wichtig sind ein zufälliger 32-Byte-Schlüssel und die Regel, eine Nonce unter demselben
+                    Schlüssel nicht absichtlich wiederzuverwenden.
+                </p>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="js/theme.js"></script>
+    <script type="module" src="js/chacha.js"></script>
+</body>
+</html>
+

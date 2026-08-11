@@ -14,6 +14,7 @@ Dieses Hochschulprojekt entwickelt eine deutschsprachige Lernanwendung für Kryp
 - Umschaltbare Hell- und Dunkelansicht mit lokaler Speicherung
 - Aktive Navigation, sichtbare Tastaturfoki und verbesserte Statusmeldungen
 - Dritte Cyber-Ansicht und einheitlicher Projekt-Footer
+- ChaCha20-Poly1305 als zweites modernes authentifiziertes Verfahren
 
 Weitere Kryptographieverfahren folgen in getrennten, nachvollziehbaren Commits.
 
