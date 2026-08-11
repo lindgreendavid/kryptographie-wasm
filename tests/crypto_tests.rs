@@ -110,31 +110,22 @@ fn aes_gcm_erkennt_falschen_schluessel_und_manipulation() {
     assert!(crypto::aes::decrypt(&encrypted.ciphertext, &key, "abc", &encrypted.tag).is_err());
 
     let tampered_ciphertext = manipulate_base64(&encrypted.ciphertext);
-    assert!(crypto::aes::decrypt(
-        &tampered_ciphertext,
-        &key,
-        &encrypted.nonce,
-        &encrypted.tag,
-    )
-    .is_err());
+    assert!(
+        crypto::aes::decrypt(&tampered_ciphertext, &key, &encrypted.nonce, &encrypted.tag,)
+            .is_err()
+    );
 
     let tampered_nonce = manipulate_base64(&encrypted.nonce);
-    assert!(crypto::aes::decrypt(
-        &encrypted.ciphertext,
-        &key,
-        &tampered_nonce,
-        &encrypted.tag,
-    )
-    .is_err());
+    assert!(
+        crypto::aes::decrypt(&encrypted.ciphertext, &key, &tampered_nonce, &encrypted.tag,)
+            .is_err()
+    );
 
     let tampered_tag = manipulate_base64(&encrypted.tag);
-    assert!(crypto::aes::decrypt(
-        &encrypted.ciphertext,
-        &key,
-        &encrypted.nonce,
-        &tampered_tag,
-    )
-    .is_err());
+    assert!(
+        crypto::aes::decrypt(&encrypted.ciphertext, &key, &encrypted.nonce, &tampered_tag,)
+            .is_err()
+    );
 }
 
 #[test]
@@ -172,29 +163,20 @@ fn chacha20_poly1305_erkennt_falschen_schluessel_und_manipulation() {
     assert!(crypto::chacha::decrypt(&encrypted.ciphertext, &key, "abc", &encrypted.tag).is_err());
 
     let tampered_ciphertext = manipulate_base64(&encrypted.ciphertext);
-    assert!(crypto::chacha::decrypt(
-        &tampered_ciphertext,
-        &key,
-        &encrypted.nonce,
-        &encrypted.tag,
-    )
-    .is_err());
+    assert!(
+        crypto::chacha::decrypt(&tampered_ciphertext, &key, &encrypted.nonce, &encrypted.tag,)
+            .is_err()
+    );
 
     let tampered_nonce = manipulate_base64(&encrypted.nonce);
-    assert!(crypto::chacha::decrypt(
-        &encrypted.ciphertext,
-        &key,
-        &tampered_nonce,
-        &encrypted.tag,
-    )
-    .is_err());
+    assert!(
+        crypto::chacha::decrypt(&encrypted.ciphertext, &key, &tampered_nonce, &encrypted.tag,)
+            .is_err()
+    );
 
     let tampered_tag = manipulate_base64(&encrypted.tag);
-    assert!(crypto::chacha::decrypt(
-        &encrypted.ciphertext,
-        &key,
-        &encrypted.nonce,
-        &tampered_tag,
-    )
-    .is_err());
+    assert!(
+        crypto::chacha::decrypt(&encrypted.ciphertext, &key, &encrypted.nonce, &tampered_tag,)
+            .is_err()
+    );
 }
