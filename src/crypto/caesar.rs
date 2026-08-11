@@ -7,6 +7,7 @@ pub fn encrypt(input: &str, shift: u8) -> Result<String, String> {
     Ok(input.chars().map(|ch| shift_char(ch, shift)).collect())
 }
 
+/// Kehrt die Verschiebung durch eine Gegenrotation um.
 pub fn decrypt(input: &str, shift: u8) -> Result<String, String> {
     validate_shift(shift)?;
     Ok(input
@@ -15,6 +16,7 @@ pub fn decrypt(input: &str, shift: u8) -> Result<String, String> {
         .collect())
 }
 
+/// Formatiert das verschobene Alphabet für die Weboberfläche.
 pub fn shifted_alphabet(shift: u8) -> Result<String, String> {
     validate_shift(shift)?;
     Ok(ALPHABET
@@ -31,7 +33,7 @@ fn validate_shift(shift: u8) -> Result<(), String> {
     if (1..=25).contains(&shift) {
         Ok(())
     } else {
-        Err("Der Caesar-Schluessel muss zwischen 1 und 25 liegen.".to_string())
+        Err("Der Caesar-Schlüssel muss zwischen 1 und 25 liegen.".to_string())
     }
 }
 

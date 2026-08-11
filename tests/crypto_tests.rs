@@ -53,6 +53,12 @@ fn substitution_roundtrip_erhaelt_den_text() {
 }
 
 #[test]
+fn substitution_erzeugt_ein_gueltiges_zufallsalphabet() {
+    let alphabet = crypto::substitution::random_alphabet().unwrap();
+    assert!(crypto::substitution::validate_secret_alphabet(&alphabet).is_ok());
+}
+
+#[test]
 fn aes_gcm_roundtrip_erhaelt_den_text() {
     let key = crypto::aes::generate_key().unwrap();
     let encrypted = crypto::aes::encrypt("Geheimer Text", &key).unwrap();
@@ -80,6 +86,8 @@ fn aes_gcm_erkennt_falschen_schluessel_und_manipulation() {
         &encrypted.tag,
     )
     .is_err());
+
+    assert!(crypto::aes::decrypt(&encrypted.ciphertext, &key, "abc", &encrypted.tag).is_err());
 
     let mut tampered = encrypted.ciphertext.clone();
     tampered.push('A');
@@ -114,6 +122,8 @@ fn chacha20_poly1305_erkennt_falschen_schluessel_und_manipulation() {
         &encrypted.tag,
     )
     .is_err());
+
+    assert!(crypto::chacha::decrypt(&encrypted.ciphertext, &key, "abc", &encrypted.tag).is_err());
 
     let mut tampered = encrypted.ciphertext.clone();
     tampered.push('A');

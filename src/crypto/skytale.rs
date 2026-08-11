@@ -19,6 +19,7 @@ pub fn encrypt(input: &str, columns: usize) -> Result<String, String> {
     Ok(output)
 }
 
+/// Rekonstruiert die ursprüngliche zeilenweise Zeichenfolge.
 pub fn decrypt(input: &str, columns: usize) -> Result<String, String> {
     validate_columns(columns)?;
     if input.is_empty() {
@@ -28,7 +29,7 @@ pub fn decrypt(input: &str, columns: usize) -> Result<String, String> {
     let chars: Vec<char> = input.chars().collect();
     let len = chars.len();
     let rows = len.div_ceil(columns);
-    let last_row_len = if len.is_multiple_of(columns) {
+    let last_row_len = if len % columns == 0 {
         columns
     } else {
         len % columns
@@ -64,6 +65,7 @@ pub fn decrypt(input: &str, columns: usize) -> Result<String, String> {
     Ok(output)
 }
 
+/// Liefert die Matrixdarstellung für die didaktische Visualisierung.
 pub fn table_rows(input: &str, columns: usize) -> Result<Vec<Vec<Option<char>>>, String> {
     validate_columns(columns)?;
     if input.is_empty() {

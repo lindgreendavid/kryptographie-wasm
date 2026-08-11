@@ -69,10 +69,14 @@ async function start() {
     });
 
     document.getElementById("substitution-random").addEventListener("click", () => {
-        const generated = substitution_random_alphabet();
-        document.getElementById("substitution-alphabet").value = generated;
-        renderAlphabetTable(generated);
-        showError("");
+        try {
+            const generated = substitution_random_alphabet();
+            document.getElementById("substitution-alphabet").value = generated;
+            renderAlphabetTable(generated);
+            showError("");
+        } catch (error) {
+            showError(String(error));
+        }
     });
 
     document.getElementById("substitution-alphabet").addEventListener("input", () => {
@@ -105,4 +109,3 @@ async function start() {
 }
 
 start().catch((error) => showError(`WASM konnte nicht geladen werden: ${error}`));
-

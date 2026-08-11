@@ -10,23 +10,26 @@ const NONCE_SIZE: usize = 12;
 const TAG_SIZE: usize = 16;
 
 #[derive(Debug, Clone, Serialize)]
+/// Getrennte Bestandteile eines ChaCha20-Poly1305-Ergebnisses.
 pub struct ChachaEncryptionResult {
     pub ciphertext: String,
     pub nonce: String,
     pub tag: String,
 }
 
+/// Erzeugt 32 kryptographisch zufällige Bytes und kodiert sie als Base64.
 pub fn generate_key() -> Result<String, String> {
     let mut key = [0_u8; KEY_SIZE];
     getrandom(&mut key)
-        .map_err(|_| "Der ChaCha20-Poly1305-Schluessel konnte nicht erzeugt werden.".to_string())?;
+        .map_err(|_| "Der ChaCha20-Poly1305-Schlüssel konnte nicht erzeugt werden.".to_string())?;
     Ok(STANDARD.encode(key))
 }
 
+/// Verschlüsselt und authentifiziert UTF-8-Text mit einer frischen 96-Bit-Nonce.
 pub fn encrypt(plaintext: &str, key_base64: &str) -> Result<ChachaEncryptionResult, String> {
     let key = decode_key(key_base64)?;
     let cipher = ChaCha20Poly1305::new_from_slice(&key)
-        .map_err(|_| "Der ChaCha20-Poly1305-Schluessel ist ungueltig.".to_string())?;
+        .map_err(|_| "Der ChaCha20-Poly1305-Schlüssel ist ungültig.".to_string())?;
 
     let mut nonce_bytes = [0_u8; NONCE_SIZE];
     getrandom(&mut nonce_bytes)
@@ -36,10 +39,10 @@ pub fn encrypt(plaintext: &str, key_base64: &str) -> Result<ChachaEncryptionResu
     // zeigt beide Teile getrennt, damit ihre Aufgaben sichtbar bleiben.
     let encrypted = cipher
         .encrypt(Nonce::from_slice(&nonce_bytes), plaintext.as_bytes())
-        .map_err(|_| "Die Daten konnten nicht verschluesselt werden.".to_string())?;
+        .map_err(|_| "Die Daten konnten nicht verschlüsselt werden.".to_string())?;
 
     if encrypted.len() < TAG_SIZE {
-        return Err("Das ChaCha20-Poly1305-Ergebnis ist unvollstaendig.".to_string());
+        return Err("Das ChaCha20-Poly1305-Ergebnis ist unvollständig.".to_string());
     }
 
     let split_at = encrypted.len() - TAG_SIZE;
@@ -52,6 +55,7 @@ pub fn encrypt(plaintext: &str, key_base64: &str) -> Result<ChachaEncryptionResu
     })
 }
 
+/// Prüft den Poly1305-Tag und gibt nur authentifizierten Klartext zurück.
 pub fn decrypt(
     ciphertext_base64: &str,
     key_base64: &str,
@@ -71,10 +75,10 @@ pub fn decrypt(
     )?;
     let ciphertext = STANDARD
         .decode(ciphertext_base64.trim())
-        .map_err(|_| "Der Geheimtext ist kein gueltiges Base64.".to_string())?;
+        .map_err(|_| "Der Geheimtext ist kein gültiges Base64.".to_string())?;
 
     let cipher = ChaCha20Poly1305::new_from_slice(&key)
-        .map_err(|_| "Der ChaCha20-Poly1305-Schluessel ist ungueltig.".to_string())?;
+        .map_err(|_| "Der ChaCha20-Poly1305-Schlüssel ist ungültig.".to_string())?;
 
     // Zur Authentifizierung erwartet RustCrypto wieder Geheimtext || Tag.
     let mut combined = ciphertext;
@@ -85,14 +89,14 @@ pub fn decrypt(
         .map_err(|_| "Die Daten konnten nicht authentifiziert werden.".to_string())?;
 
     String::from_utf8(plaintext)
-        .map_err(|_| "Der entschluesselte Text ist kein gueltiges UTF-8.".to_string())
+        .map_err(|_| "Der entschlüsselte Text ist kein gültiges UTF-8.".to_string())
 }
 
 fn decode_key(key_base64: &str) -> Result<Vec<u8>, String> {
     decode_exact(
         key_base64,
         KEY_SIZE,
-        "Der ChaCha20-Poly1305-Schluessel muss Base64-kodiert sein und 32 Byte enthalten.",
+        "Der ChaCha20-Poly1305-Schlüssel muss Base64-kodiert sein und 32 Byte enthalten.",
     )
 }
 

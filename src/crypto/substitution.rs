@@ -1,7 +1,6 @@
 use getrandom::getrandom;
 
 const NORMAL_ALPHABET: &str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const EXAMPLE_ALPHABET: &str = "QWERTZUIOPASDFGHJKLYXCVBNM";
 
 /// Ersetzt jeden lateinischen Buchstaben anhand eines geprüften Geheimalphabets.
 pub fn encrypt(input: &str, secret_alphabet: &str) -> Result<String, String> {
@@ -12,6 +11,7 @@ pub fn encrypt(input: &str, secret_alphabet: &str) -> Result<String, String> {
         .collect())
 }
 
+/// Kehrt die monoalphabetische Substitution um.
 pub fn decrypt(input: &str, secret_alphabet: &str) -> Result<String, String> {
     let secret = validate_secret_alphabet(secret_alphabet)?;
     Ok(input
@@ -20,6 +20,7 @@ pub fn decrypt(input: &str, secret_alphabet: &str) -> Result<String, String> {
         .collect())
 }
 
+/// Normalisiert und validiert eine Permutation der 26 ASCII-Großbuchstaben.
 pub fn validate_secret_alphabet(secret_alphabet: &str) -> Result<String, String> {
     let normalized = secret_alphabet.trim().to_ascii_uppercase();
 
@@ -49,21 +50,34 @@ pub fn validate_secret_alphabet(secret_alphabet: &str) -> Result<String, String>
     Ok(normalized)
 }
 
-pub fn random_alphabet() -> String {
+/// Erzeugt mittels Fisher-Yates eine zufällige Permutation von A bis Z.
+pub fn random_alphabet() -> Result<String, String> {
     let mut letters: Vec<char> = NORMAL_ALPHABET.chars().collect();
-    let mut random_bytes = [0_u8; 64];
 
-    if getrandom(&mut random_bytes).is_err() {
-        return EXAMPLE_ALPHABET.to_string();
-    }
-
-    // Fisher-Yates-Mischung: Nach jedem Schritt ist die Restmenge kleiner.
+    // Rejection Sampling vermeidet den kleinen Modulo-Bias, der entstehen
+    // würde, wenn 256 nicht ohne Rest durch die jeweilige Bereichsgröße teilbar ist.
     for index in (1..letters.len()).rev() {
-        let random_index = random_bytes[index % random_bytes.len()] as usize % (index + 1);
+        let random_index = random_index_inclusive(index)?;
         letters.swap(index, random_index);
     }
 
-    letters.into_iter().collect()
+    Ok(letters.into_iter().collect())
+}
+
+fn random_index_inclusive(max: usize) -> Result<usize, String> {
+    let range = max + 1;
+    let acceptance_limit = 256 - (256 % range);
+
+    loop {
+        let mut byte = [0_u8; 1];
+        getrandom(&mut byte)
+            .map_err(|_| "Das zufällige Geheimalphabet konnte nicht erzeugt werden.".to_string())?;
+
+        let candidate = byte[0] as usize;
+        if candidate < acceptance_limit {
+            return Ok(candidate % range);
+        }
+    }
 }
 
 fn substitute_char(ch: char, source: &str, target: &str) -> char {

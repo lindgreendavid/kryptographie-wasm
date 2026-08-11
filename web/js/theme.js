@@ -1,11 +1,27 @@
 const themeStorageKey = "krypto-theme";
 
+function saveTheme(theme) {
+    try {
+        localStorage.setItem(themeStorageKey, theme);
+    } catch {
+        // Die Ansicht funktioniert auch, wenn der Browser Speicher blockiert.
+    }
+}
+
+function loadTheme() {
+    try {
+        return localStorage.getItem(themeStorageKey) || "light";
+    } catch {
+        return "light";
+    }
+}
+
 function applyTheme(theme) {
     const normalizedTheme = ["dark", "cyber"].includes(theme) ? theme : "light";
     document.body.classList.toggle("dark-mode", normalizedTheme === "dark");
     document.body.classList.toggle("cyber-mode", normalizedTheme === "cyber");
     document.documentElement.setAttribute("data-theme", normalizedTheme);
-    localStorage.setItem(themeStorageKey, normalizedTheme);
+    saveTheme(normalizedTheme);
 
     document.querySelectorAll(".theme-button").forEach((button) => {
         const isActive = button.dataset.theme === normalizedTheme;
@@ -59,8 +75,7 @@ function createThemeChoice() {
     wrapper.appendChild(cyberButton);
     nav.appendChild(wrapper);
 
-    const savedTheme = localStorage.getItem(themeStorageKey) || "light";
-    applyTheme(savedTheme);
+    applyTheme(loadTheme());
 }
 
 createThemeChoice();
@@ -85,10 +100,17 @@ function createProjectFooter() {
 
     const footer = document.createElement("footer");
     footer.className = "site-footer";
-    footer.innerHTML = "<strong>Kryptographie-Projekt</strong><span>Rust + WebAssembly + ein bisschen Liebe zum Detail.</span>";
+
+    const title = document.createElement("strong");
+    title.textContent = "Kryptographie-Projekt";
+
+    const description = document.createElement("span");
+    description.textContent = "Rust + WebAssembly + nachvollziehbare Fachlogik.";
+
+    footer.appendChild(title);
+    footer.appendChild(description);
     site.appendChild(footer);
 }
 
 markActiveNavigation();
 createProjectFooter();
-
