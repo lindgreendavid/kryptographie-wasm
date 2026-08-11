@@ -98,9 +98,7 @@ pub(super) fn decode_ciphertext(input: &str) -> CryptoResult<Vec<u8>> {
         .map_err(|_| CryptoError::InvalidCiphertextBase64)
 }
 
-pub(super) fn split_encrypted(
-    mut encrypted: Vec<u8>,
-) -> CryptoResult<(Vec<u8>, AuthTag16)> {
+pub(super) fn split_encrypted(mut encrypted: Vec<u8>) -> CryptoResult<(Vec<u8>, AuthTag16)> {
     if encrypted.len() < TAG_SIZE {
         return Err(CryptoError::IncompleteEncryptionResult);
     }
@@ -131,10 +129,7 @@ pub(super) fn encode_result(
     }
 }
 
-fn decode_exact<const SIZE: usize>(
-    input: &str,
-    error: CryptoError,
-) -> CryptoResult<[u8; SIZE]> {
+fn decode_exact<const SIZE: usize>(input: &str, error: CryptoError) -> CryptoResult<[u8; SIZE]> {
     let bytes = STANDARD.decode(input.trim()).map_err(|_| error)?;
     bytes.try_into().map_err(|_| error)
 }

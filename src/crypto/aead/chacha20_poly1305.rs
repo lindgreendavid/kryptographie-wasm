@@ -91,11 +91,7 @@ mod tests {
                 .try_into()
                 .unwrap(),
         );
-        let nonce = Nonce12::from_bytes(
-            decode_hex("070000004041424344454647")
-                .try_into()
-                .unwrap(),
-        );
+        let nonce = Nonce12::from_bytes(decode_hex("070000004041424344454647").try_into().unwrap());
         let aad = decode_hex("50515253c0c1c2c3c4c5c6c7");
         let plaintext = decode_hex(concat!(
             "4c616469657320616e642047656e746c",
