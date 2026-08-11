@@ -65,3 +65,30 @@ function createThemeChoice() {
 
 createThemeChoice();
 
+function markActiveNavigation() {
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+    document.querySelectorAll(".topnav a").forEach((link) => {
+        const linkPage = link.getAttribute("href");
+        const isActive = linkPage === currentPage;
+        link.classList.toggle("active", isActive);
+        if (isActive) {
+            link.setAttribute("aria-current", "page");
+        }
+    });
+}
+
+function createProjectFooter() {
+    const site = document.querySelector(".site");
+    if (!site || document.querySelector(".site-footer")) {
+        return;
+    }
+
+    const footer = document.createElement("footer");
+    footer.className = "site-footer";
+    footer.innerHTML = "<strong>Kryptographie-Projekt</strong><span>Rust + WebAssembly + ein bisschen Liebe zum Detail.</span>";
+    site.appendChild(footer);
+}
+
+markActiveNavigation();
+createProjectFooter();
+

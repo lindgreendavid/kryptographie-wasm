@@ -13,6 +13,7 @@ Dieses Hochschulprojekt entwickelt eine deutschsprachige Lernanwendung für Kryp
 - AES-256-GCM mit zufälligem Schlüssel, Nonce und Authentifizierungstag
 - Umschaltbare Hell- und Dunkelansicht mit lokaler Speicherung
 - Aktive Navigation, sichtbare Tastaturfoki und verbesserte Statusmeldungen
+- Dritte Cyber-Ansicht und einheitlicher Projekt-Footer
 
 Weitere Kryptographieverfahren folgen in getrennten, nachvollziehbaren Commits.
 
