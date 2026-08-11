@@ -10,5 +10,8 @@ cargo test --locked
 wasm-pack build --target web --out-dir web/pkg
 python3 scripts/verify_web.py
 find web/js -name '*.js' -type f -print0 | xargs -0 -n1 node --check
+npm ci
+npx playwright install chromium
+npm run test:e2e
 
 echo "Alle automatisierten Prüfungen waren erfolgreich."

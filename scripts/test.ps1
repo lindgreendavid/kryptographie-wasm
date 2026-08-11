@@ -27,4 +27,19 @@ Get-ChildItem -Path web/js -Filter *.js | ForEach-Object {
     }
 }
 
+npm ci
+if ($LASTEXITCODE -ne 0) {
+    throw "Installation der Browser-Testabhängigkeiten fehlgeschlagen."
+}
+
+npx playwright install chromium
+if ($LASTEXITCODE -ne 0) {
+    throw "Installation von Chromium für Playwright fehlgeschlagen."
+}
+
+npm run test:e2e
+if ($LASTEXITCODE -ne 0) {
+    throw "Browser- oder WCAG-Test fehlgeschlagen."
+}
+
 Write-Host "Alle Tests und Prüfungen waren erfolgreich."
