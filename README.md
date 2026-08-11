@@ -119,6 +119,7 @@ Die aus sechs gelieferten Arbeitsständen rekonstruierte Entwicklung wurde bewus
 | [`v0.9.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/6a29c477845d365e0b2840c16a25d0ddc8fc677b) | Gehärtete Zufalls- und Fehlerbehandlung |
 | [`v1.0.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/cfb2bb6d22e6098d378957bbe7eee0043f6d681c) | Dokumentierte, geprüfte Abgabeversion |
 | [`v1.0.1`](https://github.com/lindgreendavid/kryptographie-wasm/commit/1358b89486f3d8621f5d78434f6afef5864a639f) | Ergänzte Abgabe- und Autorenangaben |
+| [`v1.1.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/9ab90bd3f71424bd519ac64a68256270fad0fd26) | Bewertungsreife Endfassung mit vertiefter Prüfung, Barrierefreiheit und Dokumentation |
 
 Die [Versionshistorie](docs/versionshistorie.md) erklärt Rekonstruktion, Commit-Prinzipien und Meilensteine transparent. Änderungen der Abgabeversion stehen im [Changelog](CHANGELOG.md).
 

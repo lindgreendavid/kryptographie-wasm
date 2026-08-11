@@ -16,6 +16,7 @@ Die Git-Historie wurde am 11. August 2026 aus den vorhandenen Ständen rekonstru
 6. Oberflächenentwicklung in drei Schritten
 7. ChaCha20-Poly1305
 8. Härtung, Dokumentation und Automatisierung
+9. vertiefte Prüfungen, Barrierefreiheit und Bewertungsdokumentation
 
 ## Commit-Regeln
 
@@ -39,4 +40,5 @@ git log --graph --decorate --oneline --all
 git log --reverse --oneline
 git show 2b919d65
 git diff f01de6e8..651c13ad
+git show 9ab90bd3
 ```
