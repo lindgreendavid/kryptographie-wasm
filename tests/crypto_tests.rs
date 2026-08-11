@@ -22,7 +22,10 @@ fn caesar_lehnt_ungueltige_schluessel_ab() {
 
 #[test]
 fn skytale_verschluesselt_und_entschluesselt() {
-    assert_eq!(crypto::skytale::encrypt("HALLO WELT", 4).unwrap(), "HOLA TLWLE");
+    assert_eq!(
+        crypto::skytale::encrypt("HALLO WELT", 4).unwrap(),
+        "HOLA TLWLE"
+    );
 
     for columns in [2, 3, 4, 7] {
         let text = "SKYTALE TEST MIT RESTZEILE";
@@ -49,7 +52,10 @@ fn substitution_roundtrip_erhaelt_den_text() {
     let alphabet = "QWERTZUIOPASDFGHJKLYXCVBNM";
     let text = "Angriff um 12 Uhr!";
     let encrypted = crypto::substitution::encrypt(text, alphabet).unwrap();
-    assert_eq!(crypto::substitution::decrypt(&encrypted, alphabet).unwrap(), text);
+    assert_eq!(
+        crypto::substitution::decrypt(&encrypted, alphabet).unwrap(),
+        text
+    );
 }
 
 #[test]
