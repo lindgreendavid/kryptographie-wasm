@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <a class="skip-link" href="#hauptinhalt">Direkt zum Inhalt</a>
     <div class="site">
         <nav class="topnav" aria-label="Hauptnavigation">
             <a href="index.html">Startseite</a>
@@ -17,7 +18,7 @@
             <a href="chacha.html">ChaCha20</a>
         </nav>
 
-        <main>
+        <main id="hauptinhalt">
             <h1 class="procedure-title">AES-GCM</h1>
             <p class="page-intro">
                 Modernes Verschlüsseln mit Authentifizierung: manipulierte Daten werden nicht als Klartext akzeptiert.
@@ -39,12 +40,12 @@
                     </div>
                     <div class="arrow" aria-hidden="true">→</div>
                     <div class="work-box">
-                        <label>Geheimtext</label>
-                        <div id="aes-cipher-output" class="output" aria-live="polite"></div>
-                        <label>Nonce</label>
-                        <div id="aes-nonce-output" class="output" aria-live="polite"></div>
-                        <label>Authentifizierungstag</label>
-                        <div id="aes-tag-output" class="output" aria-live="polite"></div>
+                        <label for="aes-cipher-output">Geheimtext</label>
+                        <output id="aes-cipher-output" class="output" aria-live="polite"></output>
+                        <label for="aes-nonce-output">Nonce</label>
+                        <output id="aes-nonce-output" class="output" aria-live="polite"></output>
+                        <label for="aes-tag-output">Authentifizierungstag</label>
+                        <output id="aes-tag-output" class="output" aria-live="polite"></output>
                     </div>
                 </div>
             </section>
@@ -65,8 +66,8 @@
                     </div>
                     <div class="arrow" aria-hidden="true">→</div>
                     <div class="work-box">
-                        <label>Normaler Text</label>
-                        <div id="aes-plain-output" class="output" aria-live="polite"></div>
+                        <label for="aes-plain-output">Normaler Text</label>
+                        <output id="aes-plain-output" class="output" aria-live="polite"></output>
                     </div>
                 </div>
             </section>
@@ -101,4 +102,3 @@
     <script type="module" src="js/aes.js"></script>
 </body>
 </html>
-

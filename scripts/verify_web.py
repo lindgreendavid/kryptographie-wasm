@@ -23,6 +23,10 @@ class PageParser(HTMLParser):
         self.references: list[str] = []
         self.html_language: str | None = None
         self.h1_count = 0
+        self.main_count = 0
+        self.label_targets: list[str] = []
+        self.labels_without_target = 0
+        self.form_controls: list[tuple[str, str | None]] = []
         self.in_title = False
         self.title_parts: list[str] = []
 
@@ -32,6 +36,15 @@ class PageParser(HTMLParser):
             self.html_language = attributes.get("lang")
         if tag == "h1":
             self.h1_count += 1
+        if tag == "main":
+            self.main_count += 1
+        if tag == "label":
+            if label_target := attributes.get("for"):
+                self.label_targets.append(label_target)
+            else:
+                self.labels_without_target += 1
+        if tag in {"input", "textarea", "select", "output"}:
+            self.form_controls.append((tag, attributes.get("id")))
         if tag == "title":
             self.in_title = True
         if element_id := attributes.get("id"):
@@ -65,15 +78,33 @@ def verify_html(path: Path) -> list[str]:
         errors.append("Der Seitentitel fehlt.")
     if parser.h1_count != 1:
         errors.append(f"Erwartet wird genau eine H1, gefunden: {parser.h1_count}.")
+    if parser.main_count != 1:
+        errors.append(f"Erwartet wird genau ein main-Element, gefunden: {parser.main_count}.")
 
     duplicates = sorted({item for item in parser.ids if parser.ids.count(item) > 1})
     if duplicates:
         errors.append(f"Doppelte IDs: {', '.join(duplicates)}.")
 
+    if parser.labels_without_target:
+        errors.append(f"Label ohne for-Attribut: {parser.labels_without_target}.")
+
+    for tag, control_id in parser.form_controls:
+        if not control_id:
+            errors.append(f"{tag}-Element ohne ID.")
+        elif control_id not in parser.label_targets:
+            errors.append(f"{tag}#{control_id} besitzt kein zugeordnetes Label.")
+
+    for target in parser.label_targets:
+        if target not in parser.ids:
+            errors.append(f"Label verweist auf fehlende ID: {target}.")
+
     for reference in parser.references:
+        parts = urlsplit(reference)
+        if not parts.path and parts.fragment and parts.fragment not in parser.ids:
+            errors.append(f"Sprungziel fehlt: #{parts.fragment}.")
         if not is_local_reference(reference):
             continue
-        target = (path.parent / urlsplit(reference).path).resolve()
+        target = (path.parent / parts.path).resolve()
         if WEB_ROOT.resolve() not in target.parents and target != WEB_ROOT.resolve():
             errors.append(f"Verweis verlässt web/: {reference}.")
         elif not target.exists():
@@ -125,4 +156,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

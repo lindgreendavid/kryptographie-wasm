@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <a class="skip-link" href="#hauptinhalt">Direkt zum Inhalt</a>
     <div class="site">
         <nav class="topnav" aria-label="Hauptnavigation">
             <a href="index.html">Startseite</a>
@@ -17,7 +18,7 @@
             <a href="chacha.html">ChaCha20</a>
         </nav>
 
-        <main>
+        <main id="hauptinhalt">
             <h1 class="procedure-title">Skytale</h1>
             <p class="page-intro">
                 Hier bleibt jeder Buchstabe derselbe, aber seine Position wechselt. Die Tabelle zeigt den Trick dahinter.
@@ -40,8 +41,8 @@
                     </div>
                     <div class="arrow" aria-hidden="true">→</div>
                     <div class="work-box">
-                        <label>Verschlüsselter Text</label>
-                        <div id="skytale-cipher-output" class="output" aria-live="polite"></div>
+                        <label for="skytale-cipher-output">Verschlüsselter Text</label>
+                        <output id="skytale-cipher-output" class="output" aria-live="polite"></output>
                     </div>
                 </div>
             </section>
@@ -56,8 +57,8 @@
                     </div>
                     <div class="arrow" aria-hidden="true">→</div>
                     <div class="work-box">
-                        <label>Normaler Text</label>
-                        <div id="skytale-plain-output" class="output" aria-live="polite"></div>
+                        <label for="skytale-plain-output">Normaler Text</label>
+                        <output id="skytale-plain-output" class="output" aria-live="polite"></output>
                     </div>
                 </div>
             </section>
@@ -97,4 +98,3 @@
     <script type="module" src="js/skytale.js"></script>
 </body>
 </html>
-

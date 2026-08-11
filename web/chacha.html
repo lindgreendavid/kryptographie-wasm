@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <a class="skip-link" href="#hauptinhalt">Direkt zum Inhalt</a>
     <div class="site">
         <nav class="topnav" aria-label="Hauptnavigation">
             <a href="index.html">Startseite</a>
@@ -17,7 +18,7 @@
             <a href="chacha.html">ChaCha20</a>
         </nav>
 
-        <main>
+        <main id="hauptinhalt">
             <h1 class="procedure-title">ChaCha20-Poly1305</h1>
             <p class="page-intro">
                 Ein modernes authentifiziertes Verfahren: ChaCha20 verschlüsselt, Poly1305 schützt vor Manipulation.
@@ -39,12 +40,12 @@
                     </div>
                     <div class="arrow" aria-hidden="true">→</div>
                     <div class="work-box">
-                        <label>Geheimtext</label>
-                        <div id="chacha-cipher-output" class="output" aria-live="polite"></div>
-                        <label>Nonce</label>
-                        <div id="chacha-nonce-output" class="output" aria-live="polite"></div>
-                        <label>Authentifizierungstag</label>
-                        <div id="chacha-tag-output" class="output" aria-live="polite"></div>
+                        <label for="chacha-cipher-output">Geheimtext</label>
+                        <output id="chacha-cipher-output" class="output" aria-live="polite"></output>
+                        <label for="chacha-nonce-output">Nonce</label>
+                        <output id="chacha-nonce-output" class="output" aria-live="polite"></output>
+                        <label for="chacha-tag-output">Authentifizierungstag</label>
+                        <output id="chacha-tag-output" class="output" aria-live="polite"></output>
                     </div>
                 </div>
             </section>
@@ -65,8 +66,8 @@
                     </div>
                     <div class="arrow" aria-hidden="true">→</div>
                     <div class="work-box">
-                        <label>Normaler Text</label>
-                        <div id="chacha-plain-output" class="output" aria-live="polite"></div>
+                        <label for="chacha-plain-output">Normaler Text</label>
+                        <output id="chacha-plain-output" class="output" aria-live="polite"></output>
                     </div>
                 </div>
             </section>
@@ -102,4 +103,3 @@
     <script type="module" src="js/chacha.js"></script>
 </body>
 </html>
-

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <a class="skip-link" href="#hauptinhalt">Direkt zum Inhalt</a>
     <div class="site">
         <nav class="topnav" aria-label="Hauptnavigation">
             <a href="index.html">Startseite</a>
@@ -17,7 +18,7 @@
             <a href="chacha.html">ChaCha20</a>
         </nav>
 
-        <main>
+        <main id="hauptinhalt">
             <h1 class="procedure-title">Caesar-Verschlüsselung</h1>
             <p class="page-intro">
                 Ein Klassiker zum Anfassen: Schlüssel wählen, Buchstaben verschieben und das Alphabet direkt vergleichen.
@@ -67,8 +68,8 @@
                     </div>
                     <div class="arrow" aria-hidden="true">→</div>
                     <div class="work-box">
-                        <label>Verschlüsselter Text</label>
-                        <div id="caesar-cipher-output" class="output" aria-live="polite"></div>
+                        <label for="caesar-cipher-output">Verschlüsselter Text</label>
+                        <output id="caesar-cipher-output" class="output" aria-live="polite"></output>
                     </div>
                 </div>
             </section>
@@ -83,8 +84,8 @@
                     </div>
                     <div class="arrow" aria-hidden="true">→</div>
                     <div class="work-box">
-                        <label>Normaler Text</label>
-                        <div id="caesar-plain-output" class="output" aria-live="polite"></div>
+                        <label for="caesar-plain-output">Normaler Text</label>
+                        <output id="caesar-plain-output" class="output" aria-live="polite"></output>
                     </div>
                 </div>
             </section>
@@ -119,4 +120,3 @@
     <script type="module" src="js/caesar.js"></script>
 </body>
 </html>
-

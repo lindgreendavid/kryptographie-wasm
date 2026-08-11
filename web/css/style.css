@@ -45,6 +45,22 @@ a:visited {
     color: #0b0080;
 }
 
+.skip-link {
+    position: fixed;
+    top: -80px;
+    left: 12px;
+    z-index: 1000;
+    border: 2px solid #111;
+    background: #fff;
+    color: #111;
+    font-weight: bold;
+    padding: 10px 14px;
+}
+
+.skip-link:focus {
+    top: 12px;
+}
+
 body.dark-mode a:visited {
     color: #c1a8ff;
 }
@@ -495,6 +511,8 @@ textarea {
 }
 
 .output {
+    display: block;
+    width: 100%;
     min-height: 116px;
     border: 1px solid #777;
     background: #f9f9f9;
@@ -816,4 +834,3 @@ body.cyber-mode .site-footer span {
         padding: 3px 1px;
     }
 }
-
