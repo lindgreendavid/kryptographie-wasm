@@ -1,0 +1,41 @@
+name: Qualitätsprüfung
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rust-wasm-web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v7
+
+      - name: Rust installieren
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+          components: rustfmt, clippy
+
+      - name: wasm-pack installieren
+        uses: taiki-e/install-action@wasm-pack
+
+      - name: Formatierung prüfen
+        run: cargo fmt --check
+
+      - name: Clippy prüfen
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      - name: Rust-Tests ausführen
+        run: cargo test --locked
+
+      - name: WebAssembly bauen
+        run: wasm-pack build --target web --out-dir web/pkg
+
+      - name: Webstruktur prüfen
+        run: python3 scripts/verify_web.py
+

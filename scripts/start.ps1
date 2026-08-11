@@ -8,23 +8,17 @@ if (-not (Test-Path "$ProjectRoot\web\pkg\krypto_wasm.js")) {
     wasm-pack build --target web --out-dir web/pkg
 }
 
-$VersionName = Split-Path -Leaf $ProjectRoot
-if ($VersionName -match '^v(\d+)$') {
-    $Port = 8080 + [int]$Matches[1]
-} else {
-    $Port = 8080
-}
+$Port = 8080
 
 $Url = "http://127.0.0.1:$Port/index.html"
 if (Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue) {
-    Write-Host "Diese Version scheint bereits unter $Url zu laufen."
+    Write-Host "Die Anwendung scheint bereits unter $Url zu laufen."
     Start-Process $Url
     return
 }
 
 Write-Host "Lokaler Server startet unter $Url"
 Write-Host "Projektordner: $ProjectRoot"
-Write-Host "Diese START_HIER-Datei startet nur diese Version: $VersionName"
 Write-Host "Zum Beenden Strg+C druecken."
 Start-Process $Url
 
@@ -37,4 +31,3 @@ if (Get-Command py -ErrorAction SilentlyContinue) {
 } else {
     throw "Python wurde nicht gefunden. Bitte Python installieren oder einen anderen lokalen HTTP-Server im Ordner web starten."
 }
-

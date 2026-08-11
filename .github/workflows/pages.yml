@@ -1,0 +1,51 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v7
+
+      - name: Rust installieren
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: wasm-pack installieren
+        uses: taiki-e/install-action@wasm-pack
+
+      - name: WebAssembly für die Veröffentlichung bauen
+        run: wasm-pack build --release --target web --out-dir web/pkg
+
+      - name: Webstruktur prüfen
+        run: python3 scripts/verify_web.py
+
+      - name: GitHub Pages konfigurieren
+        uses: actions/configure-pages@v6
+
+      - name: Seitenartefakt hochladen
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: web
+
+      - name: Veröffentlichen
+        id: deployment
+        uses: actions/deploy-pages@v4
