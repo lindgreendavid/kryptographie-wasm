@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - Cargo.toml
+      - .github/workflows/release.yml
   workflow_dispatch:
 
 permissions:
@@ -25,12 +26,26 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Historische Meilensteine und aktuelle Version markieren
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           tag_if_missing() {
             tag="$1"
             commit="$2"
-            if ! git rev-parse "$tag" >/dev/null 2>&1; then
-              git tag -a "$tag" "$commit" -m "Kryptographie-WASM $tag"
+            if ! gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$tag" >/dev/null 2>&1; then
+              tag_sha="$(gh api \
+                --method POST \
+                "repos/$GITHUB_REPOSITORY/git/tags" \
+                --raw-field tag="$tag" \
+                --raw-field message="Kryptographie-WASM $tag" \
+                --raw-field object="$commit" \
+                --raw-field type=commit \
+                --jq .sha)"
+              gh api \
+                --method POST \
+                "repos/$GITHUB_REPOSITORY/git/refs" \
+                --raw-field ref="refs/tags/$tag" \
+                --raw-field sha="$tag_sha" >/dev/null
             fi
           }
 
@@ -51,7 +66,6 @@ jobs:
           release_tag="v$version"
           test -f "docs/release-notes-$version.md"
           tag_if_missing "$release_tag" "$GITHUB_SHA"
-          git push origin --tags
 
       - name: GitHub-Release anlegen
         env:
