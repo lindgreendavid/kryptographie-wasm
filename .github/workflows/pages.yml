@@ -40,6 +40,8 @@ jobs:
 
       - name: GitHub Pages konfigurieren
         uses: actions/configure-pages@v6
+        with:
+          enablement: true
 
       - name: Seitenartefakt hochladen
         uses: actions/upload-pages-artifact@v5
