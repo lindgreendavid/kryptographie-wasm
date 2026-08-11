@@ -10,7 +10,7 @@ Alle wesentlichen Projektstände werden über fokussierte Commits und direkt ver
 - typisiertes WASM-Ergebnis statt JSON-Zwischenschritt
 - Playwright-End-to-End- und automatisierbare WCAG-A/AA-Tests
 - RustSec, Dependabot und vollständig SHA-gepinnte GitHub Actions
-- Bedrohungsmodell, neue ADRs und automatisierte Release-Tags
+- Bedrohungsmodell, neue ADRs und versionierte Release Notes
 
 ## 1.1.0 – Bewertungsreife Abgabe
 

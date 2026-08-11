@@ -9,7 +9,7 @@
 - [x] aussagekräftiger deutscher Projektname und Kurzbeschreibung
 - [x] linearer Commit-Verlauf mit einzelnen fachlichen Schritten
 - [x] direkt verlinkte Versionsmeilensteine
-- [x] annotierte Git-Tags und versionierte Release Notes
+- [x] direkt verlinkte Meilensteine und versionierte Release Notes
 - [x] Build-Artefakte über `.gitignore` ausgeschlossen
 - [x] keine Schlüssel, Zugangsdaten oder persönlichen Daten im Repository
 

@@ -12,6 +12,6 @@ Diese Version vertieft die Abgabequalität, ohne den didaktischen Funktionsumfan
 - Browser-Rundläufe, Manipulationstest und automatisierte WCAG-A/AA-Prüfung;
 - RustSec, Dependabot und auf vollständige Commit-SHAs festgelegte Actions;
 - Bedrohungsmodell, neue Architekturentscheidungen und aktualisierte Projektdokumentation;
-- echte annotierte Git-Tags für die dokumentierten Meilensteine.
+- konsistente Versionsnachweise über Paketversion, Changelog und Release Notes.
 
 Die Anwendung bleibt eine Lernanwendung und ist nicht für die Verarbeitung realer Geheimnisse vorgesehen.
