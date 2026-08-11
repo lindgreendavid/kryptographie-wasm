@@ -2,6 +2,15 @@
 
 Alle wesentlichen Projektstände werden über fokussierte Commits und direkt verlinkte Versionsmeilensteine nachvollziehbar gemacht.
 
+## 1.1.0 – Bewertungsreife Abgabe
+
+- Rust 1.97.1 und Paketversion reproduzierbar festgelegt
+- AEAD-Manipulationstests auf gültige, byteweise veränderte Daten präzisiert
+- JavaScript-Syntax und Formularzuordnungen in die automatische Prüfung aufgenommen
+- semantische Ausgabeelemente und Sprunglinks ergänzt
+- Architektur-, Test- und Bewertungsdokumentation vertieft
+- GitHub-Pages-Live-Demo erfolgreich veröffentlicht
+
 ## 1.0.1 – Abgabeangaben
 
 - David Lindgreen (E039) und Viktor Edelmann (E045) als Bearbeiter ergänzt

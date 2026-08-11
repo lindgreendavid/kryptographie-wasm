@@ -26,6 +26,7 @@
 - [x] Formatierung und Clippy in CI
 - [x] WebAssembly-Build in CI
 - [x] interne Links und doppelte HTML-IDs automatisiert geprüft
+- [x] Formularzuordnungen und JavaScript-Syntax automatisiert geprüft
 - [x] GitHub-Pages-Build aus demselben reproduzierbaren WASM-Artefakt
 
 ## Dokumentation
@@ -37,3 +38,4 @@
 - [x] Primärquellen für moderne Verfahren
 - [x] transparente KI-Nutzung
 - [x] transparente Rekonstruktion der Versionshistorie
+- [x] kompakter Bewertungs- und Vorführungsleitfaden

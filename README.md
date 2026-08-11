@@ -18,6 +18,10 @@ Eine deutschsprachige Lernanwendung, die drei klassische und zwei moderne Krypto
 
 > Dieses Projekt dient ausschließlich der Lehre. Caesar, Skytale und monoalphabetische Substitution sind nicht für reale Sicherheitsanwendungen geeignet. Auch die modernen Demonstrationen ersetzen keine geprüfte Produktarchitektur oder professionelles Schlüsselmanagement.
 
+### Schnelle Bewertung
+
+Der [Bewertungs- und Vorführungsleitfaden](docs/bewertungsleitfaden.md) verbindet die wichtigsten Anforderungen direkt mit Code, Tests und Dokumentation. Er enthält außerdem eine reproduzierbare Fünf-Minuten-Vorführung einschließlich eines Manipulationstests.
+
 ## Verfahren
 
 | Verfahren | Kategorie | Demonstrierter Kern | Sicherheitsstatus |
@@ -52,14 +56,14 @@ Weitere Details stehen in der [Architekturdokumentation](docs/projekt-und-archit
 
 ### Voraussetzungen
 
-- aktuelle stabile Rust-Version
-- WebAssembly-Target `wasm32-unknown-unknown`
-- `wasm-pack`
+- `rustup`; das Projekt legt Rust 1.97.1 und das WebAssembly-Target fest
+- `wasm-pack` 0.15
 - Python 3 für den lokalen Webserver
+- Node.js für die vollständige JavaScript-Syntaxprüfung
 
 ```bash
-rustup target add wasm32-unknown-unknown
-cargo install wasm-pack
+rustup toolchain install 1.97.1 --profile minimal --component rustfmt --component clippy --target wasm32-unknown-unknown
+cargo install wasm-pack --version 0.15.0 --locked
 ```
 
 ### Plattformunabhängig
@@ -92,9 +96,10 @@ cargo clippy --all-targets --all-features -- -D warnings
 cargo test --locked
 wasm-pack build --target web --out-dir web/pkg
 python3 scripts/verify_web.py
+find web/js -name '*.js' -type f -print0 | xargs -0 -n1 node --check
 ```
 
-GitHub Actions führt dieselben Prüfungen bei jedem Push und Pull Request reproduzierbar aus. Die [Teststrategie](docs/teststrategie.md) beschreibt die Abdeckung und Grenzen.
+GitHub Actions führt dieselben Prüfungen bei jedem Push und Pull Request reproduzierbar aus. Die Manipulationstests verändern gültig Base64-kodierte Daten byteweise und prüfen dadurch gezielt die AEAD-Authentifizierung. Die [Teststrategie](docs/teststrategie.md) beschreibt Abdeckung und Grenzen.
 
 ## Nachvollziehbare Versionierung
 
@@ -120,6 +125,7 @@ Die [Versionshistorie](docs/versionshistorie.md) erklärt Rekonstruktion, Commit
 ## Dokumentation
 
 - [Projekt und Architektur](docs/projekt-und-architektur.md)
+- [Bewertungs- und Vorführungsleitfaden](docs/bewertungsleitfaden.md)
 - [Technologieentscheidungen](docs/tech-stack.md)
 - [Teststrategie](docs/teststrategie.md)
 - [Spezifikationen](docs/specs/)

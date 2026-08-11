@@ -1,23 +1,40 @@
 # Projektplan
 
-## 1. Quellenanalyse
+## Ausgangslage
 
-Die verfügbare Aufgabenbeschreibung wurde vollständig gelesen. Weitere erwähnte Quelldateien lagen nicht im Anhang vor.
+Als Ausgangsmaterial lagen sechs Arbeitsstände `v1` bis `v6` ohne separates Bewertungsraster vor. Die Stände wurden zunächst inventarisiert und miteinander verglichen. Da bereits frühe Ordner mehrere Verfahren enthielten, wurde die fachliche Entwicklung für Git transparent und feingranular rekonstruiert.
 
-## 2. Anforderungen
+## Ziele
 
-Fünf Verfahren, sechs HTML-Seiten, Rust/WASM-Fachlogik, wenig JavaScript, Tests, Tooling und Dokumentation.
+- fünf Verfahren mit Ver- und Entschlüsselung
+- Rust als alleinige Fachlogik und WebAssembly als Browser-Schnittstelle
+- verständliche, deutschsprachige Oberfläche
+- reproduzierbarer Build auf Windows, macOS und Linux
+- automatisierte Qualitätsprüfung und öffentliche Live-Demo
+- nachvollziehbare Dokumentation und Versionsgeschichte
 
-## 3. Umsetzung
+## Arbeitspakete
 
-1. Projektstruktur erstellen
-2. Specs formulieren
-3. Rust-Module implementieren
-4. HTML/CSS/JS erstellen
-5. Tests und CI ergänzen
-6. Dokumentation schreiben
-7. Build und Funktionsprüfung durchführen
+| Phase | Ergebnis |
+| --- | --- |
+| 1. Analyse | Dateiinventar und Vergleich der sechs Stände |
+| 2. Fachliche Trennung | ein Entwicklungsschritt je Verfahren |
+| 3. Härtung | Validierung, Zufall, Fehlerbehandlung und Manipulationstests |
+| 4. Oberfläche | Navigation, Ansichten, responsive und semantische Elemente |
+| 5. Dokumentation | README, Spezifikationen, ADRs, Architektur und Quellen |
+| 6. Automatisierung | lokale Skripte, CI und GitHub Pages |
+| 7. Abnahme | vollständiger Qualitätslauf und öffentliche Funktionsprüfung |
 
-## 4. Abschluss
+## Risiken und Maßnahmen
 
-Der Ordner soll ohne Build-Artefakte abgebbar bleiben. `target/` und `web/pkg/` sind reproduzierbar und werden ignoriert.
+| Risiko | Maßnahme |
+| --- | --- |
+| moderne Kryptographie fehlerhaft selbst implementiert | etablierte RustCrypto-Bibliotheken verwenden |
+| unübersichtliche Versionssprünge | Verfahren und technische Änderungen einzeln committen |
+| Unterschiede zwischen lokaler und veröffentlichter Version | identische Befehle in Skripten und GitHub Actions |
+| Build-Artefakte blähen das Repository auf | `target/` und `web/pkg/` ignorieren und reproduzierbar erzeugen |
+| Demonstration wird als produktionssicher missverstanden | Sicherheitsstatus und Projektgrenzen sichtbar dokumentieren |
+
+## Abschlusskriterien
+
+Der Stand gilt als abgabefähig, wenn CI und Pages erfolgreich sind, alle fünf Verfahren in der Live-Demo funktionieren, keine Geheimnisse oder Build-Artefakte versioniert sind und die Abgabe-Checkliste vollständig erfüllt ist.
