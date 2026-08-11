@@ -1,0 +1,317 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f4f4f4;
+    color: #222;
+    font-family: Arial, Verdana, Tahoma, sans-serif;
+    font-size: 15px;
+    line-height: 1.45;
+}
+
+a {
+    color: #0645ad;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #0b0080;
+}
+
+.site {
+    width: 94%;
+    max-width: 1080px;
+    margin: 0 auto;
+    background: #fff;
+    min-height: 100vh;
+    border-left: 1px solid #999;
+    border-right: 1px solid #999;
+    padding: 0 22px 36px;
+}
+
+.topnav {
+    border: 2px solid #222;
+    background: linear-gradient(#eeeeee, #d7d7d7);
+    padding: 9px 12px;
+    margin: 0 -22px 26px;
+    text-align: center;
+}
+
+.topnav a {
+    display: inline-block;
+    margin: 3px 12px;
+    font-weight: bold;
+}
+
+.main-title,
+.procedure-title {
+    text-align: center;
+    font-weight: normal;
+    letter-spacing: 0;
+    margin: 30px 0 36px;
+}
+
+.main-title {
+    font-size: 82px;
+}
+
+.procedure-title {
+    font-size: 64px;
+}
+
+.landing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 38px;
+    margin: 0 auto 34px;
+}
+
+.method-box {
+    display: block;
+    min-height: 126px;
+    border: 4px solid #111;
+    background: #fff;
+    color: #222;
+    text-align: center;
+    text-decoration: none;
+    padding: 28px 12px;
+}
+
+.method-box:hover,
+.method-box:focus {
+    background: #eeeeee;
+    outline: 3px solid #666;
+}
+
+.method-name {
+    display: block;
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+.method-era {
+    display: block;
+    color: #444;
+}
+
+.modern-row {
+    width: 52%;
+    min-width: 360px;
+    margin: 0 auto 34px;
+}
+
+.classic-panel {
+    border: 3px solid #222;
+    background: #fff;
+    padding: 18px;
+    margin: 24px 0;
+}
+
+.classic-panel h2,
+.classic-panel h3 {
+    margin-top: 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.flow {
+    margin: 24px 0 32px;
+}
+
+.flow h2 {
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0 0 14px;
+}
+
+.flow-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr);
+    align-items: center;
+    gap: 10px;
+}
+
+.work-box {
+    border: 4px solid #222;
+    background: #fff;
+    min-height: 230px;
+    padding: 15px;
+}
+
+.work-box label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+textarea,
+input,
+select {
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid #555;
+    background: #fff;
+    color: #111;
+    font: inherit;
+    padding: 7px;
+}
+
+textarea {
+    min-height: 116px;
+    resize: vertical;
+}
+
+.output {
+    min-height: 116px;
+    border: 1px solid #777;
+    background: #f9f9f9;
+    padding: 8px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.arrow {
+    text-align: center;
+    font-size: 48px;
+    font-family: "Times New Roman", serif;
+}
+
+.controls {
+    margin-top: 12px;
+}
+
+button {
+    border: 2px solid #333;
+    background: linear-gradient(#ffffff, #d9d9d9);
+    color: #111;
+    font: inherit;
+    padding: 7px 13px;
+    margin: 4px 4px 4px 0;
+    cursor: pointer;
+}
+
+button:hover,
+button:focus {
+    background: #eaeaea;
+    outline: 2px solid #555;
+}
+
+.message {
+    min-height: 22px;
+    margin-top: 8px;
+    color: #8a0000;
+    font-weight: bold;
+}
+
+.hint {
+    color: #444;
+    font-size: 13px;
+}
+
+.classic-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    background: #fff;
+    table-layout: fixed;
+}
+
+.classic-table th,
+.classic-table td {
+    border: 1px solid #333;
+    padding: 6px 3px;
+    text-align: center;
+    min-width: 0;
+    word-break: break-word;
+}
+
+.alphabet-line {
+    border: 1px solid #666;
+    background: #f9f9f9;
+    padding: 9px;
+    margin-top: 8px;
+    font-family: "Courier New", monospace;
+    word-break: break-word;
+}
+
+.server-warning {
+    border: 2px solid #8a0000;
+    color: #8a0000;
+    background: #fff2f2;
+    padding: 10px;
+    margin: 12px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 820px) {
+    .main-title {
+        font-size: 54px;
+    }
+
+    .procedure-title {
+        font-size: 42px;
+    }
+
+    .landing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modern-row {
+        width: 80%;
+        min-width: 0;
+    }
+
+    .flow-row {
+        grid-template-columns: 1fr;
+    }
+
+    .arrow {
+        transform: rotate(90deg);
+        font-size: 38px;
+    }
+}
+
+@media (max-width: 520px) {
+    .site {
+        width: 100%;
+        padding: 0 12px 24px;
+        border: 0;
+    }
+
+    .topnav {
+        margin-left: -12px;
+        margin-right: -12px;
+    }
+
+    .main-title {
+        font-size: 42px;
+    }
+
+    .procedure-title {
+        font-size: 34px;
+    }
+
+    .landing-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .method-box {
+        min-height: 108px;
+    }
+
+    .classic-table {
+        font-size: 11px;
+    }
+
+    .classic-table th,
+    .classic-table td {
+        padding: 3px 1px;
+    }
+}
+

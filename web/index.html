@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kryptographie</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="site">
+        <nav class="topnav" aria-label="Hauptnavigation">
+            <a href="index.html">Startseite</a>
+        </nav>
+
+        <main>
+            <h1 class="main-title">Kryptographie</h1>
+            <p class="page-intro">
+                Diese Webanwendung entsteht schrittweise. Jedes Verfahren wird in einem eigenen Entwicklungsschritt ergänzt.
+            </p>
+
+            <p id="server-warning" class="server-warning hidden">
+                Diese Seite verwendet WebAssembly. Bitte starte sie über den lokalen Server.
+            </p>
+
+            <section class="classic-panel">
+                <h2>Projektziel</h2>
+                <p>
+                    Klassische und moderne Verschlüsselungsverfahren werden mit Rust implementiert und über
+                    WebAssembly im Browser interaktiv erklärt.
+                </p>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
+
