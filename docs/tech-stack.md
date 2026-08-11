@@ -21,3 +21,5 @@
 Es werden keine Frontend-Frameworks, keine Datenbank und kein Backend verwendet.
 
 Die Rust-Version und das WASM-Target sind in `rust-toolchain.toml` festgelegt. Abhängigkeiten werden über `Cargo.lock` reproduzierbar aufgelöst. Das Release-Profil ist auf eine kleine WebAssembly-Ausgabe mit Link-Time-Optimierung ausgerichtet.
+
+Die ausführliche [Rust-Entscheidung](rust-entscheidung.md) dokumentiert Anforderungen, messbare Projektkennzahlen, eine gewichtete Alternativenbewertung und die Grenzen der Sprachwahl.

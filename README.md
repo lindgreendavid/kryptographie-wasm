@@ -54,6 +54,10 @@ flowchart LR
 
 Weitere Details stehen in der [Architekturdokumentation](docs/projekt-und-architektur.md).
 
+### Warum Rust?
+
+Rust enthält 100 % der Kryptographielogik und JavaScript 0 von 5 Verfahren. Der eigene Rust-Code verwendet 0 `unsafe`-Blöcke, stellt 16 kontrollierte WASM-Funktionen bereit und wird durch 15 Rust- sowie acht Browsertests geprüft. Eine transparente Nutzwertanalyse bewertet Rust für diesen Projektzuschnitt mit 100 Punkten gegenüber 64 für C++, 60 für TypeScript und 54 für Python. Methodik, Messbefehle, Quellen und Einschränkungen stehen in [Warum Rust die Programmiersprache der Wahl ist](docs/rust-entscheidung.md).
+
 ## Schnellstart
 
 ### Voraussetzungen
@@ -134,6 +138,7 @@ Die [Versionshistorie](docs/versionshistorie.md) erklärt Rekonstruktion, Commit
 - [Projekt und Architektur](docs/projekt-und-architektur.md)
 - [Bewertungs- und Vorführungsleitfaden](docs/bewertungsleitfaden.md)
 - [Technologieentscheidungen](docs/tech-stack.md)
+- [Warum Rust die Sprache der Wahl ist](docs/rust-entscheidung.md)
 - [Teststrategie](docs/teststrategie.md)
 - [Bedrohungsmodell](docs/bedrohungsmodell.md)
 - [Spezifikationen](docs/specs/)

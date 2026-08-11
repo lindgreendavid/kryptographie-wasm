@@ -11,6 +11,7 @@ Alle wesentlichen Projektstände werden über fokussierte Commits und direkt ver
 - Playwright-End-to-End- und automatisierbare WCAG-A/AA-Tests
 - RustSec, Dependabot und vollständig SHA-gepinnte GitHub Actions
 - Bedrohungsmodell, neue ADRs, annotierte Tags und GitHub-Release
+- quantitative Rust-Entscheidung mit reproduzierbaren Projektkennzahlen
 
 ## 1.1.0 – Bewertungsreife Abgabe
 

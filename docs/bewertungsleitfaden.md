@@ -19,6 +19,7 @@ Dieser Leitfaden ermöglicht eine kompakte Prüfung des Projekts ohne Vorwissen 
 | Trennung der Verantwortlichkeiten | `src/lib.rs` als WASM-Grenze, kleine Dateien unter `web/js/` |
 | Korrektheit | Unit-Tests, offizielle Testvektoren und Playwright-Szenarien |
 | moderne Kryptographie | RustCrypto-Einbindung, ADR 003 und ADR 004, Primärquellen |
+| begründete Sprachwahl | quantitative Nutzwertanalyse und Messwerte in `docs/rust-entscheidung.md` |
 | Fehlerbehandlung | `CryptoError`, AEAD-Werttypen, deutsche UI-Meldungen und Negativtests |
 | Reproduzierbarkeit | `rust-toolchain.toml`, `Cargo.lock`, `scripts/` und GitHub Actions |
 | Barrierearme Struktur | Labels, Ausgaben, Sprunglink, Tastaturfokus und WCAG-A/AA-Prüfung |

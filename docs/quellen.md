@@ -12,6 +12,11 @@
 - RustCrypto: [`chacha20poly1305`](https://docs.rs/chacha20poly1305/)
 - Rust and WebAssembly Working Group: [`wasm-bindgen`-Leitfaden](https://rustwasm.github.io/docs/wasm-bindgen/)
 - Rust-Dokumentation: [`getrandom`](https://docs.rs/getrandom/)
+- Rust-Projekt: [Ownership und Speichersicherheit ohne Garbage Collector](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
+- Rust-Projekt: [Rust und WebAssembly](https://rust-lang.org/what/wasm/)
+- W3C: [Web Cryptography Level 2 – Algorithmusübersicht](https://www.w3.org/TR/webcrypto/), Entwurf 2025.
+- Google Security Blog: [Eliminating Memory Safety Vulnerabilities at the Source](https://security.googleblog.com/2024/09/eliminating-memory-safety-vulnerabilities-Android.html), 2024.
+- Google Security Blog: [Rust in Android: move fast and fix things](https://security.googleblog.com/2025/11/rust-in-android-move-fast-fix-things.html), 2025.
 - Microsoft: [Playwright – Accessibility testing](https://playwright.dev/docs/accessibility-testing)
 - Deque Systems: [`axe-core`](https://github.com/dequelabs/axe-core)
 - Rust Secure Code Working Group: [RustSec Advisory Database](https://rustsec.org/)

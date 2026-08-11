@@ -13,5 +13,6 @@ Diese Version vertieft die Abgabequalität, ohne den didaktischen Funktionsumfan
 - RustSec, Dependabot und auf vollständige Commit-SHAs festgelegte Actions;
 - Bedrohungsmodell, neue Architekturentscheidungen und aktualisierte Projektdokumentation;
 - annotierte Git-Tags und ein veröffentlichtes GitHub-Release.
+- ausführliche quantitative Begründung der Rust-/WebAssembly-Architektur.
 
 Die Anwendung bleibt eine Lernanwendung und ist nicht für die Verarbeitung realer Geheimnisse vorgesehen.
