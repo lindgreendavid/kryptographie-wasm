@@ -29,7 +29,7 @@ pub fn decrypt(input: &str, columns: usize) -> Result<String, String> {
     let chars: Vec<char> = input.chars().collect();
     let len = chars.len();
     let rows = len.div_ceil(columns);
-    let last_row_len = if len % columns == 0 {
+    let last_row_len = if len.is_multiple_of(columns) {
         columns
     } else {
         len % columns
