@@ -17,6 +17,7 @@ Die Git-Historie wurde am 11. August 2026 aus den vorhandenen Ständen rekonstru
 7. ChaCha20-Poly1305
 8. Härtung, Dokumentation und Automatisierung
 9. vertiefte Prüfungen, Barrierefreiheit und Bewertungsdokumentation
+10. strukturierte Domäne, offizielle Testvektoren und Supply-Chain-Härtung
 
 ## Commit-Regeln
 
@@ -41,4 +42,7 @@ git log --reverse --oneline
 git show 2b919d65
 git diff f01de6e8..651c13ad
 git show 9ab90bd3
+git tag --list --sort=version:refname
 ```
+
+Seit Version 1.2.0 kennzeichnen annotierte Git-Tags alle dokumentierten Meilensteine zusätzlich zu den Commit-Verweisen. Der Release-Workflow erzeugt den Tag der aktuellen Paketversion reproduzierbar aus `Cargo.toml` und den passenden versionierten Release Notes.

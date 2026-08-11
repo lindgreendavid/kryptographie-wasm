@@ -2,6 +2,16 @@
 
 Alle wesentlichen Projektstände werden über fokussierte Commits und direkt verlinkte Versionsmeilensteine nachvollziehbar gemacht.
 
+## 1.2.0 – Architektur und Qualität
+
+- strukturiertes Fehlermodell und validierte AEAD-Werttypen
+- gemeinsame AEAD-Infrastruktur ohne Vermischung der Verfahren
+- offizielle Known-Answer-Tests nach NIST und RFC 8439
+- typisiertes WASM-Ergebnis statt JSON-Zwischenschritt
+- Playwright-End-to-End- und automatisierbare WCAG-A/AA-Tests
+- RustSec, Dependabot und vollständig SHA-gepinnte GitHub Actions
+- Bedrohungsmodell, neue ADRs und automatisierte Release-Tags
+
 ## 1.1.0 – Bewertungsreife Abgabe
 
 - Rust 1.97.1 und Paketversion reproduzierbar festgelegt

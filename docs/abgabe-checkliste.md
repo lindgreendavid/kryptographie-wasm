@@ -9,6 +9,7 @@
 - [x] aussagekräftiger deutscher Projektname und Kurzbeschreibung
 - [x] linearer Commit-Verlauf mit einzelnen fachlichen Schritten
 - [x] direkt verlinkte Versionsmeilensteine
+- [x] annotierte Git-Tags und versionierte Release Notes
 - [x] Build-Artefakte über `.gitignore` ausgeschlossen
 - [x] keine Schlüssel, Zugangsdaten oder persönlichen Daten im Repository
 
@@ -19,6 +20,7 @@
 - [x] deutsche Validierungs- und Fehlermeldungen
 - [x] Kommentare an nicht offensichtlichen Algorithmen- und AEAD-Stellen
 - [x] keine selbst entwickelte moderne Kryptographie
+- [x] strukturierte Fehler und validierte AEAD-Werttypen
 
 ## Prüfung
 
@@ -27,6 +29,9 @@
 - [x] WebAssembly-Build in CI
 - [x] interne Links und doppelte HTML-IDs automatisiert geprüft
 - [x] Formularzuordnungen und JavaScript-Syntax automatisiert geprüft
+- [x] offizielle NIST- und RFC-Known-Answer-Tests
+- [x] Browser-Rundläufe und automatisierbare WCAG-A/AA-Prüfungen
+- [x] RustSec-, Dependabot- und Action-Pinning eingerichtet
 - [x] GitHub-Pages-Build aus demselben reproduzierbaren WASM-Artefakt
 
 ## Dokumentation
@@ -39,3 +44,4 @@
 - [x] transparente KI-Nutzung
 - [x] transparente Rekonstruktion der Versionshistorie
 - [x] kompakter Bewertungs- und Vorführungsleitfaden
+- [x] Bedrohungsmodell mit Restrisiken und Vertrauensgrenzen

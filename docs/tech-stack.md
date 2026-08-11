@@ -9,11 +9,12 @@
 | Kryptografie | aes-gcm, chacha20poly1305 / RustCrypto |
 | Zufall | getrandom |
 | Kodierung | base64 |
-| Paketverwaltung | Cargo |
-| Tests | cargo test, Python-Strukturprüfung, Node.js-Syntaxprüfung |
+| Paketverwaltung | Cargo, npm mit Lockdateien |
+| Tests | cargo test, NIST-/RFC-Vektoren, Playwright, axe-core, Python-Strukturprüfung |
 | Formatierung | rustfmt |
 | Linting | clippy |
 | CI | GitHub Actions |
+| Sicherheitsprüfung | RustSec, Dependabot, SHA-gepinnte Actions |
 | Bereitstellung | GitHub Pages |
 | Versionsverwaltung | Git |
 

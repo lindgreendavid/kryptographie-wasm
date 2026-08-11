@@ -17,11 +17,12 @@ Dieser Leitfaden ermöglicht eine kompakte Prüfung des Projekts ohne Vorwissen 
 | Aufgabenverständnis | fünf getrennte Spezifikationen und Landingpage-Spezifikation unter `docs/specs/` |
 | Fachliche Struktur | ein Rust-Modul je Verfahren unter `src/crypto/` |
 | Trennung der Verantwortlichkeiten | `src/lib.rs` als WASM-Grenze, kleine Dateien unter `web/js/` |
-| Korrektheit | `tests/crypto_tests.rs` und `docs/teststrategie.md` |
+| Korrektheit | Unit-Tests, offizielle Testvektoren und Playwright-Szenarien |
 | moderne Kryptographie | RustCrypto-Einbindung, ADR 003 und ADR 004, Primärquellen |
-| Fehlerbehandlung | Rust-`Result`, deutsche UI-Statusmeldungen und Negativtests |
+| Fehlerbehandlung | `CryptoError`, AEAD-Werttypen, deutsche UI-Meldungen und Negativtests |
 | Reproduzierbarkeit | `rust-toolchain.toml`, `Cargo.lock`, `scripts/` und GitHub Actions |
-| Barrierearme Struktur | Labels, semantische Ausgaben, Sprunglink, Tastaturfokus und automatische HTML-Prüfung |
+| Barrierearme Struktur | Labels, Ausgaben, Sprunglink, Tastaturfokus und WCAG-A/AA-Prüfung |
+| Sicherheitsreflexion | `docs/bedrohungsmodell.md`, RustSec und gepinnte CI-Actions |
 | Versionsverwaltung | ein eigener Meilenstein pro Verfahren und transparente Rekonstruktionsdokumentation |
 | Reflexion | Projektgrenzen, Lessons Learned und KI-Nutzung |
 

@@ -2,6 +2,7 @@
 
 [![Qualitätsprüfung](https://github.com/lindgreendavid/kryptographie-wasm/actions/workflows/ci.yml/badge.svg)](https://github.com/lindgreendavid/kryptographie-wasm/actions/workflows/ci.yml)
 [![GitHub Pages](https://github.com/lindgreendavid/kryptographie-wasm/actions/workflows/pages.yml/badge.svg)](https://github.com/lindgreendavid/kryptographie-wasm/actions/workflows/pages.yml)
+[![Sicherheitsprüfung](https://github.com/lindgreendavid/kryptographie-wasm/actions/workflows/security.yml/badge.svg)](https://github.com/lindgreendavid/kryptographie-wasm/actions/workflows/security.yml)
 
 Eine deutschsprachige Lernanwendung, die drei klassische und zwei moderne Kryptographieverfahren interaktiv gegenüberstellt. Die Fachlogik läuft in Rust, wird als WebAssembly kompiliert und über kleine JavaScript-Brücken mit statischen HTML-Seiten verbunden.
 
@@ -45,9 +46,9 @@ flowchart LR
 ```
 
 - `web/`: sechs statische Seiten, gemeinsame Gestaltung und DOM-Anbindung
-- `src/crypto/`: ein Rust-Modul pro Verfahren
-- `src/lib.rs`: klar abgegrenzte WebAssembly-Exports
-- `tests/`: Roundtrip-, Validierungs- und Manipulationstests
+- `src/crypto/`: Verfahrensmodule, strukturiertes Fehlermodell und validierte AEAD-Werttypen
+- `src/lib.rs`: klar abgegrenzte und typisierte WebAssembly-Exports
+- `tests/` und `e2e/`: Unit-, Known-Answer-, Manipulations-, Browser- und WCAG-Tests
 - `docs/`: Spezifikationen, Architekturentscheidungen und Projektnachweise
 
 Weitere Details stehen in der [Architekturdokumentation](docs/projekt-und-architektur.md).
@@ -59,7 +60,7 @@ Weitere Details stehen in der [Architekturdokumentation](docs/projekt-und-archit
 - `rustup`; das Projekt legt Rust 1.97.1 und das WebAssembly-Target fest
 - `wasm-pack` 0.15
 - Python 3 für den lokalen Webserver
-- Node.js für die vollständige JavaScript-Syntaxprüfung
+- Node.js 24 und npm für Syntax-, Browser- und WCAG-Prüfungen
 
 ```bash
 rustup toolchain install 1.97.1 --profile minimal --component rustfmt --component clippy --target wasm32-unknown-unknown
@@ -97,9 +98,12 @@ cargo test --locked
 wasm-pack build --target web --out-dir web/pkg
 python3 scripts/verify_web.py
 find web/js -name '*.js' -type f -print0 | xargs -0 -n1 node --check
+npm ci
+npx playwright install chromium
+npm run test:e2e
 ```
 
-GitHub Actions führt dieselben Prüfungen bei jedem Push und Pull Request reproduzierbar aus. Die Manipulationstests verändern gültig Base64-kodierte Daten byteweise und prüfen dadurch gezielt die AEAD-Authentifizierung. Die [Teststrategie](docs/teststrategie.md) beschreibt Abdeckung und Grenzen.
+GitHub Actions führt dieselben Prüfungen bei jedem Push und Pull Request reproduzierbar aus. Offizielle NIST- und RFC-Vektoren prüfen die modernen Verfahren. Browser-Tests kontrollieren zusätzlich den vollständigen WASM-Weg, einen Manipulationsangriff und die automatisierbaren WCAG-A/AA-Regeln aller Seiten. Die [Teststrategie](docs/teststrategie.md) beschreibt Abdeckung und Grenzen.
 
 ## Nachvollziehbare Versionierung
 
@@ -120,6 +124,7 @@ Die aus sechs gelieferten Arbeitsständen rekonstruierte Entwicklung wurde bewus
 | [`v1.0.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/cfb2bb6d22e6098d378957bbe7eee0043f6d681c) | Dokumentierte, geprüfte Abgabeversion |
 | [`v1.0.1`](https://github.com/lindgreendavid/kryptographie-wasm/commit/1358b89486f3d8621f5d78434f6afef5864a639f) | Ergänzte Abgabe- und Autorenangaben |
 | [`v1.1.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/9ab90bd3f71424bd519ac64a68256270fad0fd26) | Bewertungsreife Endfassung mit vertiefter Prüfung, Barrierefreiheit und Dokumentation |
+| `v1.2.0` | Strukturierte Domäne, offizielle Testvektoren, Browser-/WCAG-Tests und Supply-Chain-Härtung |
 
 Die [Versionshistorie](docs/versionshistorie.md) erklärt Rekonstruktion, Commit-Prinzipien und Meilensteine transparent. Änderungen der Abgabeversion stehen im [Changelog](CHANGELOG.md).
 
@@ -129,6 +134,7 @@ Die [Versionshistorie](docs/versionshistorie.md) erklärt Rekonstruktion, Commit
 - [Bewertungs- und Vorführungsleitfaden](docs/bewertungsleitfaden.md)
 - [Technologieentscheidungen](docs/tech-stack.md)
 - [Teststrategie](docs/teststrategie.md)
+- [Bedrohungsmodell](docs/bedrohungsmodell.md)
 - [Spezifikationen](docs/specs/)
 - [Architekturentscheidungen](docs/adr/)
 - [Quellen](docs/quellen.md)

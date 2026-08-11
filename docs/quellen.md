@@ -12,8 +12,11 @@
 - RustCrypto: [`chacha20poly1305`](https://docs.rs/chacha20poly1305/)
 - Rust and WebAssembly Working Group: [`wasm-bindgen`-Leitfaden](https://rustwasm.github.io/docs/wasm-bindgen/)
 - Rust-Dokumentation: [`getrandom`](https://docs.rs/getrandom/)
+- Microsoft: [Playwright – Accessibility testing](https://playwright.dev/docs/accessibility-testing)
+- Deque Systems: [`axe-core`](https://github.com/dequelabs/axe-core)
+- Rust Secure Code Working Group: [RustSec Advisory Database](https://rustsec.org/)
+- GitHub: [Dependabot-Konfiguration](https://docs.github.com/de/code-security/dependabot/working-with-dependabot/dependabot-options-reference)
 
 ## Einordnung klassischer Verfahren
 
 Die Beschreibungen von Caesar, Skytale und monoalphabetischer Substitution dienen der didaktischen Einordnung. Die Anwendung macht ausdrücklich kenntlich, dass diese Verfahren für heutige Sicherheitszwecke ungeeignet sind.
-

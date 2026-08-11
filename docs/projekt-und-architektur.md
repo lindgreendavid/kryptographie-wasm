@@ -28,7 +28,8 @@ Die Anwendung ist ausdrücklich kein Produkt für vertrauliche Daten. Schlüssel
 | Sicherheit der Demonstration | RustCrypto statt eigener Implementierung moderner Verfahren |
 | Wartbarkeit | Rust-Fachlogik getrennt von DOM-Anbindung und Darstellung |
 | Reproduzierbarkeit | Cargo-Lockdatei, festgelegte Rust-Version, Build-Skripte und CI |
-| Zugänglichkeit | semantische Formulare, Tastaturfokus, Sprunglink und Statusbereiche |
+| Zugänglichkeit | semantische Formulare, Tastaturfokus, Sprunglink, Statusbereiche und WCAG-Prüfung |
+| Lieferkettenschutz | Lockdateien, RustSec, Dependabot und SHA-gepinnte Actions |
 
 ## 4. Systemkontext
 
@@ -48,10 +49,11 @@ Der Browser lädt statische HTML-, CSS- und JavaScript-Dateien. `wasm-bindgen` e
 | --- | --- | --- |
 | `web/*.html` | Inhalte, Formulare, semantische Struktur | Kryptographielogik |
 | `web/css/style.css` | responsives Layout und drei Ansichten | fachlicher Zustand |
-| `web/js/*.js` | WASM laden, Eingaben lesen, Ergebnisse anzeigen | Verfahren implementieren |
-| `src/lib.rs` | stabile WASM-Schnittstelle und Fehlerübersetzung | DOM-Zugriff |
-| `src/crypto/*.rs` | Verschlüsselung, Entschlüsselung, Validierung | Browserdarstellung |
-| `tests/crypto_tests.rs` | fachliche und sicherheitsbezogene Tests | visuelle Tests |
+| `web/js/*.js` | WASM laden, DOM-Helfer nutzen, Ergebnisse anzeigen | Verfahren implementieren |
+| `src/lib.rs` | typisierte WASM-Schnittstelle und Fehlerübersetzung | DOM-Zugriff |
+| `src/crypto/*.rs` | klassische Verschlüsselung und Validierung | Browserdarstellung |
+| `src/crypto/aead/` | validierte Werttypen und getrennte moderne Verfahren | Schlüsselverwaltung |
+| `tests/` und `e2e/` | fachliche, sicherheitsbezogene, Browser- und WCAG-Tests | vollständiges Sicherheitsaudit |
 | `scripts/` | identische lokale Prüf- und Buildpfade | projektspezifische Installation |
 
 ## 6. Ablauf einer Operation
@@ -78,13 +80,13 @@ JavaScript enthält dadurch nur Integrationslogik. Fachliche Regeln wie Schlüss
 - Caesar und Substitution verändern nur ASCII-Buchstaben A–Z beziehungsweise a–z; andere Zeichen bleiben erhalten.
 - AES- und ChaCha-Schlüssel enthalten 32 Byte und werden als Base64 dargestellt.
 - Nonces enthalten 12 Byte, Authentifizierungstags 16 Byte.
-- Moderne Verschlüsselungsergebnisse werden als JSON mit `ciphertext`, `nonce` und `tag` an JavaScript geliefert.
+- Moderne Verschlüsselungsergebnisse werden als typisiertes `WasmAeadResult` mit `ciphertext`, `nonce` und `tag` an JavaScript geliefert.
 
 Die Aufteilung von Geheimtext und Tag dient der Lehre. RustCrypto verarbeitet beide Bestandteile bei der Authentifizierung wieder gemeinsam.
 
 ## 8. Fehlerbehandlung
 
-Jede öffentliche Rust-Funktion liefert `Result`. Ungültige Schlüssel, Alphabete, Längen oder Authentifizierungstags erzeugen konkrete deutsche Fehlermeldungen. `src/lib.rs` übersetzt diese Fehler in `JsValue`; die jeweilige JavaScript-Brücke zeigt sie in einem Statusbereich an. Bei fehlgeschlagener Authentifizierung wird kein Klartext ausgegeben.
+Jede öffentliche Rust-Funktion liefert `Result`. Die Aufzählung `CryptoError` bildet Fehlerzustände strukturiert ab; Tests vergleichen dadurch Varianten statt Textfragmente. `Key32`, `Nonce12` und `AuthTag16` validieren kryptographische Längen an einer zentralen Grenze. `src/lib.rs` übersetzt Fehler erst für die Oberfläche in deutsche `JsValue`-Meldungen. Bei fehlgeschlagener Authentifizierung wird kein Klartext ausgegeben.
 
 ## 9. Sicherheitsentscheidungen
 
@@ -106,7 +108,9 @@ Die Oberfläche verwendet sichtbare Labels, semantische `output`-Elemente, `aria
 
 `wasm-pack build --target web --out-dir web/pkg` erzeugt das Browserpaket. `web/pkg/` und `target/` sind reproduzierbare Build-Artefakte und werden nicht versioniert.
 
-GitHub Actions führt bei jeder Änderung Formatierung, Clippy, Rust-Tests, WASM-Build, HTML-Strukturprüfung und JavaScript-Syntaxprüfung aus. Ein zweiter Workflow erstellt ein Release-Build und veröffentlicht ausschließlich den Ordner `web/` auf GitHub Pages.
+GitHub Actions führt bei jeder Änderung Formatierung, Clippy, Rust-Tests, WASM-Build, HTML-Strukturprüfung, JavaScript-Syntaxprüfung und Playwright-Browsertests aus. Die Browserprüfung umfasst automatisierbare WCAG-A/AA-Regeln. Ein Sicherheitsworkflow prüft `Cargo.lock` mit RustSec; Dependabot überwacht Rust-, npm- und Action-Abhängigkeiten. Alle verwendeten Actions sind auf vollständige Commit-SHAs festgelegt.
+
+Ein zweiter Workflow erstellt ein Release-Build und veröffentlicht ausschließlich den Ordner `web/` auf GitHub Pages. Beim Wechsel der Paketversion legt der Release-Workflow einen annotierten Git-Tag und ein GitHub-Release aus den versionierten Release Notes an.
 
 ## 12. Nachvollziehbare Entwicklung
 
@@ -117,8 +121,8 @@ Die sechs gelieferten Arbeitsstände wurden analysiert und in fachlich getrennte
 - Mehrseitiges HTML wiederholt die Navigation, bleibt dafür ohne Framework direkt lesbar.
 - Base64 verbessert die Übertragbarkeit binärer Werte, ist aber keine Verschlüsselung.
 - Zufällige Nonces sind für die Demonstration angemessen; produktiv wäre eine belastbare Strategie zur Eindeutigkeit nötig.
-- Die automatische Webprüfung kontrolliert Struktur und Referenzen, ersetzt aber keine vollständige Prüfung mit Screenreader und verschiedenen Browsern.
+- Axe kontrolliert automatisierbare WCAG-Regeln, ersetzt aber keine vollständige Prüfung mit Screenreader und verschiedenen Browsern.
 
-## 14. Weiterentwicklung
+## 14. Sicherheits- und Entscheidungsnachweise
 
-Sinnvolle nächste Schritte wären Known-Answer-Tests über intern injizierbare Nonces, automatisierte Browser-End-to-End-Tests, Messung der WASM-Größe und die Demonstration von Additional Authenticated Data. Diese Punkte sind bewusst nicht Teil der Abgabeversion.
+Das [Bedrohungsmodell](bedrohungsmodell.md) dokumentiert Schutzwerte, Vertrauensgrenzen, Maßnahmen und Restrisiken. Die ADRs 005 und 006 begründen das Fehlermodell, die AEAD-Werttypen sowie die Browser- und WCAG-Tests. Sinnvolle spätere Erweiterungen sind eine überwachte WASM-Größenbegrenzung, Cross-Browser-Tests und die didaktische Demonstration von Additional Authenticated Data.
