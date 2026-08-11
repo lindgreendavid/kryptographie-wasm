@@ -42,6 +42,7 @@ git log --reverse --oneline
 git show 2b919d65
 git diff f01de6e8..651c13ad
 git show 9ab90bd3
+git tag --list --sort=version:refname
 ```
 
-Die dokumentierten Meilensteine sind über unveränderliche Commit-SHAs direkt verlinkt. Ab Version 1.2.0 ergänzen die Paketversion in `Cargo.toml`, der Changelog und eine eigene Release-Notes-Datei den jeweiligen Versionsnachweis.
+Die dokumentierten Meilensteine sind über unveränderliche Commit-SHAs direkt verlinkt und zusätzlich mit annotierten Git-Tags gekennzeichnet. Ab Version 1.2.0 prüft der Release-Workflow die konsistenten Versionsangaben in Rust und npm und veröffentlicht die versionierten Release Notes als GitHub-Release.

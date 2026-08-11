@@ -110,7 +110,7 @@ Die Oberfläche verwendet sichtbare Labels, semantische `output`-Elemente, `aria
 
 GitHub Actions führt bei jeder Änderung Formatierung, Clippy, Rust-Tests, WASM-Build, HTML-Strukturprüfung, JavaScript-Syntaxprüfung und Playwright-Browsertests aus. Die Browserprüfung umfasst automatisierbare WCAG-A/AA-Regeln. Ein Sicherheitsworkflow prüft `Cargo.lock` mit RustSec; Dependabot überwacht Rust-, npm- und Action-Abhängigkeiten. Alle verwendeten Actions sind auf vollständige Commit-SHAs festgelegt.
 
-Ein zweiter Workflow erstellt ein Release-Build und veröffentlicht ausschließlich den Ordner `web/` auf GitHub Pages. Paketversion, Changelog, versionierte Release Notes und direkt verlinkte Meilenstein-Commits halten die veröffentlichten Projektstände nachvollziehbar.
+Ein zweiter Workflow erstellt ein Release-Build und veröffentlicht ausschließlich den Ordner `web/` auf GitHub Pages. Der Release-Workflow prüft die Versionsangaben, legt annotierte Git-Tags an und veröffentlicht die zugehörigen deutschen Release Notes. Paketversion, Changelog und direkt verlinkte Meilenstein-Commits ergänzen diesen Nachweis.
 
 ## 12. Nachvollziehbare Entwicklung
 
