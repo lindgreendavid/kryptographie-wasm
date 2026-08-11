@@ -10,6 +10,7 @@ Dieses Hochschulprojekt entwickelt eine deutschsprachige Lernanwendung für Kryp
 - Caesar-Verschlüsselung mit Validierung, Roundtrip-Tests und interaktiver Alphabetdarstellung
 - Skytale als Transpositionsverfahren mit dynamischer Tabellenansicht
 - Monoalphabetische Substitution mit Alphabetvalidierung und Zufallsgenerator
+- AES-256-GCM mit zufälligem Schlüssel, Nonce und Authentifizierungstag
 
 Weitere Kryptographieverfahren folgen in getrennten, nachvollziehbaren Commits.
 

@@ -62,3 +62,26 @@ pub fn substitution_validate(secret_alphabet: &str) -> Result<String, JsValue> {
 pub fn substitution_random_alphabet() -> String {
     crypto::substitution::random_alphabet()
 }
+
+#[wasm_bindgen]
+pub fn aes_generate_key() -> Result<String, JsValue> {
+    crypto::aes::generate_key().map_err(to_js_error)
+}
+
+#[wasm_bindgen]
+pub fn aes_encrypt(plaintext: &str, key_base64: &str) -> Result<String, JsValue> {
+    let result = crypto::aes::encrypt(plaintext, key_base64).map_err(to_js_error)?;
+    serde_json::to_string(&result)
+        .map_err(|_| JsValue::from_str("Das AES-Ergebnis konnte nicht serialisiert werden."))
+}
+
+#[wasm_bindgen]
+pub fn aes_decrypt(
+    ciphertext_base64: &str,
+    key_base64: &str,
+    nonce_base64: &str,
+    tag_base64: &str,
+) -> Result<String, JsValue> {
+    crypto::aes::decrypt(ciphertext_base64, key_base64, nonce_base64, tag_base64)
+        .map_err(to_js_error)
+}

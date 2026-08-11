@@ -51,3 +51,37 @@ fn substitution_roundtrip_erhaelt_den_text() {
     let encrypted = crypto::substitution::encrypt(text, alphabet).unwrap();
     assert_eq!(crypto::substitution::decrypt(&encrypted, alphabet).unwrap(), text);
 }
+
+#[test]
+fn aes_gcm_roundtrip_erhaelt_den_text() {
+    let key = crypto::aes::generate_key().unwrap();
+    let encrypted = crypto::aes::encrypt("Geheimer Text", &key).unwrap();
+    let decrypted = crypto::aes::decrypt(
+        &encrypted.ciphertext,
+        &key,
+        &encrypted.nonce,
+        &encrypted.tag,
+    )
+    .unwrap();
+
+    assert_eq!(decrypted, "Geheimer Text");
+}
+
+#[test]
+fn aes_gcm_erkennt_falschen_schluessel_und_manipulation() {
+    let key = crypto::aes::generate_key().unwrap();
+    let wrong_key = crypto::aes::generate_key().unwrap();
+    let encrypted = crypto::aes::encrypt("Manipulationstest", &key).unwrap();
+
+    assert!(crypto::aes::decrypt(
+        &encrypted.ciphertext,
+        &wrong_key,
+        &encrypted.nonce,
+        &encrypted.tag,
+    )
+    .is_err());
+
+    let mut tampered = encrypted.ciphertext.clone();
+    tampered.push('A');
+    assert!(crypto::aes::decrypt(&tampered, &key, &encrypted.nonce, &encrypted.tag).is_err());
+}
