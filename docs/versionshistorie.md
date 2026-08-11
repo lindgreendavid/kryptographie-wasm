@@ -22,7 +22,7 @@ Die Git-Historie wurde am 11. August 2026 aus den vorhandenen Ständen rekonstru
 - Ein Commit verfolgt genau ein fachliches oder technisches Ziel.
 - Neue Verfahren erhalten jeweils Rust-Modul, WASM-Export, UI-Anbindung und Tests im selben Feature-Commit.
 - Commit-Nachrichten folgen dem Muster `typ(bereich): beschreibung`.
-- Annotierte Tags markieren vorführbare Meilensteine.
+- Direkt verlinkte Commits markieren vorführbare Versionsmeilensteine.
 - Es wurden keine historischen Datumsangaben erfunden.
 - Die Rekonstruktion wird ausdrücklich dokumentiert und nicht als ursprünglicher Entstehungsverlauf ausgegeben.
 
@@ -36,8 +36,7 @@ Der Verlauf lässt sich mit folgenden Befehlen prüfen:
 
 ```bash
 git log --graph --decorate --oneline --all
-git tag --list --sort=version:refname
-git show v0.1.0
-git diff v0.3.0..v0.4.0
+git log --reverse --oneline
+git show 2b919d65
+git diff f01de6e8..651c13ad
 ```
-

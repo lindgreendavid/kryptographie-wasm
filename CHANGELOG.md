@@ -1,6 +1,6 @@
 # Änderungsprotokoll
 
-Alle wesentlichen Projektstände werden über annotierte Git-Tags nachvollziehbar gemacht.
+Alle wesentlichen Projektstände werden über fokussierte Commits und direkt verlinkte Versionsmeilensteine nachvollziehbar gemacht.
 
 ## 1.0.1 – Abgabeangaben
 

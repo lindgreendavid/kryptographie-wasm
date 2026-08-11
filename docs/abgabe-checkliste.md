@@ -8,7 +8,7 @@
 
 - [x] aussagekräftiger deutscher Projektname und Kurzbeschreibung
 - [x] linearer Commit-Verlauf mit einzelnen fachlichen Schritten
-- [x] annotierte Versionstags
+- [x] direkt verlinkte Versionsmeilensteine
 - [x] Build-Artefakte über `.gitignore` ausgeschlossen
 - [x] keine Schlüssel, Zugangsdaten oder persönlichen Daten im Repository
 

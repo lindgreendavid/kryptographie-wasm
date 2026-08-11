@@ -100,22 +100,22 @@ GitHub Actions führt dieselben Prüfungen bei jedem Push und Pull Request repro
 
 Die aus sechs gelieferten Arbeitsständen rekonstruierte Entwicklung wurde bewusst feingranular organisiert. Kein Commit führt alle Verfahren gleichzeitig ein.
 
-| Tag | Inhalt |
+| Version | Inhalt |
 | --- | --- |
-| `v0.0.1` | Projektgrundlage, Rust, WebAssembly und statische Oberfläche |
-| `v0.1.0` | Caesar-Chiffre |
-| `v0.2.0` | Skytale |
-| `v0.3.0` | Monoalphabetische Substitution |
-| `v0.4.0` | AES-256-GCM |
-| `v0.5.0` | Hell- und Dunkelansicht |
-| `v0.6.0` | Aktive Navigation und Tastaturfokus |
-| `v0.7.0` | Cyber-Ansicht und Projekt-Footer |
-| `v0.8.0` | ChaCha20-Poly1305 |
-| `v0.9.0` | Gehärtete Zufalls- und Fehlerbehandlung |
-| `v1.0.0` | Dokumentierte, geprüfte Abgabeversion |
-| `v1.0.1` | Ergänzte Abgabe- und Autorenangaben |
+| [`v0.0.1`](https://github.com/lindgreendavid/kryptographie-wasm/commit/fb452dcbc56b58fa438e64ea45cc8691c3a2ef8e) | Projektgrundlage, Rust, WebAssembly und statische Oberfläche |
+| [`v0.1.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/2b919d65fe1fedcb315544a364f4a17805b8afb9) | Caesar-Chiffre |
+| [`v0.2.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/9cfb24a54d4bcb8b68afeb51418c07691cc92685) | Skytale |
+| [`v0.3.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/f01de6e8f1296fb9733b63847108307d9b1bfb8f) | Monoalphabetische Substitution |
+| [`v0.4.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/651c13ada4701983112164661d20188e70e7d53d) | AES-256-GCM |
+| [`v0.5.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/cb099440b6cc7da79aff773c2b0169f8489d2f27) | Hell- und Dunkelansicht |
+| [`v0.6.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/8decec835e8c3a7b6d3ac6eb2266704c6e21fbe2) | Aktive Navigation und Tastaturfokus |
+| [`v0.7.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/518379a7b9f4e72fec5d692027ff0b40316cda61) | Cyber-Ansicht und Projekt-Footer |
+| [`v0.8.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/c65bb887ecf1bd7331790462c54aba6a28f6161e) | ChaCha20-Poly1305 |
+| [`v0.9.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/6a29c477845d365e0b2840c16a25d0ddc8fc677b) | Gehärtete Zufalls- und Fehlerbehandlung |
+| [`v1.0.0`](https://github.com/lindgreendavid/kryptographie-wasm/commit/cfb2bb6d22e6098d378957bbe7eee0043f6d681c) | Dokumentierte, geprüfte Abgabeversion |
+| [`v1.0.1`](https://github.com/lindgreendavid/kryptographie-wasm/commit/1358b89486f3d8621f5d78434f6afef5864a639f) | Ergänzte Abgabe- und Autorenangaben |
 
-Die [Versionshistorie](docs/versionshistorie.md) erklärt Rekonstruktion, Commit-Prinzipien und Tags transparent. Änderungen der Abgabeversion stehen im [Changelog](CHANGELOG.md).
+Die [Versionshistorie](docs/versionshistorie.md) erklärt Rekonstruktion, Commit-Prinzipien und Meilensteine transparent. Änderungen der Abgabeversion stehen im [Changelog](CHANGELOG.md).
 
 ## Dokumentation
 
