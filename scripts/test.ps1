@@ -16,4 +16,15 @@ if (Get-Command py -ErrorAction SilentlyContinue) {
     throw "Python wurde für die Webprüfung nicht gefunden."
 }
 
+if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
+    throw "Node.js wurde für die JavaScript-Syntaxprüfung nicht gefunden."
+}
+
+Get-ChildItem -Path web/js -Filter *.js | ForEach-Object {
+    node --check $_.FullName
+    if ($LASTEXITCODE -ne 0) {
+        throw "JavaScript-Syntaxprüfung fehlgeschlagen: $($_.Name)"
+    }
+}
+
 Write-Host "Alle Tests und Prüfungen waren erfolgreich."
