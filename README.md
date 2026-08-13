@@ -24,6 +24,14 @@ Eine deutschsprachige Lernanwendung, die drei klassische und zwei moderne Krypto
 
 Der [Bewertungs- und Vorführungsleitfaden](docs/bewertungsleitfaden.md) verbindet die wichtigsten Anforderungen direkt mit Code, Tests und Dokumentation. Er enthält außerdem eine reproduzierbare Fünf-Minuten-Vorführung einschließlich eines Manipulationstests.
 
+## Beitrag dieses Projekts
+
+- Kein neues Kryptographieverfahren, sondern eine saubere, geprüfte Gegenüberstellung: fünf Verfahren (drei historisch, zwei modern) in einer einzigen konsistenten, barrierefreien Oberfläche, sodass ihr Unterschied unmittelbar erfahrbar wird statt nur beschrieben.
+- Reale Kryptographiebibliotheken (RustCrypto) für die modernen Verfahren statt didaktischer Eigenimplementierungen, geprüft gegen offizielle NIST- und RFC-Testvektoren — der Unterschied zwischen „sieht aus wie Verschlüsselung" und „ist geprüfte Verschlüsselung" wird dadurch sichtbar.
+- Ein dokumentierter Manipulationstest, der zeigt, warum Authentifizierung (AEAD) bei modernen Verfahren nicht optional ist.
+- Eine transparente, quellenbasierte Begründung der Sprachwahl (Rust vs. C++/TypeScript/Python) statt einer unbelegten Behauptung.
+- Was dieses Projekt **nicht** beansprucht: eine produktionsreife Sicherheitsarchitektur, professionelles Schlüsselmanagement oder eine Empfehlung für reale Sicherheitsanwendungen. Siehe [Projektgrenzen](#projektgrenzen).
+
 ## Verfahren
 
 | Verfahren | Kategorie | Demonstrierter Kern | Sicherheitsstatus |
