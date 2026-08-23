@@ -2,8 +2,6 @@
 
 <p><a href="https://github.com/lindgreendavid/lindgreendavid/tree/main/brand"><img src="https://raw.githubusercontent.com/lindgreendavid/lindgreendavid/main/brand/lab-notes-mark.svg" width="52" align="right" alt="Lab Notes research-cycle mark"></a></p>
 
-**Teil des [Lab Notes Research Portfolio](https://blog-interactive.lindgreendavid.workers.dev/)** · Interaktives Lernen · Frage → Evidenz → Ergebnis → Grenze
-
 [![Qualitätsprüfung](https://github.com/lindgreendavid/kryptographie-wasm/actions/workflows/ci.yml/badge.svg)](https://github.com/lindgreendavid/kryptographie-wasm/actions/workflows/ci.yml)
 [![GitHub Pages](https://github.com/lindgreendavid/kryptographie-wasm/actions/workflows/pages.yml/badge.svg)](https://github.com/lindgreendavid/kryptographie-wasm/actions/workflows/pages.yml)
 [![Sicherheitsprüfung](https://github.com/lindgreendavid/kryptographie-wasm/actions/workflows/security.yml/badge.svg)](https://github.com/lindgreendavid/kryptographie-wasm/actions/workflows/security.yml)
