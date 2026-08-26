@@ -3,33 +3,14 @@ $ErrorActionPreference = "Stop"
 $ProjectRoot = Split-Path -Parent $PSScriptRoot
 Set-Location $ProjectRoot
 
-cargo fmt --check
-cargo clippy --all-targets --all-features -- -D warnings
-cargo test --locked
-wasm-pack build --target web --out-dir web/pkg
-
-if (Get-Command py -ErrorAction SilentlyContinue) {
-    py -3 scripts/verify_web.py
-} elseif (Get-Command python -ErrorAction SilentlyContinue) {
-    python scripts/verify_web.py
-} else {
-    throw "Python wurde für die Webprüfung nicht gefunden."
-}
-
-if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
-    throw "Node.js wurde für die JavaScript-Syntaxprüfung nicht gefunden."
-}
-
-Get-ChildItem -Path web/js -Filter *.js | ForEach-Object {
-    node --check $_.FullName
-    if ($LASTEXITCODE -ne 0) {
-        throw "JavaScript-Syntaxprüfung fehlgeschlagen: $($_.Name)"
-    }
-}
-
 npm ci
 if ($LASTEXITCODE -ne 0) {
-    throw "Installation der Browser-Testabhängigkeiten fehlgeschlagen."
+    throw "Installation der Node-Abhängigkeiten fehlgeschlagen."
+}
+
+cargo llvm-cov --version
+if ($LASTEXITCODE -ne 0) {
+    throw "cargo-llvm-cov fehlt. Installation: cargo install cargo-llvm-cov --version 0.9.0 --locked"
 }
 
 npx playwright install chromium
@@ -37,9 +18,9 @@ if ($LASTEXITCODE -ne 0) {
     throw "Installation von Chromium für Playwright fehlgeschlagen."
 }
 
-npm run test:e2e
+npm run test:all
 if ($LASTEXITCODE -ne 0) {
-    throw "Browser- oder WCAG-Test fehlgeschlagen."
+    throw "Der vollständige Qualitätslauf ist fehlgeschlagen."
 }
 
-Write-Host "Alle Tests und Prüfungen waren erfolgreich."
+Write-Host "Alle Tests, Qualitätsprüfungen und Berichte waren erfolgreich."

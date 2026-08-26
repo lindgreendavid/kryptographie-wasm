@@ -1,13 +1,39 @@
 {
-  "name": "kryptographie-wasm-e2e",
-  "version": "1.2.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "test:e2e": "playwright test"
-  },
-  "devDependencies": {
-    "@axe-core/playwright": "4.12.1",
-    "@playwright/test": "1.62.1"
-  }
+    "name": "kryptographie-wasm-e2e",
+    "version": "1.2.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "wasm-pack build --release --target web --out-dir web/pkg --locked",
+        "coverage:rust": "node scripts/run-rust-coverage.mjs html",
+        "coverage:rust:check": "node scripts/run-rust-coverage.mjs check",
+        "coverage:rust:lcov": "node scripts/run-rust-coverage.mjs lcov",
+        "format": "prettier --write . --ignore-unknown",
+        "format:check": "prettier --check . --ignore-unknown",
+        "lighthouse": "node scripts/run-lighthouse.mjs",
+        "lint": "eslint .",
+        "serve": "http-server web -a 127.0.0.1 -p 8080 -c-1",
+        "serve:test": "http-server web -a 127.0.0.1 -p 8080 -c-1 --silent",
+        "test:e2e": "playwright test",
+        "test:e2e:report": "playwright show-report reports/e2e",
+        "test:frontend": "npm run verify:web && npm run format:check && npm run lint && npm run typecheck && npm run test:e2e",
+        "test:rust": "cargo fmt --check && cargo clippy --all-targets --all-features -- -D warnings && cargo test --locked && cargo rustdoc --lib -- -D missing-docs",
+        "test:all": "npm run test:rust && npm run coverage:rust:check && npm run build && npm run test:frontend && npm run lighthouse",
+        "typecheck": "tsc --noEmit",
+        "verify:web": "node scripts/run-verify-web.mjs"
+    },
+    "devDependencies": {
+        "@eslint/js": "10.0.1",
+        "@axe-core/playwright": "4.12.1",
+        "@playwright/test": "1.62.1",
+        "@types/node": "24.13.3",
+        "chrome-launcher": "1.2.1",
+        "eslint": "10.9.0",
+        "eslint-plugin-jsdoc": "64.2.1",
+        "globals": "17.11.0",
+        "http-server": "14.1.1",
+        "lighthouse": "13.4.1",
+        "prettier": "3.9.6",
+        "typescript": "7.0.2"
+    }
 }

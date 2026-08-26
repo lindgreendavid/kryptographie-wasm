@@ -1,0 +1,257 @@
+{"kind":"deck","id":"pr/1kha1u","name":"Deck"}
+{"kind":"layout","layoutId":"f58c7467-1874-4207-86ea-c18f1ac90a07","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"1270a94c-4a6d-4a02-82ae-fecf58fc517f","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/qxqz9w","slide":1,"title":"FORTGESCHRITTENE PROGRAMMIERUNG","textShapes":12}
+{"kind":"textbox","id":"sh/onyd0z61","slide":1,"name":"cover-course","text":"FORTGESCHRITTENE PROGRAMMIERUNG","textPreview":"FORTGESCHRITTENE PROGRAMMIERUNG","textChars":31,"textLines":1,"bbox":[64,54,300,34]}
+{"kind":"textbox","id":"sh/z25kb6xk","slide":1,"name":"cover-title","text":"Kryptographie\nim Browser","textPreview":"Kryptographie | im Browser","textChars":24,"textLines":2,"bbox":[64,142,630,178]}
+{"kind":"shape","id":"sh/6hcrmhk3","slide":1,"bbox":[64,342,180,0]}
+{"kind":"textbox","id":"sh/dg7adsji","slide":1,"name":"cover-subtitle","text":"Fünf Verfahren. Eine Rust-Fachlogik.\nEine kleine WebAssembly-Grenze.","textPreview":"Fünf Verfahren. Eine Rust-Fachlogik. | Eine kleine WebAssembly-Grenze.","textChars":68,"textLines":2,"bbox":[64,372,590,88]}
+{"kind":"shape","id":"sh/ovahoza1","slide":1,"name":"cover-orbit","bbox":[790,106,360,360]}
+{"kind":"shape","id":"sh/vahoza1g","slide":1,"name":"cover-orbit-inner","bbox":[856,172,228,228]}
+{"kind":"textbox","id":"sh/6tovahoz","slide":1,"name":"cover-wasm","text":"WASM","textPreview":"WASM","textChars":4,"textLines":1,"bbox":[876,246,188,64]}
+{"kind":"textbox","id":"sh/dsji5sne","slide":1,"name":"cover-rust","text":"RUST","textPreview":"RUST","textChars":4,"textLines":1,"bbox":[900,321,140,26]}
+{"kind":"textbox","id":"sh/o7qpg3ex","slide":1,"name":"cover-algos-1","text":"CAESAR","textPreview":"CAESAR","textChars":6,"textLines":1,"bbox":[738,492,120,34]}
+{"kind":"textbox","id":"sh/q5o7qpg3","slide":1,"name":"cover-algos-2","text":"SKYTALE","textPreview":"SKYTALE","textChars":7,"textLines":1,"bbox":[866,492,120,34]}
+{"kind":"textbox","id":"sh/jqh0fepk","slide":1,"name":"cover-algos-3","text":"AES-GCM","textPreview":"AES-GCM","textChars":7,"textLines":1,"bbox":[994,492,120,34]}
+{"kind":"textbox","id":"sh/8bat47y1","slide":1,"name":"cover-algos-4","text":"SUBSTITUTION","textPreview":"SUBSTITUTION","textChars":12,"textLines":1,"bbox":[802,540,150,34]}
+{"kind":"textbox","id":"sh/1w7mp0bi","slide":1,"name":"cover-algos-5","text":"CHACHA20","textPreview":"CHACHA20","textChars":8,"textLines":1,"bbox":[962,540,150,34]}
+{"kind":"shape","id":"sh/qh0fepkz","slide":1,"bbox":[64,628,1152,0]}
+{"kind":"textbox","id":"sh/j2t83itg","slide":1,"name":"cover-team","text":"David Lindgreen · Viktor Edelmann","textPreview":"David Lindgreen · Viktor Edelmann","textChars":33,"textLines":1,"bbox":[64,648,540,24]}
+{"kind":"textbox","id":"sh/8nqxs72x","slide":1,"name":"cover-meta","text":"Version 1.2.0 · 23.08.2026","textPreview":"Version 1.2.0 · 23.08.2026","textChars":26,"textLines":1,"bbox":[786,648,430,24]}
+{"kind":"notes","id":"nt/qxqz9w","slide":1,"text":"In einem Satz: Wir zeigen Kryptographie als interaktive Lernanwendung, deren gesamte Fachlogik in Rust läuft.\nZiel der Präsentation: Architektur, zwei Demo-Flows und messbare Qualität.\nZeit: 0:00–0:35."}
+{"kind":"slide","id":"sl/s9chf5","slide":2,"title":"PROBLEM & UMFANG","textShapes":20}
+{"kind":"textbox","id":"sh/sfil0rqd","slide":2,"name":"section-2","text":"PROBLEM & UMFANG","textPreview":"PROBLEM & UMFANG","textChars":16,"textLines":1,"bbox":[64,42,190,34]}
+{"kind":"textbox","id":"sh/zupwb2hw","slide":2,"name":"index-2","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1170,44,46,24]}
+{"kind":"shape","id":"sh/a9w3m94f","slide":2,"bbox":[64,675,1152,0]}
+{"kind":"textbox","id":"sh/hcrmhk3q","slide":2,"name":"footer-2","text":"Kryptographie · Rust + WebAssembly · SoSe 2026","textPreview":"Kryptographie · Rust + WebAssembly · SoSe 2026","textChars":46,"textLines":1,"bbox":[64,684,760,18]}
+{"kind":"textbox","id":"sh/orytsvu9","slide":2,"name":"title-2","text":"Historische Ideen treffen moderne Integrität","textPreview":"Historische Ideen treffen moderne Integrität","textChars":44,"textLines":1,"bbox":[64,98,1000,62]}
+{"kind":"textbox","id":"sh/z61032ls","slide":2,"name":"subtitle-2","text":"Die Oberfläche macht Unterschiede sichtbar; Rust hält Regeln und Fehler konsistent.","textPreview":"Die Oberfläche macht Unterschiede sichtbar; Rust hält Regeln und Fehler konsistent.","textChars":83,"textLines":1,"bbox":[64,158,1080,42]}
+{"kind":"textbox","id":"sh/al87ed8b","slide":2,"name":"scope-historical","text":"HISTORISCHE LERNVERFAHREN","textPreview":"HISTORISCHE LERNVERFAHREN","textChars":25,"textLines":1,"bbox":[64,224,520,28]}
+{"kind":"shape","id":"sh/hk3q5o7q","slide":2,"name":"scope-caesar","bbox":[64,268,160,92]}
+{"kind":"textbox","id":"sh/oza1gvy9","slide":2,"name":"scope-caesar-title","text":"Caesar","textPreview":"Caesar","textChars":6,"textLines":1,"bbox":[82,285,124,32]}
+{"kind":"textbox","id":"sh/29gr2p8n","slide":2,"name":"scope-caesar-era","text":"Buchstabenverschiebung","textPreview":"Buchstabenverschiebung","textChars":22,"textLines":1,"bbox":[82,323,124,20]}
+{"kind":"shape","id":"sh/vu9knih4","slide":2,"name":"scope-skytale","bbox":[238,268,160,92]}
+{"kind":"textbox","id":"sh/kf6dcbul","slide":2,"name":"scope-skytale-title","text":"Skytale","textPreview":"Skytale","textChars":7,"textLines":1,"bbox":[256,285,124,32]}
+{"kind":"textbox","id":"sh/d0z61032","slide":2,"name":"scope-skytale-era","text":"Transposition","textPreview":"Transposition","textChars":13,"textLines":1,"bbox":[256,323,124,20]}
+{"kind":"shape","id":"sh/2lszqtcj","slide":2,"name":"scope-substitution","bbox":[412,268,178,92]}
+{"kind":"textbox","id":"sh/v6psfil0","slide":2,"name":"scope-substitution-title","text":"Substitution","textPreview":"Substitution","textChars":12,"textLines":1,"bbox":[430,285,142,32]}
+{"kind":"textbox","id":"sh/knih4byh","slide":2,"name":"scope-substitution-era","text":"Permutation","textPreview":"Permutation","textChars":11,"textLines":1,"bbox":[430,323,142,20]}
+{"kind":"textbox","id":"sh/d8bat47y","slide":2,"name":"scope-modern","text":"MODERNE AEAD-VERFAHREN","textPreview":"MODERNE AEAD-VERFAHREN","textChars":22,"textLines":1,"bbox":[676,224,520,28]}
+{"kind":"shape","id":"sh/6psfil0r","slide":2,"name":"scope-aes","bbox":[676,268,240,92]}
+{"kind":"textbox","id":"sh/val87ed8","slide":2,"name":"scope-aes-title","text":"AES-256-GCM","textPreview":"AES-256-GCM","textChars":11,"textLines":1,"bbox":[694,285,204,32]}
+{"kind":"textbox","id":"sh/n29gr2p8","slide":2,"name":"scope-aes-era","text":"Verschlüsselung + Authentifizierung","textPreview":"Verschlüsselung + Authentifizierung","textChars":35,"textLines":1,"bbox":[694,323,204,20]}
+{"kind":"shape","id":"sh/yhgn29gr","slide":2,"name":"scope-chacha","bbox":[934,268,240,92]}
+{"kind":"textbox","id":"sh/58z25kb6","slide":2,"name":"scope-chacha-title","text":"ChaCha20","textPreview":"ChaCha20","textChars":8,"textLines":1,"bbox":[952,285,204,32]}
+{"kind":"textbox","id":"sh/gn29gr2p","slide":2,"name":"scope-chacha-era","text":"Poly1305-Tag","textPreview":"Poly1305-Tag","textChars":12,"textLines":1,"bbox":[952,323,204,20]}
+{"kind":"shape","id":"sh/nuxc3ylc","slide":2,"name":"scope-goal","bbox":[64,420,1110,164]}
+{"kind":"textbox","id":"sh/y90je9cv","slide":2,"name":"scope-goal-pill","text":"LERNZIEL","textPreview":"LERNZIEL","textChars":8,"textLines":1,"bbox":[88,444,112,34]}
+{"kind":"textbox","id":"sh/5wjudg7a","slide":2,"name":"scope-goal-text","text":"Ver- und Entschlüsseln nachvollziehen, Eingaben sicher validieren und bei modernen Verfahren Manipulation zuverlässig erkennen.","textPreview":"Ver- und Entschlüsseln nachvollziehen, Eingaben sicher validieren und bei modernen Verfahren Manipulation zuverlässig erkennen.","textChars":127,"textLines":1,"bbox":[88,494,1020,58]}
+{"kind":"textbox","id":"sh/gbq1oryt","slide":2,"name":"scope-boundary","text":"KEIN BACKEND · KEINE DATENBANK · LOKALE VERARBEITUNG","textPreview":"KEIN BACKEND · KEINE DATENBANK · LOKALE VERARBEITUNG","textChars":52,"textLines":1,"bbox":[730,596,444,34]}
+{"kind":"notes","id":"nt/s9chf5","slide":2,"text":"Drei historische Verfahren sind bewusst didaktisch und nicht sicher.\nAES-GCM und ChaCha20-Poly1305 zeigen zusätzlich Integrität: Manipulation muss scheitern.\nDie App arbeitet statisch und lokal im Browser; produktives Schlüsselmanagement ist nicht Teil des Scopes.\nZeit: 0:35–1:10."}
+{"kind":"slide","id":"sl/iujkiy","slide":3,"title":"ARCHITEKTUR","textShapes":20}
+{"kind":"textbox","id":"sh/b6xkf6dc","slide":3,"name":"section-3","text":"ARCHITEKTUR","textPreview":"ARCHITEKTUR","textChars":11,"textLines":1,"bbox":[64,42,190,34]}
+{"kind":"textbox","id":"sh/0rqd4vmt","slide":3,"name":"index-3","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1170,44,46,24]}
+{"kind":"shape","id":"sh/tcj6tova","slide":3,"bbox":[64,675,1152,0]}
+{"kind":"textbox","id":"sh/idonyd0z","slide":3,"name":"footer-3","text":"Kryptographie · Rust + WebAssembly · SoSe 2026","textPreview":"Kryptographie · Rust + WebAssembly · SoSe 2026","textChars":46,"textLines":1,"bbox":[64,684,760,18]}
+{"kind":"textbox","id":"sh/byhgn29g","slide":3,"name":"title-3","text":"Eine Richtung, eine Fachlogik","textPreview":"Eine Richtung, eine Fachlogik","textChars":29,"textLines":1,"bbox":[64,98,1000,62]}
+{"kind":"textbox","id":"sh/0je9cvix","slide":3,"name":"subtitle-3","text":"Die Browseroberfläche bleibt austauschbar; Rust bleibt nativ testbar.","textPreview":"Die Browseroberfläche bleibt austauschbar; Rust bleibt nativ testbar.","textChars":69,"textLines":1,"bbox":[64,158,1080,42]}
+{"kind":"shape","id":"sh/t47y1kre","slide":3,"name":"arch-card-0","bbox":[64,250,186,126]}
+{"kind":"textbox","id":"sh/i9s36hcr","slide":3,"name":"arch-card-title-0","text":"Benutzer","textPreview":"Benutzer","textChars":8,"textLines":1,"bbox":[78,272,158,34]}
+{"kind":"textbox","id":"sh/bulwval8","slide":3,"name":"arch-card-detail-0","text":"Eingabe & Aktion","textPreview":"Eingabe & Aktion","textChars":16,"textLines":1,"bbox":[78,320,158,26]}
+{"kind":"shape","id":"sh/j6tovaho","slide":3,"name":"arch-card-1","bbox":[290,250,186,126]}
+{"kind":"textbox","id":"sh/ulwval87","slide":3,"name":"arch-card-title-1","text":"HTML / CSS","textPreview":"HTML / CSS","textChars":10,"textLines":1,"bbox":[304,272,158,34]}
+{"kind":"textbox","id":"sh/1cfa9w3m","slide":3,"name":"arch-card-detail-1","text":"Semantik & UX","textPreview":"Semantik & UX","textChars":13,"textLines":1,"bbox":[304,320,158,26]}
+{"kind":"shape","id":"sh/crmhk3q5","slide":3,"name":"arch-card-2","bbox":[516,250,186,126]}
+{"kind":"textbox","id":"sh/ji5snelo","slide":3,"name":"arch-card-title-2","text":"JavaScript","textPreview":"JavaScript","textChars":10,"textLines":1,"bbox":[530,272,158,34]}
+{"kind":"textbox","id":"sh/uxc3ylc7","slide":3,"name":"arch-card-detail-2","text":"DOM & Zustände","textPreview":"DOM & Zustände","textChars":14,"textLines":1,"bbox":[530,320,158,26]}
+{"kind":"shape","id":"sh/1kre1w7m","slide":3,"name":"arch-card-3","bbox":[742,250,186,126]}
+{"kind":"textbox","id":"sh/c3ylc7u5","slide":3,"name":"arch-card-title-3","text":"WASM","textPreview":"WASM","textChars":4,"textLines":1,"bbox":[756,272,158,34]}
+{"kind":"textbox","id":"sh/jqh0fepk","slide":3,"name":"arch-card-detail-3","text":"16 Exports","textPreview":"16 Exports","textChars":10,"textLines":1,"bbox":[756,320,158,26]}
+{"kind":"shape","id":"sh/q5o7qpg3","slide":3,"name":"arch-card-4","bbox":[968,250,186,126]}
+{"kind":"textbox","id":"sh/itgfmlkj","slide":3,"name":"arch-card-title-4","text":"RustCrypto","textPreview":"RustCrypto","textChars":10,"textLines":1,"bbox":[982,272,158,34]}
+{"kind":"textbox","id":"sh/7ed8bat4","slide":3,"name":"arch-card-detail-4","text":"Fachlogik","textPreview":"Fachlogik","textChars":9,"textLines":1,"bbox":[982,320,158,26]}
+{"kind":"shape","id":"sh/0z61032l","slide":3,"bbox":[250,313,40,0]}
+{"kind":"shape","id":"sh/pkzupwb2","slide":3,"bbox":[476,313,40,0]}
+{"kind":"shape","id":"sh/ih4byhgn","slide":3,"bbox":[702,313,40,0]}
+{"kind":"shape","id":"sh/72x4nap4","slide":3,"bbox":[928,313,40,0]}
+{"kind":"shape","id":"sh/0nuxc3yl","slide":3,"name":"arch-principle","bbox":[64,430,1090,132]}
+{"kind":"shape","id":"sh/p8nqxs72","slide":3,"name":"arch-bullet-1-dot","bbox":[94,464,10,10]}
+{"kind":"textbox","id":"sh/ed8v6psf","slide":3,"name":"arch-bullet-1","text":"JavaScript orchestriert – es implementiert keine Kryptographie doppelt.","textPreview":"JavaScript orchestriert – es implementiert keine Kryptographie doppelt.","textChars":71,"textLines":1,"bbox":[116,456,488,44]}
+{"kind":"shape","id":"sh/7y1kre1w","slide":3,"name":"arch-bullet-2-dot","bbox":[94,514,10,10]}
+{"kind":"textbox","id":"sh/x0nuxc3y","slide":3,"name":"arch-bullet-2","text":"Rust validiert Typen, Schlüsselgrößen, Nonces und Tags.","textPreview":"Rust validiert Typen, Schlüsselgrößen, Nonces und Tags.","textChars":55,"textLines":1,"bbox":[116,506,488,44]}
+{"kind":"shape","id":"sh/4fu18jqh","slide":3,"name":"arch-bullet-3-dot","bbox":[626,464,10,10]}
+{"kind":"textbox","id":"sh/fu18jqh0","slide":3,"name":"arch-bullet-3","text":"RustCrypto liefert geprüfte moderne Primitive.","textPreview":"RustCrypto liefert geprüfte moderne Primitive.","textChars":46,"textLines":1,"bbox":[648,456,458,44]}
+{"kind":"shape","id":"sh/m94fu18j","slide":3,"name":"arch-bullet-4-dot","bbox":[626,514,10,10]}
+{"kind":"textbox","id":"sh/xobm58z2","slide":3,"name":"arch-bullet-4","text":"Fehler werden an der WASM-Grenze verständlich übersetzt.","textPreview":"Fehler werden an der WASM-Grenze verständlich übersetzt.","textChars":56,"textLines":1,"bbox":[648,506,458,44]}
+{"kind":"textbox","id":"sh/83itgfml","slide":3,"name":"arch-tag","text":"KEIN MOCK IM E2E-PFAD","textPreview":"KEIN MOCK IM E2E-PFAD","textChars":21,"textLines":1,"bbox":[922,584,232,34]}
+{"kind":"notes","id":"nt/iujkiy","slide":3,"text":"Die Abhängigkeit zeigt nur in eine Richtung: UI, JS-Brücke, WASM-Exports, Rust-Domäne.\nDer Browser kennt die Implementierung nicht; Rust kennt den DOM nicht.\nDadurch laufen dieselben Regeln nativ in Rust-Tests und im echten Browser-E2E-Pfad.\nZeit: 1:10–1:45."}
+{"kind":"slide","id":"sl/vxgq1f","slide":4,"title":"LIVE-DEMO I","textShapes":12}
+{"kind":"textbox","id":"sh/18jqh0fe","slide":4,"name":"section-4","text":"LIVE-DEMO I","textPreview":"LIVE-DEMO I","textChars":11,"textLines":1,"bbox":[64,42,190,34]}
+{"kind":"textbox","id":"sh/qh0fepkz","slide":4,"name":"index-4","text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1170,44,46,24]}
+{"kind":"shape","id":"sh/j2t83itg","slide":4,"bbox":[64,675,1152,0]}
+{"kind":"textbox","id":"sh/8bat47y1","slide":4,"name":"footer-4","text":"Kryptographie · Rust + WebAssembly · SoSe 2026","textPreview":"Kryptographie · Rust + WebAssembly · SoSe 2026","textChars":46,"textLines":1,"bbox":[64,684,760,18]}
+{"kind":"textbox","id":"sh/1w7mp0bi","slide":4,"name":"title-4","text":"Vom Lernverfahren zur modernen Chiffre","textPreview":"Vom Lernverfahren zur modernen Chiffre","textChars":38,"textLines":1,"bbox":[64,98,1000,62]}
+{"kind":"textbox","id":"sh/q5o7qpg3","slide":4,"name":"subtitle-4","text":"Erst einen einfachen Roundtrip zeigen, dann die zusätzliche Sicherheitsdimension.","textPreview":"Erst einen einfachen Roundtrip zeigen, dann die zusätzliche Sicherheitsdimension.","textChars":81,"textLines":1,"bbox":[64,158,1080,42]}
+{"kind":"shape","id":"sh/jqh0fepk","slide":4,"name":"demo1-panel","bbox":[64,230,316,350]}
+{"kind":"textbox","id":"sh/c3ylc7u5","slide":4,"name":"demo1-step","text":"01 · CAESAR","textPreview":"01 · CAESAR","textChars":11,"textLines":1,"bbox":[88,254,140,34]}
+{"kind":"textbox","id":"sh/1kre1w7m","slide":4,"name":"demo1-input","text":"ABC äöü","textPreview":"ABC äöü","textChars":7,"textLines":1,"bbox":[88,318,250,40]}
+{"kind":"textbox","id":"sh/5o7qpg3e","slide":4,"name":"demo1-arrow","text":"↓  Schlüssel 3","textPreview":"↓  Schlüssel 3","textChars":14,"textLines":1,"bbox":[88,372,250,32]}
+{"kind":"textbox","id":"sh/g3ex0nux","slide":4,"name":"demo1-output","text":"DEF äöü","textPreview":"DEF äöü","textChars":7,"textLines":1,"bbox":[88,422,250,40]}
+{"kind":"shape","id":"sh/nih4byhg","slide":4,"name":"demo1-note-1-dot","bbox":[88,494,10,10]}
+{"kind":"textbox","id":"sh/yxobm58z","slide":4,"name":"demo1-note-1","text":"ASCII verschiebt sich","textPreview":"ASCII verschiebt sich","textChars":21,"textLines":1,"bbox":[110,486,228,28]}
+{"kind":"shape","id":"sh/9cvixcze","slide":4,"name":"demo1-note-2-dot","bbox":[88,532,10,10]}
+{"kind":"textbox","id":"sh/gr2p8nqx","slide":4,"name":"demo1-note-2","text":"Unicode bleibt erhalten","textPreview":"Unicode bleibt erhalten","textChars":23,"textLines":1,"bbox":[110,524,228,28]}
+{"kind":"shape","id":"sh/r65wjudg","slide":4,"name":"startseite.png-frame","bbox":[413,219,768,438]}
+{"kind":"textbox","id":"sh/90je9cvi","slide":4,"name":"demo1-live","text":"LIVE: 35 SEKUNDEN","textPreview":"LIVE: 35 SEKUNDEN","textChars":17,"textLines":1,"bbox":[944,610,210,34]}
+{"kind":"image","id":"im/d0z61032","slide":4,"name":"","geometry":"roundRect","alt":"Startseite der Kryptographie-Lernanwendung im Cyber-Design","bbox":[420,226,754,424]}
+{"kind":"notes","id":"nt/vxgq1f","slide":4,"text":"Live zur Caesar-Seite wechseln: Schlüssel 3, Eingabe ABC äöü, verschlüsseln und zurück.\nKurz erklären: Nicht-ASCII-Zeichen bleiben laut dokumentierter Regel unverändert.\nDanach direkt AES öffnen; Skytale und Substitution nicht live zeigen.\nZeit: 1:45–2:20."}
+{"kind":"slide","id":"sl/digauk","slide":5,"title":"LIVE-DEMO II","textShapes":15}
+{"kind":"textbox","id":"sh/fu18jqh0","slide":5,"name":"section-5","text":"LIVE-DEMO II","textPreview":"LIVE-DEMO II","textChars":12,"textLines":1,"bbox":[64,42,190,34]}
+{"kind":"textbox","id":"sh/4fu18jqh","slide":5,"name":"index-5","text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1170,44,46,24]}
+{"kind":"shape","id":"sh/x0nuxc3y","slide":5,"bbox":[64,675,1152,0]}
+{"kind":"textbox","id":"sh/qxs72x4n","slide":5,"name":"footer-5","text":"Kryptographie · Rust + WebAssembly · SoSe 2026","textPreview":"Kryptographie · Rust + WebAssembly · SoSe 2026","textChars":46,"textLines":1,"bbox":[64,684,760,18]}
+{"kind":"textbox","id":"sh/fil0rqd4","slide":5,"name":"title-5","text":"AES-GCM schützt Inhalt und Integrität","textPreview":"AES-GCM schützt Inhalt und Integrität","textChars":37,"textLines":1,"bbox":[64,98,1000,62]}
+{"kind":"textbox","id":"sh/83itgfml","slide":5,"name":"subtitle-5","text":"Geheimtext, Nonce und Tag werden getrennt sichtbar – die Authentifizierung bleibt gemeinsam.","textPreview":"Geheimtext, Nonce und Tag werden getrennt sichtbar – die Authentifizierung bleibt gemeinsam.","textChars":92,"textLines":1,"bbox":[64,158,1080,42]}
+{"kind":"shape","id":"sh/xobm58z2","slide":5,"name":"aes-steps","bbox":[64,222,350,360]}
+{"kind":"shape","id":"sh/mtwra5gb","slide":5,"name":"aes-step-0","bbox":[88,250,44,44]}
+{"kind":"textbox","id":"sh/fepkzupw","slide":5,"name":"aes-step-number-0","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[88,250,44,44]}
+{"kind":"textbox","id":"sh/7adsji5s","slide":5,"name":"aes-step-label-0","text":"32-Byte-Schlüssel erzeugen","textPreview":"32-Byte-Schlüssel erzeugen","textChars":26,"textLines":1,"bbox":[152,258,226,34]}
+{"kind":"shape","id":"sh/epkzupwb","slide":5,"name":"aes-step-1","bbox":[88,322,44,44]}
+{"kind":"textbox","id":"sh/pg3ex0nu","slide":5,"name":"aes-step-number-1","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[88,322,44,44]}
+{"kind":"textbox","id":"sh/wval87ed","slide":5,"name":"aes-step-label-1","text":"Unicode-Text verschlüsseln","textPreview":"Unicode-Text verschlüsseln","textChars":26,"textLines":1,"bbox":[152,330,226,34]}
+{"kind":"shape","id":"sh/7mp0bi9s","slide":5,"name":"aes-step-2","bbox":[88,394,44,44]}
+{"kind":"textbox","id":"sh/e1w7mp0b","slide":5,"name":"aes-step-number-2","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[88,394,44,44]}
+{"kind":"textbox","id":"sh/psfil0rq","slide":5,"name":"aes-step-label-2","text":"Roundtrip exakt prüfen","textPreview":"Roundtrip exakt prüfen","textChars":22,"textLines":1,"bbox":[152,402,226,34]}
+{"kind":"shape","id":"sh/w7mp0bi9","slide":5,"name":"aes-step-3","bbox":[88,466,44,44]}
+{"kind":"textbox","id":"sh/7u54zido","slide":5,"name":"aes-step-number-3","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[88,466,44,44]}
+{"kind":"textbox","id":"sh/ed8bat47","slide":5,"name":"aes-step-label-3","text":"Tag verändern → Fehler","textPreview":"Tag verändern → Fehler","textChars":22,"textLines":1,"bbox":[152,474,226,34]}
+{"kind":"textbox","id":"sh/mhk3q5o7","slide":5,"name":"aes-rule","text":"MANIPULATION ⇒ KEIN KLARTEXT","textPreview":"MANIPULATION ⇒ KEIN KLARTEXT","textChars":28,"textLines":1,"bbox":[88,538,280,34]}
+{"kind":"shape","id":"sh/b2hwfyxo","slide":5,"name":"aes-verschluesselt.png-frame","bbox":[449,219,732,418]}
+{"kind":"textbox","id":"sh/t83itgfm","slide":5,"name":"aes-caption","text":"Echter lokaler Browserlauf · kein Mock · Konsole fehlerfrei","textPreview":"Echter lokaler Browserlauf · kein Mock · Konsole fehlerfrei","textChars":59,"textLines":1,"bbox":[456,642,718,22]}
+{"kind":"image","id":"im/32lszqtc","slide":5,"name":"","geometry":"roundRect","alt":"AES-GCM-Verschlüsselungszustand mit Geheimtext, Nonce und Authentifizierungstag","bbox":[456,226,718,404]}
+{"kind":"notes","id":"nt/digauk","slide":5,"text":"Live: Schlüssel erzeugen, vorbereiteten Unicode-/Mehrzeilentext verschlüsseln und entschlüsseln.\nNonce ist pro Verschlüsselung nötig; der Tag prüft Integrität und Authentizität.\nDann ein Zeichen im Tag ändern. Erwartung: verständlicher Fehler und keine Klartextausgabe.\nScreenshot ist der geprüfte Offline-Fallback.\nZeit: 2:20–3:50."}
+{"kind":"slide","id":"sl/kuho8s","slide":6,"title":"RUST / WASM","textShapes":17}
+{"kind":"textbox","id":"sh/ixczed8v","slide":6,"name":"section-6","text":"RUST / WASM","textPreview":"RUST / WASM","textChars":11,"textLines":1,"bbox":[64,42,190,34]}
+{"kind":"textbox","id":"sh/tovahoza","slide":6,"name":"index-6","text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1170,44,46,24]}
+{"kind":"shape","id":"sh/032lszqt","slide":6,"bbox":[64,675,1152,0]}
+{"kind":"textbox","id":"sh/bulwval8","slide":6,"name":"footer-6","text":"Kryptographie · Rust + WebAssembly · SoSe 2026","textPreview":"Kryptographie · Rust + WebAssembly · SoSe 2026","textChars":46,"textLines":1,"bbox":[64,684,760,18]}
+{"kind":"textbox","id":"sh/i9s36hcr","slide":6,"name":"title-6","text":"Typen machen die Grenze explizit","textPreview":"Typen machen die Grenze explizit","textChars":32,"textLines":1,"bbox":[64,98,1000,62]}
+{"kind":"textbox","id":"sh/p0bi9s36","slide":6,"name":"subtitle-6","text":"Validierung geschieht einmal in der Domäne; die UI erhält Wertobjekt oder verständlichen Fehler.","textPreview":"Validierung geschieht einmal in der Domäne; die UI erhält Wertobjekt oder verständlichen Fehler.","textChars":96,"textLines":1,"bbox":[64,158,1080,42]}
+{"kind":"shape","id":"sh/0fepkzup","slide":6,"name":"type-0","bbox":[64,246,216,118]}
+{"kind":"textbox","id":"sh/byhgn29g","slide":6,"name":"type-name-0","text":"Key32","textPreview":"Key32","textChars":5,"textLines":1,"bbox":[82,266,180,36]}
+{"kind":"textbox","id":"sh/idonyd0z","slide":6,"name":"type-size-0","text":"32 Byte","textPreview":"32 Byte","textChars":7,"textLines":1,"bbox":[82,316,180,24]}
+{"kind":"shape","id":"sh/c7u54zid","slide":6,"name":"type-1","bbox":[314,246,216,118]}
+{"kind":"textbox","id":"sh/1orytsvu","slide":6,"name":"type-name-1","text":"Nonce12","textPreview":"Nonce12","textChars":7,"textLines":1,"bbox":[332,266,180,36]}
+{"kind":"textbox","id":"sh/u18jqh0f","slide":6,"name":"type-size-1","text":"12 Byte","textPreview":"12 Byte","textChars":7,"textLines":1,"bbox":[332,316,180,24]}
+{"kind":"shape","id":"sh/jm1cfa9w","slide":6,"name":"type-2","bbox":[564,246,216,118]}
+{"kind":"textbox","id":"sh/cfa9w3m9","slide":6,"name":"type-name-2","text":"AuthTag16","textPreview":"AuthTag16","textChars":9,"textLines":1,"bbox":[582,266,180,36]}
+{"kind":"textbox","id":"sh/1032lszq","slide":6,"name":"type-size-2","text":"16 Byte","textPreview":"16 Byte","textChars":7,"textLines":1,"bbox":[582,316,180,24]}
+{"kind":"shape","id":"sh/u9knih4b","slide":6,"name":"type-error","bbox":[864,246,310,118]}
+{"kind":"textbox","id":"sh/judg7ads","slide":6,"name":"type-error-title","text":"CryptoError","textPreview":"CryptoError","textChars":11,"textLines":1,"bbox":[888,266,262,36]}
+{"kind":"textbox","id":"sh/cj6tovah","slide":6,"name":"type-error-detail","text":"Parameter · Base64 · UTF-8 · Auth","textPreview":"Parameter · Base64 · UTF-8 · Auth","textChars":33,"textLines":1,"bbox":[888,316,262,24]}
+{"kind":"shape","id":"sh/54zidony","slide":6,"bbox":[780,305,84,0]}
+{"kind":"shape","id":"sh/9s36hcrm","slide":6,"name":"rust-code","bbox":[64,424,704,162]}
+{"kind":"textbox","id":"sh/g7adsji5","slide":6,"name":"rust-code-text","text":"#![forbid(unsafe_code)]\n#![deny(missing_docs)]\n\nWasmAeadResult { ciphertext, nonce, tag }","textPreview":"#![forbid(unsafe_code)] | #![deny(missing_docs)] |  | WasmAeadResult { ciphertext, nonce, tag }","textChars":89,"textLines":4,"bbox":[90,446,650,122]}
+{"kind":"shape","id":"sh/rmhk3q5o","slide":6,"name":"rust-facts","bbox":[800,424,374,162]}
+{"kind":"shape","id":"sh/y1kre1w7","slide":6,"name":"rust-fact-1-dot","bbox":[824,456,10,10]}
+{"kind":"textbox","id":"sh/90je9cvi","slide":6,"name":"rust-fact-1","text":"16 dokumentierte WASM-Exports","textPreview":"16 dokumentierte WASM-Exports","textChars":29,"textLines":1,"bbox":[846,448,298,28]}
+{"kind":"shape","id":"sh/gfmlkjm1","slide":6,"name":"rust-fact-2-dot","bbox":[824,500,10,10]}
+{"kind":"textbox","id":"sh/rytsvu9k","slide":6,"name":"rust-fact-2","text":"RustCrypto statt eigener Primitive","textPreview":"RustCrypto statt eigener Primitive","textChars":34,"textLines":1,"bbox":[846,492,298,28]}
+{"kind":"shape","id":"sh/yd0z6103","slide":6,"name":"rust-fact-3-dot","bbox":[824,544,10,10]}
+{"kind":"textbox","id":"sh/9cvixcze","slide":6,"name":"rust-fact-3","text":"Base64 nur als Darstellung","textPreview":"Base64 nur als Darstellung","textChars":26,"textLines":1,"bbox":[846,536,298,28]}
+{"kind":"notes","id":"nt/kuho8s","slide":6,"text":"Key32, Nonce12 und AuthTag16 kapseln Größenprüfungen und verhindern verteilte Stringvalidierung.\nCryptoError trennt Eingabe-, Encoding- und Authentifizierungsfehler.\nModerne Primitive werden nicht selbst implementiert; NIST- und RFC-Vektoren prüfen die Einbindung.\nZeit: 3:50–4:40."}
+{"kind":"slide","id":"sl/6pdcjk","slide":7,"title":"QUALITÄT","textShapes":27}
+{"kind":"textbox","id":"sh/at47y1kr","slide":7,"name":"section-7","text":"QUALITÄT","textPreview":"QUALITÄT","textChars":8,"textLines":1,"bbox":[64,42,190,34]}
+{"kind":"textbox","id":"sh/lkjm1cfa","slide":7,"name":"index-7","text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1170,44,46,24]}
+{"kind":"shape","id":"sh/szqtcj6t","slide":7,"bbox":[64,675,1152,0]}
+{"kind":"textbox","id":"sh/32lszqtc","slide":7,"name":"footer-7","text":"Kryptographie · Rust + WebAssembly · SoSe 2026","textPreview":"Kryptographie · Rust + WebAssembly · SoSe 2026","textChars":46,"textLines":1,"bbox":[64,684,760,18]}
+{"kind":"textbox","id":"sh/ahoza1gv","slide":7,"name":"title-7","text":"Qualität ist ein ausführbarer Nachweis","textPreview":"Qualität ist ein ausführbarer Nachweis","textChars":38,"textLines":1,"bbox":[64,98,1000,62]}
+{"kind":"textbox","id":"sh/l87ed8ba","slide":7,"name":"subtitle-7","text":"Der finale Stand wurde lokal als Release-Build und im echten Browser geprüft.","textPreview":"Der finale Stand wurde lokal als Release-Build und im echten Browser geprüft.","textChars":77,"textLines":1,"bbox":[64,158,1080,42]}
+{"kind":"shape","id":"sh/sneloj2t","slide":7,"name":"metric-rust-card","bbox":[64,236,258,154]}
+{"kind":"textbox","id":"sh/3q5o7qpg","slide":7,"name":"metric-rust-value","text":"27 / 27","textPreview":"27 / 27","textChars":7,"textLines":1,"bbox":[84,260,218,58]}
+{"kind":"textbox","id":"sh/e9cvixcz","slide":7,"name":"metric-rust-label","text":"Rust-Tests","textPreview":"Rust-Tests","textChars":10,"textLines":1,"bbox":[84,328,218,40]}
+{"kind":"shape","id":"sh/87ed8bat","slide":7,"name":"metric-e2e-card","bbox":[350,236,258,154]}
+{"kind":"textbox","id":"sh/xs72x4na","slide":7,"name":"metric-e2e-value","text":"18 / 18","textPreview":"18 / 18","textChars":7,"textLines":1,"bbox":[370,260,218,58]}
+{"kind":"textbox","id":"sh/q1orytsv","slide":7,"name":"metric-e2e-label","text":"Browser + WCAG","textPreview":"Browser + WCAG","textChars":14,"textLines":1,"bbox":[370,328,218,40]}
+{"kind":"shape","id":"sh/fmlkjm1c","slide":7,"name":"metric-coverage-card","bbox":[636,236,258,154]}
+{"kind":"textbox","id":"sh/8z25kb6x","slide":7,"name":"metric-coverage-value","text":"98,82 %","textPreview":"98,82 %","textChars":7,"textLines":1,"bbox":[656,260,218,58]}
+{"kind":"textbox","id":"sh/1gvy90je","slide":7,"name":"metric-coverage-label","text":"Rust Lines","textPreview":"Rust Lines","textChars":10,"textLines":1,"bbox":[656,328,218,40]}
+{"kind":"shape","id":"sh/qtcj6tov","slide":7,"name":"metric-lighthouse-card","bbox":[922,236,258,154]}
+{"kind":"textbox","id":"sh/je9cvixc","slide":7,"name":"metric-lighthouse-value","text":"100 × 4","textPreview":"100 × 4","textChars":7,"textLines":1,"bbox":[942,260,218,58]}
+{"kind":"textbox","id":"sh/8v6psfil","slide":7,"name":"metric-lighthouse-label","text":"Lighthouse","textPreview":"Lighthouse","textChars":10,"textLines":1,"bbox":[942,328,218,40]}
+{"kind":"shape","id":"sh/xczed8v6","slide":7,"name":"quality-gates","bbox":[64,432,1116,142]}
+{"kind":"textbox","id":"sh/hoza1gvy","slide":7,"name":"quality-gates-title","text":"FINALER QUALITÄTSPFAD","textPreview":"FINALER QUALITÄTSPFAD","textChars":21,"textLines":1,"bbox":[90,454,260,24]}
+{"kind":"textbox","id":"sh/s36hcrmh","slide":7,"name":"gate-0","text":"✓ rustfmt","textPreview":"✓ rustfmt","textChars":9,"textLines":1,"bbox":[90,492,148,34]}
+{"kind":"textbox","id":"sh/zidonyd0","slide":7,"name":"gate-1","text":"✓ Clippy","textPreview":"✓ Clippy","textChars":8,"textLines":1,"bbox":[260,492,148,34]}
+{"kind":"textbox","id":"sh/a1gvy90j","slide":7,"name":"gate-2","text":"✓ Rustdoc","textPreview":"✓ Rustdoc","textChars":9,"textLines":1,"bbox":[430,492,148,34]}
+{"kind":"textbox","id":"sh/hgn29gr2","slide":7,"name":"gate-3","text":"✓ Coverage","textPreview":"✓ Coverage","textChars":10,"textLines":1,"bbox":[600,492,148,34]}
+{"kind":"textbox","id":"sh/svu9knih","slide":7,"name":"gate-4","text":"✓ Prettier","textPreview":"✓ Prettier","textChars":10,"textLines":1,"bbox":[770,492,148,34]}
+{"kind":"textbox","id":"sh/za1gvy90","slide":7,"name":"gate-5","text":"✓ ESLint","textPreview":"✓ ESLint","textChars":8,"textLines":1,"bbox":[940,492,148,34]}
+{"kind":"textbox","id":"sh/ap4r65wj","slide":7,"name":"gate-6","text":"✓ Typecheck","textPreview":"✓ Typecheck","textChars":11,"textLines":1,"bbox":[90,536,148,34]}
+{"kind":"textbox","id":"sh/h4byhgn2","slide":7,"name":"gate-7","text":"✓ WASM","textPreview":"✓ WASM","textChars":6,"textLines":1,"bbox":[260,536,148,34]}
+{"kind":"textbox","id":"sh/sji5snel","slide":7,"name":"gate-8","text":"✓ E2E","textPreview":"✓ E2E","textChars":5,"textLines":1,"bbox":[430,536,148,34]}
+{"kind":"textbox","id":"sh/2lszqtcj","slide":7,"name":"gate-9","text":"✓ axe","textPreview":"✓ axe","textChars":5,"textLines":1,"bbox":[600,536,148,34]}
+{"kind":"textbox","id":"sh/v6psfil0","slide":7,"name":"gate-10","text":"✓ Lighthouse","textPreview":"✓ Lighthouse","textChars":12,"textLines":1,"bbox":[770,536,148,34]}
+{"kind":"textbox","id":"sh/knih4byh","slide":7,"name":"gate-11","text":"✓ audit","textPreview":"✓ audit","textChars":7,"textLines":1,"bbox":[940,536,148,34]}
+{"kind":"textbox","id":"sh/d8bat47y","slide":7,"name":"quality-zero","text":"0 bekannte npm-Schwachstellen","textPreview":"0 bekannte npm-Schwachstellen","textChars":29,"textLines":1,"bbox":[874,600,306,34]}
+{"kind":"notes","id":"nt/6pdcjk","slide":7,"text":"Nicht nur Tests nennen, sondern die Testebenen erklären: bekannte Vektoren, Negativfälle, reale Browserflows und WCAG.\nCoverage ist hoch, aber kein Sicherheitsbeweis; sie ergänzt die fachlich gewählten Fälle.\nLighthouse erreichte auf Startseite und AES jeweils 100 in allen vier Kategorien.\nZeit: 4:40–5:30."}
+{"kind":"slide","id":"sl/gky5da","slide":8,"title":"PROZESS & GRENZEN","textShapes":18}
+{"kind":"textbox","id":"sh/n29gr2p8","slide":8,"name":"section-8","text":"PROZESS & GRENZEN","textPreview":"PROZESS & GRENZEN","textChars":17,"textLines":1,"bbox":[64,42,190,34]}
+{"kind":"textbox","id":"sh/gn29gr2p","slide":8,"name":"index-8","text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1170,44,46,24]}
+{"kind":"shape","id":"sh/58z25kb6","slide":8,"bbox":[64,675,1152,0]}
+{"kind":"textbox","id":"sh/y90je9cv","slide":8,"name":"footer-8","text":"Kryptographie · Rust + WebAssembly · SoSe 2026","textPreview":"Kryptographie · Rust + WebAssembly · SoSe 2026","textChars":46,"textLines":1,"bbox":[64,684,760,18]}
+{"kind":"textbox","id":"sh/nuxc3ylc","slide":8,"name":"title-8","text":"Vorschläge werden erst durch Gates zu Ergebnissen","textPreview":"Vorschläge werden erst durch Gates zu Ergebnissen","textChars":49,"textLines":1,"bbox":[64,98,1000,62]}
+{"kind":"textbox","id":"sh/gbq1oryt","slide":8,"name":"subtitle-8","text":"Specs und messbare Akzeptanzkriterien halten Code, Dokumentation und KI-Nutzung überprüfbar.","textPreview":"Specs und messbare Akzeptanzkriterien halten Code, Dokumentation und KI-Nutzung überprüfbar.","textChars":92,"textLines":1,"bbox":[64,158,1080,42]}
+{"kind":"shape","id":"sh/5wjudg7a","slide":8,"name":"process-0","bbox":[64,234,186,72]}
+{"kind":"textbox","id":"sh/u54zidon","slide":8,"name":"process-label-0","text":"Anforderung","textPreview":"Anforderung","textChars":11,"textLines":1,"bbox":[76,252,162,36]}
+{"kind":"shape","id":"sh/nqxs72x4","slide":8,"name":"process-1","bbox":[290,234,186,72]}
+{"kind":"textbox","id":"sh/z25kb6xk","slide":8,"name":"process-label-1","text":"Spec","textPreview":"Spec","textChars":4,"textLines":1,"bbox":[302,252,162,36]}
+{"kind":"shape","id":"sh/6hcrmhk3","slide":8,"name":"process-2","bbox":[516,234,186,72]}
+{"kind":"textbox","id":"sh/d8v6psfi","slide":8,"name":"process-label-2","text":"Test","textPreview":"Test","textChars":4,"textLines":1,"bbox":[528,252,162,36]}
+{"kind":"shape","id":"sh/onyd0z61","slide":8,"name":"process-3","bbox":[742,234,186,72]}
+{"kind":"textbox","id":"sh/vahoza1g","slide":8,"name":"process-label-3","text":"Implementierung","textPreview":"Implementierung","textChars":15,"textLines":1,"bbox":[754,252,162,36]}
+{"kind":"shape","id":"sh/6tovahoz","slide":8,"name":"process-4","bbox":[968,234,186,72]}
+{"kind":"textbox","id":"sh/dg7adsji","slide":8,"name":"process-label-4","text":"Gate","textPreview":"Gate","textChars":4,"textLines":1,"bbox":[980,252,162,36]}
+{"kind":"shape","id":"sh/ovahoza1","slide":8,"bbox":[250,270,40,0]}
+{"kind":"shape","id":"sh/vmtwra5g","slide":8,"bbox":[476,270,40,0]}
+{"kind":"shape","id":"sh/61032lsz","slide":8,"bbox":[702,270,40,0]}
+{"kind":"shape","id":"sh/e9cvixcz","slide":8,"bbox":[928,270,40,0]}
+{"kind":"shape","id":"sh/3q5o7qpg","slide":8,"name":"process-ai","bbox":[64,360,536,236]}
+{"kind":"textbox","id":"sh/wb2hwfyx","slide":8,"name":"process-ai-pill","text":"KI KONTROLLIERT","textPreview":"KI KONTROLLIERT","textChars":15,"textLines":1,"bbox":[88,384,170,34]}
+{"kind":"shape","id":"sh/lwval87e","slide":8,"name":"process-ai-1-dot","bbox":[88,446,10,10]}
+{"kind":"textbox","id":"sh/ex0nuxc3","slide":8,"name":"process-ai-1","text":"wasm-pack 0.15 scheiterte → 0.14 reproduzierbar gepinnt","textPreview":"wasm-pack 0.15 scheiterte → 0.14 reproduzierbar gepinnt","textChars":55,"textLines":1,"bbox":[110,438,454,44]}
+{"kind":"shape","id":"sh/3itgfmlk","slide":8,"name":"process-ai-2-dot","bbox":[88,500,10,10]}
+{"kind":"textbox","id":"sh/w3m94fu1","slide":8,"name":"process-ai-2","text":"ARM-Coveragefehler → dokumentierter x86_64-Fallback","textPreview":"ARM-Coveragefehler → dokumentierter x86_64-Fallback","textChars":51,"textLines":1,"bbox":[110,492,454,44]}
+{"kind":"shape","id":"sh/loj2t83i","slide":8,"name":"process-ai-3-dot","bbox":[88,554,10,10]}
+{"kind":"textbox","id":"sh/at47y1kr","slide":8,"name":"process-ai-3","text":"Lighthouse-Paket mit Auditfunden → direkter Runner","textPreview":"Lighthouse-Paket mit Auditfunden → direkter Runner","textChars":50,"textLines":1,"bbox":[110,546,454,36]}
+{"kind":"shape","id":"sh/3ex0nuxc","slide":8,"name":"process-limits","bbox":[638,360,536,236]}
+{"kind":"textbox","id":"sh/tcj6tova","slide":8,"name":"process-limits-pill","text":"BEWUSSTE GRENZEN","textPreview":"BEWUSSTE GRENZEN","textChars":16,"textLines":1,"bbox":[662,384,186,34]}
+{"kind":"shape","id":"sh/0rqd4vmt","slide":8,"name":"process-limit-1-dot","bbox":[662,446,10,10]}
+{"kind":"textbox","id":"sh/b6xkf6dc","slide":8,"name":"process-limit-1","text":"Lehrdemo, kein produktives Schlüsselmanagement","textPreview":"Lehrdemo, kein produktives Schlüsselmanagement","textChars":46,"textLines":1,"bbox":[684,438,454,40]}
+{"kind":"shape","id":"sh/il0rqd4v","slide":8,"name":"process-limit-2-dot","bbox":[662,498,10,10]}
+{"kind":"textbox","id":"sh/t47y1kre","slide":8,"name":"process-limit-2","text":"historische Verfahren sind ausdrücklich unsicher","textPreview":"historische Verfahren sind ausdrücklich unsicher","textChars":48,"textLines":1,"bbox":[684,490,454,40]}
+{"kind":"shape","id":"sh/0je9cvix","slide":8,"name":"process-limit-3-dot","bbox":[662,550,10,10]}
+{"kind":"textbox","id":"sh/byhgn29g","slide":8,"name":"process-limit-3","text":"kein vollständiges Sicherheitsaudit oder Backend","textPreview":"kein vollständiges Sicherheitsaudit oder Backend","textChars":48,"textLines":1,"bbox":[684,542,454,40]}
+{"kind":"notes","id":"nt/gky5da","slide":8,"text":"KI half bei Struktur, Reviews, Tests und Dokumentation, aber Vorschläge wurden nie ungeprüft übernommen.\nZwei konkrete Korrekturen nennen: Toolchain-Pin und Coverage-Fallback oder Lighthouse-Runner.\nGrenzen offen benennen: Lehrdemo, sichtbare Schlüssel, keine Persistenz, kein Sicherheitsaudit.\nZeit: 5:30–6:45."}
+{"kind":"slide","id":"sl/6i3tle","slide":9,"title":"FAZIT","textShapes":15}
+{"kind":"textbox","id":"sh/90je9cvi","slide":9,"name":"close-pill","text":"FAZIT","textPreview":"FAZIT","textChars":5,"textLines":1,"bbox":[64,52,112,34]}
+{"kind":"textbox","id":"sh/yd0z6103","slide":9,"name":"close-title","text":"Eine Fachlogik.\nKleine Grenze.\nMessbare Qualität.","textPreview":"Eine Fachlogik. | Kleine Grenze. | Messbare Qualität.","textChars":49,"textLines":3,"bbox":[64,138,660,220]}
+{"kind":"shape","id":"sh/rytsvu9k","slide":9,"bbox":[64,390,180,0]}
+{"kind":"textbox","id":"sh/g7adsji5","slide":9,"name":"close-subtitle","text":"Rust + WebAssembly machen die Kryptographie im Browser nachvollziehbar – und testbar.","textPreview":"Rust + WebAssembly machen die Kryptographie im Browser nachvollziehbar – und testbar.","textChars":85,"textLines":1,"bbox":[64,424,650,84]}
+{"kind":"shape","id":"sh/9s36hcrm","slide":9,"name":"close-card-0","bbox":[798,136,376,112]}
+{"kind":"textbox","id":"sh/y1kre1w7","slide":9,"name":"close-number-0","text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[820,160,52,38]}
+{"kind":"textbox","id":"sh/rmhk3q5o","slide":9,"name":"close-card-title-0","text":"Fachlich","textPreview":"Fachlich","textChars":8,"textLines":1,"bbox":[884,156,254,32]}
+{"kind":"textbox","id":"sh/g3ex0nux","slide":9,"name":"close-card-detail-0","text":"5 Verfahren","textPreview":"5 Verfahren","textChars":11,"textLines":1,"bbox":[884,196,254,25]}
+{"kind":"shape","id":"sh/5o7qpg3e","slide":9,"name":"close-card-1","bbox":[798,278,376,112]}
+{"kind":"textbox","id":"sh/5gbq1ory","slide":9,"name":"close-number-1","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[820,302,52,38]}
+{"kind":"textbox","id":"sh/cvixczed","slide":9,"name":"close-card-title-1","text":"Architektonisch","textPreview":"Architektonisch","textChars":15,"textLines":1,"bbox":[884,298,254,32]}
+{"kind":"textbox","id":"sh/nap4r65w","slide":9,"name":"close-card-detail-1","text":"16 WASM-Exports","textPreview":"16 WASM-Exports","textChars":15,"textLines":1,"bbox":[884,338,254,25]}
+{"kind":"shape","id":"sh/upwb2hwf","slide":9,"name":"close-card-2","bbox":[798,420,376,112]}
+{"kind":"textbox","id":"sh/54zidony","slide":9,"name":"close-number-2","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[820,444,52,38]}
+{"kind":"textbox","id":"sh/cj6tovah","slide":9,"name":"close-card-title-2","text":"Nachgewiesen","textPreview":"Nachgewiesen","textChars":12,"textLines":1,"bbox":[884,440,254,32]}
+{"kind":"textbox","id":"sh/nyd0z610","slide":9,"name":"close-card-detail-2","text":"45 grüne Tests","textPreview":"45 grüne Tests","textChars":14,"textLines":1,"bbox":[884,480,254,25]}
+{"kind":"textbox","id":"sh/udg7adsj","slide":9,"name":"close-questions","text":"FRAGEN?","textPreview":"FRAGEN?","textChars":7,"textLines":1,"bbox":[934,586,240,34]}
+{"kind":"shape","id":"sh/1032lszq","slide":9,"bbox":[64,640,1110,0]}
+{"kind":"textbox","id":"sh/cfa9w3m9","slide":9,"name":"close-repo","text":"github.com/lindgreendavid/kryptographie-wasm","textPreview":"github.com/lindgreendavid/kryptographie-wasm","textChars":44,"textLines":1,"bbox":[64,654,700,24]}
+{"kind":"textbox","id":"sh/obm58z25","slide":9,"name":"close-thanks","text":"Vielen Dank","textPreview":"Vielen Dank","textChars":11,"textLines":1,"bbox":[930,654,244,24]}
+{"kind":"notes","id":"nt/6i3tle","slide":9,"text":"Schlusssatz: Eine einzige Fachlogik, eine kleine WASM-Grenze und ausführbare Qualitätsnachweise machen das Projekt nachvollziehbar.\nZur Fragerunde überleiten.\nZeit: 6:45–7:00."}

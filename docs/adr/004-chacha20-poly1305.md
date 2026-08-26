@@ -15,4 +15,3 @@ Das Projekt verwendet `chacha20poly1305` aus dem RustCrypto-Ökosystem.
 ## Konsequenzen
 
 ChaCha20-Poly1305 wird als modernes authentifiziertes Verfahren neben AES-GCM demonstriert. Schlüssel, Nonce und Authentifizierungstag müssen korrekt behandelt werden.
-

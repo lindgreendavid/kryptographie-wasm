@@ -6,13 +6,13 @@ Dieses Modell bewertet die Lernanwendung als statische Browseranwendung. Es besc
 
 ## Schutzwerte und Vertrauensgrenzen
 
-| Schutzwert | Ziel | Einordnung |
-| --- | --- | --- |
-| Klartext | während einer Operation nicht unbeabsichtigt verändern | verbleibt ausschließlich im Browserprozess |
-| Schlüssel | zufällig erzeugen und korrekt an das Verfahren übergeben | wird zu Lehrzwecken sichtbar angezeigt |
-| Nonce | pro Operation zufällig erzeugen und in korrekter Länge nutzen | keine dauerhafte Eindeutigkeitsverwaltung |
-| Geheimtext und Tag | Manipulation beim Entschlüsseln erkennen | AEAD-Prüfung muss vor Klartextausgabe erfolgreich sein |
-| Anwendungscode | reproduzierbar bauen und Veränderungen prüfen | Git, Lockdateien, CI und gepinnte Actions |
+| Schutzwert         | Ziel                                                          | Einordnung                                             |
+| ------------------ | ------------------------------------------------------------- | ------------------------------------------------------ |
+| Klartext           | während einer Operation nicht unbeabsichtigt verändern        | verbleibt ausschließlich im Browserprozess             |
+| Schlüssel          | zufällig erzeugen und korrekt an das Verfahren übergeben      | wird zu Lehrzwecken sichtbar angezeigt                 |
+| Nonce              | pro Operation zufällig erzeugen und in korrekter Länge nutzen | keine dauerhafte Eindeutigkeitsverwaltung              |
+| Geheimtext und Tag | Manipulation beim Entschlüsseln erkennen                      | AEAD-Prüfung muss vor Klartextausgabe erfolgreich sein |
+| Anwendungscode     | reproduzierbar bauen und Veränderungen prüfen                 | Git, Lockdateien, CI und gepinnte Actions              |
 
 ```mermaid
 flowchart TD
@@ -26,16 +26,16 @@ DOM-Eingaben, Base64-Werte und übertragene Geheimtexte gelten als nicht vertrau
 
 ## Bedrohungen, Maßnahmen und Restrisiken
 
-| Bedrohung | Maßnahme | Automatischer Nachweis | Restrisiko |
-| --- | --- | --- | --- |
-| manipuliertes AEAD-Ergebnis | Authentifizierung vor jeder Klartextausgabe | Unit- und Browser-Manipulationstest | kompromittierter Anwendungscode könnte die Prüfung umgehen |
-| falsche Schlüssel-, Nonce- oder Taglänge | eigene Werttypen `Key32`, `Nonce12`, `AuthTag16` | Negativtests mit konkreten Fehlervarianten | JavaScript zeigt Werte weiterhin offen an |
-| schwacher Zufall | `getrandom` nutzt die Zufallsquelle des Browsers | Größen- und Roundtriptests | Browserumgebung bleibt Teil der Vertrauensbasis |
-| Nonce-Wiederverwendung | neue zufällige Nonce je Verschlüsselung | Prüfung der Ausgabelänge | Zufall garantiert mathematisch keine globale Eindeutigkeit |
-| unsichere Eigenentwicklung moderner Primitive | AES-GCM und ChaCha20-Poly1305 aus RustCrypto | NIST- und RFC-Known-Answer-Tests | Bibliotheks- und Integrationsfehler bleiben möglich |
-| manipulierte oder verwundbare Abhängigkeiten | Lockdateien, RustSec, Dependabot, SHA-gepinnte Actions | Sicherheitsworkflow | neue Schwachstellen können erst nach Veröffentlichung bekannt werden |
-| Cross-Site-Scripting durch Klartext | Ausgabe über `textContent`, keine HTML-Interpretation | Browser-Rundläufe und Codeprüfung | zukünftige DOM-Änderungen müssen diese Regel bewahren |
-| unbemerkte Regression | Rust-, Struktur-, Browser- und WCAG-Tests | GitHub Actions | automatisierte Tests ersetzen keine vollständige manuelle Prüfung |
+| Bedrohung                                     | Maßnahme                                               | Automatischer Nachweis                     | Restrisiko                                                           |
+| --------------------------------------------- | ------------------------------------------------------ | ------------------------------------------ | -------------------------------------------------------------------- |
+| manipuliertes AEAD-Ergebnis                   | Authentifizierung vor jeder Klartextausgabe            | Unit- und Browser-Manipulationstest        | kompromittierter Anwendungscode könnte die Prüfung umgehen           |
+| falsche Schlüssel-, Nonce- oder Taglänge      | eigene Werttypen `Key32`, `Nonce12`, `AuthTag16`       | Negativtests mit konkreten Fehlervarianten | JavaScript zeigt Werte weiterhin offen an                            |
+| schwacher Zufall                              | `getrandom` nutzt die Zufallsquelle des Browsers       | Größen- und Roundtriptests                 | Browserumgebung bleibt Teil der Vertrauensbasis                      |
+| Nonce-Wiederverwendung                        | neue zufällige Nonce je Verschlüsselung                | Prüfung der Ausgabelänge                   | Zufall garantiert mathematisch keine globale Eindeutigkeit           |
+| unsichere Eigenentwicklung moderner Primitive | AES-GCM und ChaCha20-Poly1305 aus RustCrypto           | NIST- und RFC-Known-Answer-Tests           | Bibliotheks- und Integrationsfehler bleiben möglich                  |
+| manipulierte oder verwundbare Abhängigkeiten  | Lockdateien, RustSec, Dependabot, SHA-gepinnte Actions | Sicherheitsworkflow                        | neue Schwachstellen können erst nach Veröffentlichung bekannt werden |
+| Cross-Site-Scripting durch Klartext           | Ausgabe über `textContent`, keine HTML-Interpretation  | Browser-Rundläufe und Codeprüfung          | zukünftige DOM-Änderungen müssen diese Regel bewahren                |
+| unbemerkte Regression                         | Rust-, Struktur-, Browser- und WCAG-Tests              | GitHub Actions                             | automatisierte Tests ersetzen keine vollständige manuelle Prüfung    |
 
 ## Bewusste Nicht-Ziele
 

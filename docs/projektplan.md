@@ -1,40 +1,63 @@
 # Projektplan
 
-## Ausgangslage
+## Rahmen und Ziel
 
-Als Ausgangsmaterial lagen sechs Arbeitsstände `v1` bis `v6` ohne separates Bewertungsraster vor. Die Stände wurden zunächst inventarisiert und miteinander verglichen. Da bereits frühe Ordner mehrere Verfahren enthielten, wurde die fachliche Entwicklung für Git transparent und feingranular rekonstruiert.
-
-## Ziele
-
-- fünf Verfahren mit Ver- und Entschlüsselung
-- Rust als alleinige Fachlogik und WebAssembly als Browser-Schnittstelle
-- verständliche, deutschsprachige Oberfläche
-- reproduzierbarer Build auf Windows, macOS und Linux
-- automatisierte Qualitätsprüfung und öffentliche Live-Demo
-- nachvollziehbare Dokumentation und Versionsgeschichte
+Die Kursvorgabe sieht rund 40 Stunden je Studierendem vor. Für das Zweierteam wurde der Scope deshalb
+auf fünf vollständig demonstrierbare Verfahren, eine klare Rust-/WASM-Grenze und nachweisbare
+Qualität begrenzt. Backend, Konten, Datenbank und produktive Schlüsselverwaltung bleiben außerhalb.
 
 ## Arbeitspakete
 
-| Phase | Ergebnis |
-| --- | --- |
-| 1. Analyse | Dateiinventar und Vergleich der sechs Stände |
-| 2. Fachliche Trennung | ein Entwicklungsschritt je Verfahren |
-| 3. Härtung | Validierung, Zufall, Fehlerbehandlung und Manipulationstests |
-| 4. Oberfläche | Navigation, Ansichten, responsive und semantische Elemente |
-| 5. Dokumentation | README, Spezifikationen, ADRs, Architektur und Quellen |
-| 6. Automatisierung | lokale Skripte, CI und GitHub Pages |
-| 7. Abnahme | vollständiger Qualitätslauf und öffentliche Funktionsprüfung |
+| Phase                            | Plan [Team-h] | Ergebnis / Akzeptanzkriterium                                   |
+| -------------------------------- | ------------: | --------------------------------------------------------------- |
+| Analyse, Specs und Planung       |            10 | Verfahren, Inputs, Outputs, Fehler und Tests sind spezifiziert. |
+| Frontend und UX                  |            16 | sechs responsive, tastaturtaugliche Seiten mit drei Ansichten   |
+| Rust-/WASM-Fachlogik             |            24 | fünf Verfahren, typsichere AEAD-Werte, 16 dokumentierte Exports |
+| Integration und Fehlerbehandlung |            10 | reale Roundtrips, Ladezustände, verständliche Fehler            |
+| Tests, Tooling und CI            |            12 | Lint, Typecheck, Coverage, E2E, axe, Lighthouse, Actions        |
+| Dokumentation und Präsentation   |             8 | Bericht, ADRs, Demo-Drehbuch, Folien und Abgabecheck            |
+| **Gesamt**                       |        **80** | technisch und dokumentarisch konsistenter Abgabestand           |
+
+Die tatsächlichen Stunden müssen die Teammitglieder aus ihren realen Aufzeichnungen in
+[zeitnachweis.md](zeitnachweis.md) ergänzen. Eine nachträgliche Schätzung wird nicht als Ist-Wert
+ausgegeben.
+
+## Abhängigkeiten und Reihenfolge
+
+```mermaid
+flowchart LR
+    A["Anforderungen"] --> S["Specs & Tests"]
+    S --> R["Rust-Core"]
+    R --> W["WASM-Brücke"]
+    W --> F["Frontend-Flows"]
+    F --> Q["E2E & Qualität"]
+    Q --> D["Doku & Präsentation"]
+```
 
 ## Risiken und Maßnahmen
 
-| Risiko | Maßnahme |
-| --- | --- |
-| moderne Kryptographie fehlerhaft selbst implementiert | etablierte RustCrypto-Bibliotheken verwenden |
-| unübersichtliche Versionssprünge | Verfahren und technische Änderungen einzeln committen |
-| Unterschiede zwischen lokaler und veröffentlichter Version | identische Befehle in Skripten und GitHub Actions |
-| Build-Artefakte blähen das Repository auf | `target/` und `web/pkg/` ignorieren und reproduzierbar erzeugen |
-| Demonstration wird als produktionssicher missverstanden | Sicherheitsstatus und Projektgrenzen sichtbar dokumentieren |
+| Risiko                           | Eintritt / Auswirkung | Maßnahme                                              | Rest-Risiko                            |
+| -------------------------------- | --------------------- | ----------------------------------------------------- | -------------------------------------- |
+| moderne Kryptographie fehlerhaft | mittel / sehr hoch    | RustCrypto + NIST-/RFC-Vektor                         | Einbindung ist Demo, kein Audit        |
+| Nonce/Schlüssel missverstanden   | mittel / hoch         | getrennte Felder, Erklärungen, Bedrohungsmodell       | sichtbare Schlüssel in Demo            |
+| WASM lädt verzögert              | mittel / mittel       | Ladezustand und gesperrte Controls                    | Netz-/Browserfehler bleibt möglich     |
+| Testflakiness                    | mittel / mittel       | zustandsbasiertes Warten, 2 Worker, Diagnoseartefakte | weitere Browser nicht automatisiert    |
+| Toolchainabweichung              | mittel / hoch         | exakte Versionen, Lockfiles, CI                       | externe Action-/Registry-Verfügbarkeit |
+| Scope wächst kurz vor Abgabe     | hoch / hoch           | keine neuen Verfahren, kein Backend/PWA               | nur bewertungsrelevante Fehler beheben |
 
-## Abschlusskriterien
+## Meilensteine
 
-Der Stand gilt als abgabefähig, wenn CI und Pages erfolgreich sind, alle fünf Verfahren in der Live-Demo funktionieren, keine Geheimnisse oder Build-Artefakte versioniert sind und die Abgabe-Checkliste vollständig erfüllt ist.
+1. Anforderungen und Architektur festlegen.
+2. Historische Verfahren vollständig machen.
+3. Moderne AEAD-Verfahren über Bibliotheken einbinden.
+4. Browserintegration, Responsiveness und Accessibility absichern.
+5. Tooling, Coverage, CI und Deployment reproduzierbar machen.
+6. Bericht, Präsentation und Demo aus dem finalen Messstand erzeugen.
+7. Final Freeze: nur noch nachweisbare Fehler korrigieren.
+
+## Definition of Done
+
+Der Stand ist technisch fertig, wenn `npm run test:all` erfolgreich ist, alle Muss-Anforderungen
+in der Nachweismatrix umgesetzt sind und Bericht, Code und Messwerte übereinstimmen. Organisatorisch
+fertig ist die Abgabe erst nach Ergänzung realer Ist-Stunden, finalem Git-Commit/Tag, Upload und einer
+geprobten Sieben-Minuten-Präsentation.

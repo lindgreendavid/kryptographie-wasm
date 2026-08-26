@@ -1,0 +1,11 @@
+node_modules/
+target/
+web/pkg/
+reports/
+playwright-report/
+test-results/
+docs/abgabe/*.docx
+docs/abgabe/*.pdf
+docs/abgabe/*.pptx
+package-lock.json
+ai/prompts/

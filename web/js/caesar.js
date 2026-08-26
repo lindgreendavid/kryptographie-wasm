@@ -3,7 +3,7 @@ import init, {
     caesar_encrypt,
     caesar_shifted_alphabet,
 } from "../pkg/krypto_wasm.js";
-import { element, setText, showMessage, value } from "./dom.js";
+import { element, setDisabled, setText, setValue, showMessage, value } from "./dom.js";
 
 const normalAlphabet = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z";
 
@@ -30,7 +30,7 @@ async function start() {
         try {
             const result = caesar_encrypt(value("caesar-plain"), shift());
             setText("caesar-cipher-output", result);
-            element("caesar-cipher").value = result;
+            setValue("caesar-cipher", result);
             showMessage("caesar-message", "");
             refreshAlphabet();
         } catch (error) {
@@ -47,6 +47,12 @@ async function start() {
             showMessage("caesar-message", String(error));
         }
     });
+
+    setDisabled("caesar-encrypt", false);
+    setDisabled("caesar-decrypt", false);
+    showMessage("caesar-message", "");
 }
 
-start().catch((error) => showMessage("caesar-message", `WASM konnte nicht geladen werden: ${error}`));
+start().catch((error) =>
+    showMessage("caesar-message", `WASM konnte nicht geladen werden: ${error}`),
+);

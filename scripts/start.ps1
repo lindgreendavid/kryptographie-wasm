@@ -5,29 +5,66 @@ Set-Location $ProjectRoot
 
 if (-not (Test-Path "$ProjectRoot\web\pkg\krypto_wasm.js")) {
     Write-Host "WASM-Paket fehlt. Build wird gestartet..."
-    wasm-pack build --target web --out-dir web/pkg
+    npm run build
+    if ($LASTEXITCODE -ne 0) {
+        throw "WebAssembly-Build fehlgeschlagen."
+    }
 }
 
 $Port = 8080
-
 $Url = "http://127.0.0.1:$Port/index.html"
-if (Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue) {
-    Write-Host "Die Anwendung scheint bereits unter $Url zu laufen."
-    Start-Process $Url
-    return
+
+function Test-KryptographieApp {
+    try {
+        $Response = Invoke-WebRequest -Uri $Url -UseBasicParsing -TimeoutSec 2
+        return $Response.StatusCode -eq 200 -and $Response.Content.Contains("<title>Kryptographie</title>")
+    } catch {
+        return $false
+    }
 }
 
-Write-Host "Lokaler Server startet unter $Url"
-Write-Host "Projektordner: $ProjectRoot"
-Write-Host "Zum Beenden Strg+C druecken."
-Start-Process $Url
+if (Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue) {
+    if (Test-KryptographieApp) {
+        Write-Host "Die geprüfte Anwendung läuft bereits unter $Url."
+        Start-Process $Url
+        return
+    }
+    throw "Port $Port wird von einem anderen Dienst verwendet. Bitte den Port freigeben."
+}
 
-Set-Location "$ProjectRoot\web"
+if (-not (Test-Path "$ProjectRoot\node_modules")) {
+    npm ci
+    if ($LASTEXITCODE -ne 0) {
+        throw "Installation der Node-Abhängigkeiten fehlgeschlagen."
+    }
+}
 
-if (Get-Command py -ErrorAction SilentlyContinue) {
-    py -3 -m http.server $Port --bind 127.0.0.1
-} elseif (Get-Command python -ErrorAction SilentlyContinue) {
-    python -m http.server $Port --bind 127.0.0.1
-} else {
-    throw "Python wurde nicht gefunden. Bitte Python installieren oder einen anderen lokalen HTTP-Server im Ordner web starten."
+$NpmCommand = (Get-Command npm.cmd -ErrorAction Stop).Source
+$Server = Start-Process -FilePath $NpmCommand -ArgumentList @("run", "serve") -WorkingDirectory $ProjectRoot -WindowStyle Hidden -PassThru
+
+try {
+    $Ready = $false
+    for ($Attempt = 0; $Attempt -lt 80; $Attempt++) {
+        if ($Server.HasExited) {
+            throw "Der lokale Server wurde unerwartet beendet."
+        }
+        if (Test-KryptographieApp) {
+            $Ready = $true
+            break
+        }
+        Start-Sleep -Milliseconds 250
+    }
+
+    if (-not $Ready) {
+        throw "Die Anwendung war nach 20 Sekunden nicht erreichbar."
+    }
+
+    Write-Host "Lokaler Server: $Url"
+    Write-Host "Zum Beenden dieses Fensters Strg+C drücken."
+    Start-Process $Url
+    Wait-Process -Id $Server.Id
+} finally {
+    if (-not $Server.HasExited) {
+        Stop-Process -Id $Server.Id
+    }
 }

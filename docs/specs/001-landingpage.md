@@ -4,6 +4,8 @@
 
 Die Startseite zeigt das Thema Kryptographie und führt zu den fünf Verfahren.
 
+**IDs:** F-001, F-002, Q-006, Q-007 · **Priorität:** Muss/Soll · **Status:** umgesetzt
+
 ## Benutzeranforderungen
 
 Benutzer sollen Caesar, Skytale, Substitution, AES-GCM und ChaCha20-Poly1305 direkt auswählen können.
@@ -26,7 +28,8 @@ Bei direktem `file://`-Aufruf zeigt die Startseite einen Hinweis zum lokalen Ser
 
 ## Tests
 
-Navigation und responsive Umbruch manuell prüfen.
+Playwright prüft Navigation, aktiven Link, Sprunglink, Theme-Persistenz, 390-Pixel-Layout,
+Console-Fehler und axe WCAG A/AA in allen drei Ansichten.
 
 ## Akzeptanzkriterien
 

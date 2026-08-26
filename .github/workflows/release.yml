@@ -1,89 +1,60 @@
 name: Release veröffentlichen
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - Cargo.toml
-      - Cargo.lock
-      - package.json
-      - docs/release-notes-*.md
-      - .github/workflows/release.yml
-  workflow_dispatch:
+    workflow_dispatch:
 
 permissions:
-  contents: write
+    contents: write
 
 concurrency:
-  group: release
-  cancel-in-progress: false
+    group: release
+    cancel-in-progress: false
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Repository vollständig auschecken
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.RELEASE_TOKEN }}
+    release:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Repository vollständig auschecken
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+              with:
+                  fetch-depth: 0
 
-      - name: Versionsangaben prüfen
-        id: version
-        run: |
-          cargo_version="$(awk -F '"' '/^version = / { print $2; exit }' Cargo.toml)"
-          lock_version="$(awk -F '"' '/^name = "krypto-wasm"/ { getline; print $2; exit }' Cargo.lock)"
-          npm_version="$(jq -r .version package.json)"
+            - name: Versionsangaben prüfen
+              id: version
+              run: |
+                  cargo_version="$(awk -F '"' '/^version = / { print $2; exit }' Cargo.toml)"
+                  lock_version="$(awk -F '"' '/^name = "krypto-wasm"/ { getline; print $2; exit }' Cargo.lock)"
+                  npm_version="$(jq -r .version package.json)"
 
-          test -n "$cargo_version"
-          test "$cargo_version" = "$lock_version"
-          test "$cargo_version" = "$npm_version"
-          test -f "docs/release-notes-v$cargo_version.md"
+                  test -n "$cargo_version"
+                  test "$cargo_version" = "$lock_version"
+                  test "$cargo_version" = "$npm_version"
+                  test -f "docs/release-notes-v$cargo_version.md"
 
-          echo "version=$cargo_version" >> "$GITHUB_OUTPUT"
-          echo "tag=v$cargo_version" >> "$GITHUB_OUTPUT"
+                  echo "version=$cargo_version" >> "$GITHUB_OUTPUT"
+                  echo "tag=v$cargo_version" >> "$GITHUB_OUTPUT"
 
-      - name: Meilensteine als annotierte Tags anlegen
-        env:
-          RELEASE_TAG: ${{ steps.version.outputs.tag }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            - name: Release-Tag anlegen
+              env:
+                  RELEASE_TAG: ${{ steps.version.outputs.tag }}
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          tag_if_missing() {
-            tag="$1"
-            commit="$2"
-            if ! git ls-remote --exit-code --tags origin "refs/tags/$tag" >/dev/null 2>&1; then
-              echo "Erzeuge $tag für $commit"
-              git tag -a "$tag" "$commit" -m "Kryptographie-WASM $tag"
-              git push origin "refs/tags/$tag"
-            fi
-          }
+                  if ! git ls-remote --exit-code --tags origin "refs/tags/$RELEASE_TAG" >/dev/null 2>&1; then
+                    git tag -a "$RELEASE_TAG" "$GITHUB_SHA" -m "Kryptographie-WASM $RELEASE_TAG"
+                    git push origin "refs/tags/$RELEASE_TAG"
+                  fi
 
-          tag_if_missing v0.0.1 fb452dcbc56b58fa438e64ea45cc8691c3a2ef8e
-          tag_if_missing v0.1.0 2b919d65fe1fedcb315544a364f4a17805b8afb9
-          tag_if_missing v0.2.0 9cfb24a54d4bcb8b68afeb51418c07691cc92685
-          tag_if_missing v0.3.0 f01de6e8f1296fb9733b63847108307d9b1bfb8f
-          tag_if_missing v0.4.0 651c13ada4701983112164661d20188e70e7d53d
-          tag_if_missing v0.5.0 cb099440b6cc7da79aff773c2b0169f8489d2f27
-          tag_if_missing v0.6.0 8decec835e8c3a7b6d3ac6eb2266704c6e21fbe2
-          tag_if_missing v0.7.0 518379a7b9f4e72fec5d692027ff0b40316cda61
-          tag_if_missing v0.8.0 c65bb887ecf1bd7331790462c54aba6a28f6161e
-          tag_if_missing v0.9.0 6a29c477845d365e0b2840c16a25d0ddc8fc677b
-          tag_if_missing v1.0.0 cfb2bb6d22e6098d378957bbe7eee0043f6d681c
-          tag_if_missing v1.0.1 1358b89486f3d8621f5d78434f6afef5864a639f
-          tag_if_missing v1.1.0 9ab90bd3f71424bd519ac64a68256270fad0fd26
-          tag_if_missing "$RELEASE_TAG" "$GITHUB_SHA"
-
-      - name: GitHub-Release anlegen
-        env:
-          GH_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-          RELEASE_TAG: ${{ steps.version.outputs.tag }}
-          RELEASE_VERSION: ${{ steps.version.outputs.version }}
-        run: |
-          if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
-            gh release create "$RELEASE_TAG" \
-              --title "Kryptographie-WASM $RELEASE_VERSION" \
-              --notes-file "docs/release-notes-v$RELEASE_VERSION.md" \
-              --verify-tag
-          fi
+            - name: GitHub-Release anlegen
+              env:
+                  GH_TOKEN: ${{ github.token }}
+                  RELEASE_TAG: ${{ steps.version.outputs.tag }}
+                  RELEASE_VERSION: ${{ steps.version.outputs.version }}
+              run: |
+                  if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+                    gh release create "$RELEASE_TAG" \
+                      --title "Kryptographie-WASM $RELEASE_VERSION" \
+                      --notes-file "docs/release-notes-v$RELEASE_VERSION.md" \
+                      --verify-tag
+                  fi

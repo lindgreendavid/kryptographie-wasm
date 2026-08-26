@@ -1,5 +1,11 @@
 const themeStorageKey = "krypto-theme";
 
+/**
+ * Speichert die gewählte Ansicht, sofern Web Storage verfügbar ist.
+
+ * @param {string} theme - Name der Ansicht.
+ * @returns {void}
+ */
 function saveTheme(theme) {
     try {
         localStorage.setItem(themeStorageKey, theme);
@@ -16,6 +22,12 @@ function loadTheme() {
     }
 }
 
+/**
+ * Aktiviert eine geprüfte Ansicht und synchronisiert die Schaltflächen.
+
+ * @param {string} theme - Gewünschte Ansicht.
+ * @returns {void}
+ */
 function applyTheme(theme) {
     const normalizedTheme = ["dark", "cyber"].includes(theme) ? theme : "light";
     document.body.classList.toggle("dark-mode", normalizedTheme === "dark");
@@ -24,6 +36,9 @@ function applyTheme(theme) {
     saveTheme(normalizedTheme);
 
     document.querySelectorAll(".theme-button").forEach((button) => {
+        if (!(button instanceof HTMLButtonElement)) {
+            return;
+        }
         const isActive = button.dataset.theme === normalizedTheme;
         button.classList.toggle("active", isActive);
         button.setAttribute("aria-pressed", String(isActive));

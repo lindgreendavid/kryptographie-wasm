@@ -4,6 +4,8 @@
 
 ChaCha20-Poly1305 ergänzt AES-GCM als zweites modernes authentifiziertes Verfahren.
 
+**IDs:** F-050, F-051, F-060 · **Priorität:** Muss · **Status:** umgesetzt
+
 ## Benutzeranforderungen
 
 Schlüssel erzeugen, Klartext verschlüsseln, Geheimtext mit Nonce und Tag entschlüsseln.
@@ -26,7 +28,9 @@ Ungültiger Schlüssel, falsche Nonce, falscher Tag und manipulierte Daten ergeb
 
 ## Tests
 
-Roundtrip, falscher Schlüssel, manipulierte Daten und fehlerhafte Nonce.
+RFC-8439-Known-Answer-Test, Unicode-/Mehrzeilen-/Langtext-Roundtrips, falscher Schlüssel,
+ungültiges Base64, falsche Größen und manipulierte Cipher-/Nonce-/Tag-Daten; Browser-Tagmanipulation
+über WASM.
 
 ## Akzeptanzkriterien
 
@@ -35,4 +39,3 @@ Bei Authentifizierungsfehlern wird kein Klartext ausgegeben.
 ## Definition of Done
 
 RustCrypto-Integration, UI, Tests und Dokumentation sind vorhanden.
-

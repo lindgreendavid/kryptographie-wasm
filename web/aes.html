@@ -1,104 +1,133 @@
 <!doctype html>
 <html lang="de">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AES-GCM</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <a class="skip-link" href="#hauptinhalt">Direkt zum Inhalt</a>
-    <div class="site">
-        <nav class="topnav" aria-label="Hauptnavigation">
-            <a href="index.html">Startseite</a>
-            <a href="caesar.html">Caesar</a>
-            <a href="skytale.html">Skytale</a>
-            <a href="substitution.html">Substitution</a>
-            <a href="aes.html">AES</a>
-            <a href="chacha.html">ChaCha20</a>
-        </nav>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="AES-256-GCM mit Schlüssel, Nonce und Authentifizierungstag sicher im Browser demonstrieren."
+        />
+        <title>AES-GCM</title>
+        <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <a class="skip-link" href="#hauptinhalt">Direkt zum Inhalt</a>
+        <div class="site">
+            <nav class="topnav" aria-label="Hauptnavigation">
+                <a href="index.html">Startseite</a>
+                <a href="caesar.html">Caesar</a>
+                <a href="skytale.html">Skytale</a>
+                <a href="substitution.html">Substitution</a>
+                <a href="aes.html">AES</a>
+                <a href="chacha.html">ChaCha20</a>
+            </nav>
 
-        <main id="hauptinhalt">
-            <h1 class="procedure-title">AES-GCM</h1>
-            <p class="page-intro">
-                Modernes Verschlüsseln mit Authentifizierung: manipulierte Daten werden nicht als Klartext akzeptiert.
-            </p>
-            <p id="aes-message" class="message" role="status"></p>
+            <main id="hauptinhalt" tabindex="-1">
+                <h1 class="procedure-title">AES-GCM</h1>
+                <p class="page-intro">
+                    Modernes Verschlüsseln mit Authentifizierung: manipulierte Daten werden nicht
+                    als Klartext akzeptiert.
+                </p>
+                <p id="aes-message" class="message" role="status">WASM wird geladen …</p>
 
-            <section class="flow">
-                <h2>Verschlüsseln</h2>
-                <div class="flow-row">
-                    <div class="work-box">
-                        <label for="aes-plain">Normaler Text</label>
-                        <textarea id="aes-plain">Geheimer Text</textarea>
-                        <label for="aes-key">Schlüssel Base64, 32 Byte</label>
-                        <input id="aes-key" autocomplete="off">
-                        <div class="controls">
-                            <button id="aes-generate-key" type="button">Schlüssel erzeugen</button>
-                            <button id="aes-encrypt-button" type="button">Verschlüsseln</button>
+                <section class="flow">
+                    <h2>Verschlüsseln</h2>
+                    <div class="flow-row">
+                        <div class="work-box">
+                            <label for="aes-plain">Normaler Text</label>
+                            <textarea id="aes-plain">Geheimer Text</textarea>
+                            <label for="aes-key">Schlüssel Base64, 32 Byte</label>
+                            <input id="aes-key" autocomplete="off" />
+                            <div class="controls">
+                                <button id="aes-generate-key" type="button" disabled>
+                                    Schlüssel erzeugen
+                                </button>
+                                <button id="aes-encrypt-button" type="button" disabled>
+                                    Verschlüsseln
+                                </button>
+                            </div>
+                        </div>
+                        <div class="arrow" aria-hidden="true">→</div>
+                        <div class="work-box">
+                            <label for="aes-cipher-output">Geheimtext</label>
+                            <output
+                                id="aes-cipher-output"
+                                class="output"
+                                aria-live="polite"
+                            ></output>
+                            <label for="aes-nonce-output">Nonce</label>
+                            <output
+                                id="aes-nonce-output"
+                                class="output"
+                                aria-live="polite"
+                            ></output>
+                            <label for="aes-tag-output">Authentifizierungstag</label>
+                            <output id="aes-tag-output" class="output" aria-live="polite"></output>
                         </div>
                     </div>
-                    <div class="arrow" aria-hidden="true">→</div>
-                    <div class="work-box">
-                        <label for="aes-cipher-output">Geheimtext</label>
-                        <output id="aes-cipher-output" class="output" aria-live="polite"></output>
-                        <label for="aes-nonce-output">Nonce</label>
-                        <output id="aes-nonce-output" class="output" aria-live="polite"></output>
-                        <label for="aes-tag-output">Authentifizierungstag</label>
-                        <output id="aes-tag-output" class="output" aria-live="polite"></output>
+                </section>
+
+                <section class="flow">
+                    <h2>Entschlüsseln</h2>
+                    <div class="flow-row">
+                        <div class="work-box">
+                            <label for="aes-cipher">Verschlüsselter Text</label>
+                            <textarea id="aes-cipher"></textarea>
+                            <label for="aes-key-decrypt">Schlüssel</label>
+                            <input id="aes-key-decrypt" autocomplete="off" />
+                            <label for="aes-nonce">Nonce</label>
+                            <input id="aes-nonce" autocomplete="off" />
+                            <label for="aes-tag">Authentifizierungstag</label>
+                            <input id="aes-tag" autocomplete="off" />
+                            <div class="controls">
+                                <button id="aes-decrypt-button" type="button" disabled>
+                                    Entschlüsseln
+                                </button>
+                            </div>
+                        </div>
+                        <div class="arrow" aria-hidden="true">→</div>
+                        <div class="work-box">
+                            <label for="aes-plain-output">Normaler Text</label>
+                            <output
+                                id="aes-plain-output"
+                                class="output"
+                                aria-live="polite"
+                            ></output>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <section class="flow">
-                <h2>Entschlüsseln</h2>
-                <div class="flow-row">
-                    <div class="work-box">
-                        <label for="aes-cipher">Verschlüsselter Text</label>
-                        <textarea id="aes-cipher"></textarea>
-                        <label for="aes-key-decrypt">Schlüssel</label>
-                        <input id="aes-key-decrypt" autocomplete="off">
-                        <label for="aes-nonce">Nonce</label>
-                        <input id="aes-nonce" autocomplete="off">
-                        <label for="aes-tag">Authentifizierungstag</label>
-                        <input id="aes-tag" autocomplete="off">
-                        <div class="controls"><button id="aes-decrypt-button" type="button">Entschlüsseln</button></div>
-                    </div>
-                    <div class="arrow" aria-hidden="true">→</div>
-                    <div class="work-box">
-                        <label for="aes-plain-output">Normaler Text</label>
-                        <output id="aes-plain-output" class="output" aria-live="polite"></output>
-                    </div>
-                </div>
-            </section>
+                <section class="classic-panel">
+                    <h2>Erklärung des Verfahrens</h2>
+                    <p>
+                        AES ist ein modernes symmetrisches Blockchiffre-Verfahren. In diesem Projekt
+                        wird AES-GCM verwendet. GCM ergänzt die Verschlüsselung um
+                        Authentifizierung: manipulierte Daten sollen nicht entschlüsselt als
+                        gültiger Klartext erscheinen.
+                    </p>
+                </section>
 
-            <section class="classic-panel">
-                <h2>Erklärung des Verfahrens</h2>
-                <p>
-                    AES ist ein modernes symmetrisches Blockchiffre-Verfahren. In diesem Projekt wird AES-GCM verwendet.
-                    GCM ergänzt die Verschlüsselung um Authentifizierung: manipulierte Daten sollen nicht entschlüsselt
-                    als gültiger Klartext erscheinen.
-                </p>
-            </section>
+                <section class="classic-panel">
+                    <h2>Historie</h2>
+                    <p>
+                        AES wurde als Advanced Encryption Standard eingeführt und löste ältere
+                        Standards für viele Anwendungen ab. Heute ist AES in zahlreichen
+                        Protokollen, Programmen und Geräten verbreitet.
+                    </p>
+                </section>
 
-            <section class="classic-panel">
-                <h2>Historie</h2>
-                <p>
-                    AES wurde als Advanced Encryption Standard eingeführt und löste ältere Standards für viele Anwendungen ab.
-                    Heute ist AES in zahlreichen Protokollen, Programmen und Geräten verbreitet.
-                </p>
-            </section>
-
-            <section class="classic-panel">
-                <h2>Sicherheitsbewertung</h2>
-                <p>
-                    AES-GCM gilt bei korrekter Verwendung als starkes Verfahren. Wichtig sind zufällige Schlüssel, eine passende
-                    Schlüssellänge und die Regel, eine Nonce unter demselben Schlüssel nicht absichtlich wiederzuverwenden.
-                </p>
-            </section>
-        </main>
-    </div>
-    <script type="module" src="js/theme.js"></script>
-    <script type="module" src="js/aes.js"></script>
-</body>
+                <section class="classic-panel">
+                    <h2>Sicherheitsbewertung</h2>
+                    <p>
+                        AES-GCM gilt bei korrekter Verwendung als starkes Verfahren. Wichtig sind
+                        zufällige Schlüssel, eine passende Schlüssellänge und die Regel, eine Nonce
+                        unter demselben Schlüssel nicht absichtlich wiederzuverwenden.
+                    </p>
+                </section>
+            </main>
+        </div>
+        <script type="module" src="js/theme.js"></script>
+        <script type="module" src="js/aes.js"></script>
+    </body>
 </html>

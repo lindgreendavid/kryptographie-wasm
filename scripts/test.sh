@@ -4,14 +4,14 @@ set -euo pipefail
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$PROJECT_ROOT"
 
-cargo fmt --check
-cargo clippy --all-targets --all-features -- -D warnings
-cargo test --locked
-wasm-pack build --target web --out-dir web/pkg
-python3 scripts/verify_web.py
-find web/js -name '*.js' -type f -print0 | xargs -0 -n1 node --check
 npm ci
-npx playwright install chromium
-npm run test:e2e
 
-echo "Alle automatisierten Prüfungen waren erfolgreich."
+if ! cargo llvm-cov --version >/dev/null 2>&1; then
+    echo "cargo-llvm-cov fehlt. Installation: cargo install cargo-llvm-cov --version 0.9.0 --locked" >&2
+    exit 1
+fi
+
+npx playwright install chromium --with-deps
+npm run test:all
+
+echo "Alle Tests, Qualitätsprüfungen und Berichte waren erfolgreich."

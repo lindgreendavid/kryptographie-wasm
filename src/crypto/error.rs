@@ -6,25 +6,43 @@ use std::fmt;
 /// [`fmt::Display`] erzeugt die deutschsprachigen Texte für die Oberfläche.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum CryptoError {
+    /// Der Caesar-Schlüssel liegt nicht im erlaubten Bereich 1 bis 25.
     InvalidCaesarShift,
+    /// Die Skytale-Spaltenzahl liegt nicht im erlaubten Bereich 2 bis 30.
     InvalidSkytaleColumns,
+    /// Das Substitutionsalphabet enthält nicht genau 26 Zeichen.
     InvalidAlphabetLength,
+    /// Das Substitutionsalphabet enthält ein Zeichen außerhalb A bis Z.
     InvalidAlphabetCharacter,
+    /// Der angegebene Buchstabe kommt im Substitutionsalphabet mehrfach vor.
     DuplicateAlphabetLetter(char),
+    /// Der angegebene Buchstabe fehlt im Substitutionsalphabet.
     MissingAlphabetLetter(char),
+    /// Der Browser-Zufallsgenerator konnte kein Substitutionsalphabet liefern.
     RandomAlphabetUnavailable,
+    /// Der Browser-Zufallsgenerator konnte keinen Schlüssel liefern.
     RandomKeyUnavailable,
+    /// Der Browser-Zufallsgenerator konnte keine Nonce liefern.
     RandomNonceUnavailable,
+    /// Der Schlüssel ist kein gültiger Base64-Wert mit genau 32 Byte.
     InvalidKey,
+    /// Die Nonce ist kein gültiger Base64-Wert mit genau 12 Byte.
     InvalidNonce,
+    /// Der Tag ist kein gültiger Base64-Wert mit genau 16 Byte.
     InvalidTag,
+    /// Der Geheimtext ist nicht gültig Base64-kodiert.
     InvalidCiphertextBase64,
+    /// Die AEAD-Bibliothek konnte die Daten nicht verschlüsseln.
     EncryptionFailed,
+    /// Das Bibliotheksergebnis enthält weniger Bytes als der erwartete Tag.
     IncompleteEncryptionResult,
+    /// Schlüssel, Nonce, Ciphertext oder Tag bestehen die Authentifizierung nicht.
     AuthenticationFailed,
+    /// Der erfolgreich entschlüsselte Bytepuffer ist kein gültiges UTF-8.
     InvalidUtf8,
 }
 
+/// Einheitlicher Ergebnistyp der Kryptographie-Fachlogik.
 pub type CryptoResult<T> = Result<T, CryptoError>;
 
 impl fmt::Display for CryptoError {

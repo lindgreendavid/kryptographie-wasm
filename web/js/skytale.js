@@ -1,10 +1,16 @@
 import init, { skytale_decrypt, skytale_encrypt, skytale_table } from "../pkg/krypto_wasm.js";
-import { element, setText, showMessage, value } from "./dom.js";
+import { element, setDisabled, setText, setValue, showMessage, value } from "./dom.js";
 
 function columns() {
     return Number.parseInt(value("skytale-columns"), 10);
 }
 
+/**
+ * Rendert die aus Rust gelieferte Skytale-Matrix.
+
+ * @param {Array<Array<string | null>>} rows - Zeilen und optionale Leerzellen.
+ * @returns {void}
+ */
 function renderTable(rows) {
     const target = element("skytale-table");
     target.innerHTML = "";
@@ -27,8 +33,17 @@ function renderTable(rows) {
     target.appendChild(table);
 }
 
+/**
+ * Berechnet und aktualisiert die didaktische Tabellenansicht.
+
+ * @param {string} input - Darzustellender Klartext.
+ * @returns {void}
+ */
 function updateTable(input) {
-    renderTable(JSON.parse(skytale_table(input, columns())));
+    const rows = /** @type {Array<Array<string | null>>} */ (
+        JSON.parse(skytale_table(input, columns()))
+    );
+    renderTable(rows);
 }
 
 async function start() {
@@ -39,7 +54,7 @@ async function start() {
         try {
             const result = skytale_encrypt(value("skytale-plain"), columns());
             setText("skytale-cipher-output", result);
-            element("skytale-cipher").value = result;
+            setValue("skytale-cipher", result);
             updateTable(value("skytale-plain"));
             showMessage("skytale-message", "");
         } catch (error) {
@@ -57,6 +72,12 @@ async function start() {
             showMessage("skytale-message", String(error));
         }
     });
+
+    setDisabled("skytale-encrypt", false);
+    setDisabled("skytale-decrypt", false);
+    showMessage("skytale-message", "");
 }
 
-start().catch((error) => showMessage("skytale-message", `WASM konnte nicht geladen werden: ${error}`));
+start().catch((error) =>
+    showMessage("skytale-message", `WASM konnte nicht geladen werden: ${error}`),
+);

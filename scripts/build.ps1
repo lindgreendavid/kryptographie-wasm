@@ -3,9 +3,19 @@ $ErrorActionPreference = "Stop"
 $ProjectRoot = Split-Path -Parent $PSScriptRoot
 Set-Location $ProjectRoot
 
-cargo fmt --check
-cargo clippy --all-targets --all-features -- -D warnings
-cargo test --locked
-wasm-pack build --target web --out-dir web/pkg
+npm run test:rust
+if ($LASTEXITCODE -ne 0) {
+    throw "Rust-Qualitätsprüfung fehlgeschlagen."
+}
+
+npm run build
+if ($LASTEXITCODE -ne 0) {
+    throw "WebAssembly-Build fehlgeschlagen."
+}
+
+npm run verify:web
+if ($LASTEXITCODE -ne 0) {
+    throw "Statische Webprüfung fehlgeschlagen."
+}
 
 Write-Host "Build erfolgreich. Die Website liegt im Ordner web/."

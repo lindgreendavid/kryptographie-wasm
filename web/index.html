@@ -1,75 +1,83 @@
 <!doctype html>
 <html lang="de">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kryptographie</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <a class="skip-link" href="#hauptinhalt">Direkt zum Inhalt</a>
-    <div class="site">
-        <nav class="topnav" aria-label="Hauptnavigation">
-            <a href="index.html">Startseite</a>
-            <a href="caesar.html">Caesar</a>
-            <a href="skytale.html">Skytale</a>
-            <a href="substitution.html">Substitution</a>
-            <a href="aes.html">AES</a>
-            <a href="chacha.html">ChaCha20</a>
-        </nav>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="Interaktive Kryptographie-Lernanwendung mit Caesar, Skytale, Substitution, AES-GCM und ChaCha20-Poly1305 in Rust und WebAssembly."
+        />
+        <title>Kryptographie</title>
+        <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <a class="skip-link" href="#hauptinhalt">Direkt zum Inhalt</a>
+        <div class="site">
+            <nav class="topnav" aria-label="Hauptnavigation">
+                <a href="index.html">Startseite</a>
+                <a href="caesar.html">Caesar</a>
+                <a href="skytale.html">Skytale</a>
+                <a href="substitution.html">Substitution</a>
+                <a href="aes.html">AES</a>
+                <a href="chacha.html">ChaCha20</a>
+            </nav>
 
-        <main id="hauptinhalt">
-            <h1 class="main-title">Kryptographie</h1>
-            <p class="page-intro">
-                Fünf Verfahren, ein gemeinsames Ziel: sichtbar machen, wie aus lesbarem Text ein Geheimtext wird.
-            </p>
-
-            <p id="server-warning" class="server-warning hidden">
-                Diese Seite verwendet WebAssembly. Bitte starte sie über den lokalen Server, zum Beispiel mit scripts/start.ps1.
-            </p>
-
-            <section class="landing-grid" aria-label="Historische Verfahren">
-                <a class="method-box" href="caesar.html">
-                    <span class="method-name">Caesar</span>
-                    <span class="method-era">Antik</span>
-                </a>
-                <a class="method-box" href="skytale.html">
-                    <span class="method-name">Skytale</span>
-                    <span class="method-era">Antik</span>
-                </a>
-                <a class="method-box" href="substitution.html">
-                    <span class="method-name">Substitution</span>
-                    <span class="method-era">Antik</span>
-                </a>
-            </section>
-
-            <section class="modern-grid" aria-label="Moderne Verfahren">
-                <a class="method-box" href="aes.html">
-                    <span class="method-name">AES</span>
-                    <span class="method-era">Modern</span>
-                </a>
-                <a class="method-box" href="chacha.html">
-                    <span class="method-name">ChaCha20</span>
-                    <span class="method-era">Modern</span>
-                </a>
-            </section>
-
-            <section class="classic-panel">
-                <h2>Grundbegriffe</h2>
-                <p>
-                    Kryptographie beschäftigt sich mit Verfahren, die Informationen vor unbefugtem Lesen schützen.
-                    Bei der Verschlüsselung wird normaler Text mit einem Schlüssel in Geheimtext umgewandelt.
-                    Bei der Entschlüsselung wird dieser Geheimtext mit dem passenden Verfahren wieder lesbar gemacht.
+            <main id="hauptinhalt" tabindex="-1">
+                <h1 class="main-title">Kryptographie</h1>
+                <p class="page-intro">
+                    Fünf Verfahren, ein gemeinsames Ziel: sichtbar machen, wie aus lesbarem Text ein
+                    Geheimtext wird.
                 </p>
-                <p>
-                    Dieses Projekt zeigt drei historische Verfahren sowie AES-GCM und ChaCha20-Poly1305 als moderne
-                    authentifizierte Verfahren. Die historischen Verfahren sind didaktisch gut nachvollziehbar,
-                    aber heute nicht mehr sicher.
+
+                <p id="server-warning" class="server-warning hidden">
+                    Diese Seite verwendet WebAssembly. Bitte starte sie über den lokalen Server, zum
+                    Beispiel mit scripts/start.ps1.
                 </p>
-            </section>
-        </main>
-    </div>
-    <script type="module" src="js/theme.js"></script>
-    <script type="module" src="js/main.js"></script>
-</body>
+
+                <section class="landing-grid" aria-label="Historische Verfahren">
+                    <a class="method-box" href="caesar.html">
+                        <span class="method-name">Caesar</span>
+                        <span class="method-era">Antik</span>
+                    </a>
+                    <a class="method-box" href="skytale.html">
+                        <span class="method-name">Skytale</span>
+                        <span class="method-era">Antik</span>
+                    </a>
+                    <a class="method-box" href="substitution.html">
+                        <span class="method-name">Substitution</span>
+                        <span class="method-era">Antik</span>
+                    </a>
+                </section>
+
+                <section class="modern-grid" aria-label="Moderne Verfahren">
+                    <a class="method-box" href="aes.html">
+                        <span class="method-name">AES</span>
+                        <span class="method-era">Modern</span>
+                    </a>
+                    <a class="method-box" href="chacha.html">
+                        <span class="method-name">ChaCha20</span>
+                        <span class="method-era">Modern</span>
+                    </a>
+                </section>
+
+                <section class="classic-panel">
+                    <h2>Grundbegriffe</h2>
+                    <p>
+                        Kryptographie beschäftigt sich mit Verfahren, die Informationen vor
+                        unbefugtem Lesen schützen. Bei der Verschlüsselung wird normaler Text mit
+                        einem Schlüssel in Geheimtext umgewandelt. Bei der Entschlüsselung wird
+                        dieser Geheimtext mit dem passenden Verfahren wieder lesbar gemacht.
+                    </p>
+                    <p>
+                        Dieses Projekt zeigt drei historische Verfahren sowie AES-GCM und
+                        ChaCha20-Poly1305 als moderne authentifizierte Verfahren. Die historischen
+                        Verfahren sind didaktisch gut nachvollziehbar, aber heute nicht mehr sicher.
+                    </p>
+                </section>
+            </main>
+        </div>
+        <script type="module" src="js/theme.js"></script>
+        <script type="module" src="js/main.js"></script>
+    </body>
 </html>

@@ -4,6 +4,7 @@
 //! ausschließlich zwischen Rust-Typen und der JavaScript-Oberfläche.
 
 #![forbid(unsafe_code)]
+#![deny(missing_docs)]
 
 pub mod crypto;
 
@@ -24,16 +25,19 @@ pub struct WasmAeadResult {
 
 #[wasm_bindgen]
 impl WasmAeadResult {
+    /// Liefert den Base64-kodierten Geheimtext ohne den getrennten Tag.
     #[wasm_bindgen(getter)]
     pub fn ciphertext(&self) -> String {
         self.ciphertext.clone()
     }
 
+    /// Liefert die zufällig erzeugte 96-Bit-Nonce als Base64.
     #[wasm_bindgen(getter)]
     pub fn nonce(&self) -> String {
         self.nonce.clone()
     }
 
+    /// Liefert den 128-Bit-Authentifizierungstag als Base64.
     #[wasm_bindgen(getter)]
     pub fn tag(&self) -> String {
         self.tag.clone()

@@ -1,60 +1,86 @@
 # Teststrategie
 
-## Ziel
+## Ziel und Testpyramide
 
-Die Prüfungen decken vier Ebenen ab: fachliche Korrektheit der Rust-Logik, Übereinstimmung mit offiziellen Testvektoren, Integrität des Browser-Builds und Qualität der realen Browseroberfläche.
+Die Qualität wird auf der jeweils günstigsten wirksamen Ebene geprüft:
 
-## Automatisierte Testmatrix
+1. **Rust-Unit- und Integrationstests** belegen Fachregeln, Fehlerdomäne und offizielle Vektoren.
+2. **WASM-API-Tests** prüfen die öffentlich exportierte Form und typisierte AEAD-Ergebnisse.
+3. **statische Webprüfungen** erkennen kaputte Verweise, doppelte IDs, Label-Fehler und Syntax-/Typfehler.
+4. **Playwright** prüft reale Browserflows über HTML, JavaScript, generierte Bindings und WASM.
+5. **axe und Lighthouse** messen automatisierbare Barrierefreiheit und Webqualität.
 
-| Bereich | Positivfall | Negativ- und Grenzfälle |
-| --- | --- | --- |
-| Caesar | bekanntes Beispiel und Roundtrip | Schlüssel 0 und 26 |
-| Skytale | bekanntes Beispiel und Roundtrips mit Restzeilen | Spaltenzahl außerhalb 2–30 |
-| Substitution | gültiges Beispiel- und Zufallsalphabet, Roundtrip | falsche Länge und doppelte Buchstaben |
-| AES-256-GCM | UTF-8-Roundtrip, Schlüssel-/Nonce-/Taggrößen | falscher Schlüssel, ungültige Nonce, veränderter Geheimtext, Nonce und Tag |
-| ChaCha20-Poly1305 | UTF-8-Roundtrip, Schlüssel-/Nonce-/Taggrößen | falscher Schlüssel, ungültige Nonce, veränderter Geheimtext, Nonce und Tag |
-| HTML | sechs Seiten, Sprache, Titel, H1, `main`, eindeutige IDs und gültige lokale Verweise | fehlende Ziele, doppelte IDs und veraltete Verfahrenszahl |
-| Formulare | ID und zugeordnetes Label für jedes Ein-/Ausgabefeld | Label ohne Ziel oder Ziel ohne Label |
-| JavaScript | Syntaxprüfung aller Module mit Node.js | Syntaxfehler beendet den Prüfpfad |
-| Known-Answer | AES-256-GCM nach NIST und ChaCha20-Poly1305 nach RFC 8439 | Abweichende Bytes oder Tags beenden den Test |
-| Browser | Caesar-Rundlauf und AES-GCM-Manipulation über WASM und DOM | bei ungültigem Tag bleibt die Klartextausgabe leer |
-| Barrierefreiheit | axe-core auf allen sechs Seiten | automatisierbare WCAG-A/AA-Verstöße |
+Mocks werden für Kernflows bewusst nicht verwendet.
 
-Die Manipulationstests ändern ein Byte und kodieren anschließend wieder gültiges Base64. Damit wird tatsächlich die AEAD-Authentifizierung geprüft und nicht lediglich ein Fehler des Base64-Decoders ausgelöst.
+## Rust-Testmatrix
 
-## Vollständiger Prüfpfad
+| Bereich           | Positivfälle                                | Grenz- und Negativfälle                                          |
+| ----------------- | ------------------------------------------- | ---------------------------------------------------------------- |
+| Caesar            | bekanntes Beispiel und Roundtrip            | 0/26, leer, Whitespace, Unicode, Emoji, mehrzeilig               |
+| Skytale           | Roundtrips, Restzeilen und Matrix           | Spalten außerhalb 2–30, kurz, leer, Unicode                      |
+| Substitution      | Beispiel-/Zufallsalphabet, Roundtrip        | Länge, Nicht-A–Z, Dopplung, fehlender Buchstabe                  |
+| AES-256-GCM       | UTF-8-Roundtrips und NIST-Vektor            | Base64, Größen, falscher Schlüssel, Cipher/Nonce/Tag manipuliert |
+| ChaCha20-Poly1305 | UTF-8-Roundtrips und RFC-8439-Vektor        | Base64, Größen, falscher Schlüssel, Cipher/Nonce/Tag manipuliert |
+| Fehlerdomäne      | jede Variante besitzt verständliche Meldung | unvollständiges AEAD-Ergebnis und UTF-8-Fehler                   |
+| WASM-API          | alle klassischen und modernen Exports       | typisierte Felder und Fehlerübersetzung                          |
+
+Ergebnis: **27/27 Rust-Tests bestanden**. Die Coverage beträgt **95,99 % Regions**,
+**97,62 % Functions** und **98,82 % Lines**. Die CI-Schranke liegt bei 85 % Lines.
+
+## Browser- und Accessibility-Matrix
+
+Die 18 Playwright-Tests prüfen:
+
+- Roundtrips aller fünf Verfahren mit Unicode und Mehrzeilentext;
+- manipulierte Tags bei AES-GCM und ChaCha20-Poly1305;
+- verständliche Skytale-/Substitutionsfehler;
+- Theme-Persistenz;
+- Navigation, aktiven Link, Sprunglink und Tastaturfokus;
+- alle sechs Seiten bei 390 Pixeln ohne horizontalen Dokument-Overflow;
+- alle Seiten ohne Browser-Console-Fehler;
+- axe WCAG A/AA auf sechs Seiten in Hell, Dunkel und Cyber.
+
+Playwright speichert bei Fehlern Screenshot und Video; im CI-Retry zusätzlich einen Trace. Zwei
+Worker vermeiden Ressourcenflakiness auf Windows ARM. Es gibt keine festen Sleeps.
+
+## Statische und visuelle Gates
+
+| Gate                 | Befehl                                                     | Ziel                                                    |
+| -------------------- | ---------------------------------------------------------- | ------------------------------------------------------- |
+| HTML/Verweise/Labels | `npm run verify:web`                                       | sechs vollständige Seiten und gültige lokale Referenzen |
+| Format               | `npm run format:check`                                     | einheitlicher JS/CSS/HTML/Markdown/YAML-Stil            |
+| JS/JSDoc             | `npm run lint`                                             | ESLint ohne Fehler                                      |
+| Typen                | `npm run typecheck`                                        | TypeScript strict checkJs ohne Fehler                   |
+| Rustformat           | `cargo fmt --check`                                        | kanonischer Rust-Stil                                   |
+| Rustlint             | `cargo clippy --all-targets --all-features -- -D warnings` | keine Clippy-Warnungen                                  |
+| API-Doku             | `cargo rustdoc --lib --locked -- -D missing-docs`          | öffentliche API vollständig dokumentiert                |
+| Lighthouse           | `npm run lighthouse`                                       | Desktop P/A/BP/SEO ≥ 90, Accessibility 100              |
+
+Lighthouse erreichte auf Startseite und AES **100/100/100/100**. Die Messbedingung ist das
+Lighthouse-Desktopprofil auf dem lokalen Release-Build.
+
+## Reproduktion
 
 ```bash
-./scripts/test.sh
-```
-
-Der Skriptpfad entspricht den wesentlichen Schritten in GitHub Actions:
-
-```bash
-cargo fmt --check
-cargo clippy --all-targets --all-features -- -D warnings
-cargo test --locked
-wasm-pack build --target web --out-dir web/pkg
-python3 scripts/verify_web.py
-find web/js -name '*.js' -type f -print0 | xargs -0 -n1 node --check
 npm ci
 npx playwright install chromium
-npm run test:e2e
+npm run test:all
 ```
 
-Unter Windows stellt `scripts/test.ps1` denselben Prüfpfad bereit.
+Einzelberichte:
 
-## Manuelle Abnahme
+```bash
+npm run coverage:rust
+npm run coverage:rust:lcov
+npm run test:e2e
+npm run lighthouse
+```
 
-Nach dem Build wird `web/` über `scripts/start.sh` oder `scripts/start.ps1` geöffnet. Manuell geprüft werden:
-
-1. Navigation mit Maus und Tastatur;
-2. Sprunglink und sichtbarer Fokus;
-3. je ein Hin- und Rückweg pro Verfahren;
-4. Fehlermeldung nach Veränderung eines AEAD-Tags;
-5. Hell-, Dunkel- und Cyber-Ansicht;
-6. grobe Darstellung bei Desktop- und Mobilbreite.
+Unter Windows führt `scripts/test.ps1`, unter Linux/macOS `scripts/test.sh` denselben Pfad aus.
 
 ## Grenzen
 
-Die Tests beweisen die korrekte Einbindung im definierten Projektumfang, nicht die generelle Sicherheit eines produktiven Kryptosystems. Axe kann nur einen Teil der WCAG-Regeln automatisieren. Nicht automatisiert sind vollständige Screenreader-, Cross-Browser- und visuelle Regressionstests.
+Coverage beweist ausgeführte Zeilen, nicht kryptographische Sicherheit. Axe deckt nur
+automatisierbare WCAG-Regeln ab. Nicht automatisiert sind ein vollständiger Screenreader-Test,
+Firefox/WebKit und pixelgenaue visuelle Regression. Diese Punkte sind für den eng begrenzten
+Lehrumfang bewusst als manuelle bzw. spätere Erweiterung dokumentiert.

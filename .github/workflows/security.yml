@@ -1,24 +1,24 @@
 name: Sicherheitsprüfung
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-  schedule:
-    - cron: "17 4 * * 1"
-  workflow_dispatch:
+    push:
+        branches: [main]
+    pull_request:
+    schedule:
+        - cron: "17 4 * * 1"
+    workflow_dispatch:
 
 permissions:
-  contents: read
+    contents: read
 
 jobs:
-  rustsec:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Repository auschecken
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+    rustsec:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Repository auschecken
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
-      - name: RustSec-Datenbank gegen Cargo.lock prüfen
-        uses: rustsec/audit-check@69366f33c96575abad1ee0dba8212993eecbe998 # v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+            - name: RustSec-Datenbank gegen Cargo.lock prüfen
+              uses: rustsec/audit-check@69366f33c96575abad1ee0dba8212993eecbe998 # v2
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}

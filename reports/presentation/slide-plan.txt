@@ -1,0 +1,14 @@
+Ziel: Prüfungsvortrag in 7 Minuten, 16:9, 9 Folien, ca. 45 Sekunden je Inhaltsfolie.
+
+1. Titel – Kryptographie im Browser, Rust + WebAssembly, Team und Version.
+2. Problem und Umfang – fünf Verfahren, historische Lernmodelle vs. moderne AEAD-Verfahren.
+3. Architektur – Benutzer → HTML/CSS → JavaScript → WASM → Rust/RustCrypto; klare Verantwortungen.
+4. Live-Demo I – Startseite, Caesar als kurzer historischer Roundtrip, dann Wechsel zu AES.
+5. Live-Demo II – AES-GCM: Schlüssel, Nonce, Tag, Roundtrip und Manipulationsnachweis.
+6. Rust-/WASM-Design – typisierte Grenzen, strukturierte Fehler, 16 Exports, kein unsafe.
+7. Qualität – 27 Rust-Tests, 18 Browser-/WCAG-Tests, 98,82 % Lines, Lighthouse 100.
+8. Prozess und Grenzen – Specs, Gates, kontrollierte KI-Nutzung, transparente Nicht-Ziele.
+9. Fazit – eine Fachlogik, kleine WASM-Grenze, messbare Qualität; Fragerunde.
+
+Gestaltung: dunkles Navy, Cyan als Primärakzent, Fuchsia als Sekundärakzent, große Typografie,
+wenig Text, editierbare Diagramme und zwei reale Screenshots aus der lokal geprüften Anwendung.

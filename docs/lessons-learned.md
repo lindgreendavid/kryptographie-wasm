@@ -6,4 +6,3 @@
 - AES-GCM zeigt, dass moderne Verschlüsselung nicht nur Geheimhaltung, sondern auch Authentifizierung liefern muss.
 - ChaCha20-Poly1305 zeigt, dass moderne authentifizierte Verschlüsselung nicht nur auf AES basiert.
 - Eine einfache Architektur ist für ein Prüfungsprojekt leichter erklärbar als ein modernes Frontend-Framework.
-

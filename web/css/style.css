@@ -5,7 +5,13 @@
 body {
     margin: 0;
     background:
-        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.025), rgba(0, 0, 0, 0.025) 1px, transparent 1px, transparent 22px),
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.025),
+            rgba(0, 0, 0, 0.025) 1px,
+            transparent 1px,
+            transparent 22px
+        ),
         #f4f4f4;
     color: #222;
     font-family: Arial, Verdana, Tahoma, sans-serif;
@@ -15,15 +21,33 @@ body {
 
 body.dark-mode {
     background:
-        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.025) 1px, transparent 1px, transparent 22px),
+        repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.025),
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px,
+            transparent 22px
+        ),
         #1b1b1b;
     color: #e8e8e8;
 }
 
 body.cyber-mode {
     background:
-        repeating-linear-gradient(90deg, rgba(255, 23, 79, 0.12), rgba(255, 23, 79, 0.12) 1px, transparent 1px, transparent 34px),
-        repeating-linear-gradient(0deg, rgba(123, 44, 255, 0.12), rgba(123, 44, 255, 0.12) 1px, transparent 1px, transparent 34px),
+        repeating-linear-gradient(
+            90deg,
+            rgba(255, 23, 79, 0.12),
+            rgba(255, 23, 79, 0.12) 1px,
+            transparent 1px,
+            transparent 34px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(123, 44, 255, 0.12),
+            rgba(123, 44, 255, 0.12) 1px,
+            transparent 1px,
+            transparent 34px
+        ),
         #050008;
     color: #f7eaff;
 }
@@ -222,7 +246,9 @@ body.cyber-mode .theme-button.active {
 body.cyber-mode .main-title,
 body.cyber-mode .procedure-title {
     color: #ffffff;
-    text-shadow: 2px 2px 0 #ff174f, -2px -2px 0 #7b2cff;
+    text-shadow:
+        2px 2px 0 #ff174f,
+        -2px -2px 0 #7b2cff;
 }
 
 .main-title {
@@ -271,7 +297,9 @@ body.cyber-mode .page-intro {
     text-align: center;
     text-decoration: none;
     padding: 28px 12px;
-    transition: transform 120ms ease, background-color 120ms ease;
+    transition:
+        transform 120ms ease,
+        background-color 120ms ease;
 }
 
 .method-box::after {
@@ -576,20 +604,25 @@ body.cyber-mode button {
     color: #ffffff;
 }
 
-button:hover,
-button:focus {
+button:disabled {
+    cursor: wait;
+    opacity: 0.62;
+}
+
+button:not(:disabled):hover,
+button:not(:disabled):focus {
     background: #eaeaea;
     outline: 2px solid #555;
 }
 
-body.dark-mode button:hover,
-body.dark-mode button:focus {
+body.dark-mode button:not(:disabled):hover,
+body.dark-mode button:not(:disabled):focus {
     background: #3a3a3a;
     outline-color: #dddddd;
 }
 
-body.cyber-mode button:hover,
-body.cyber-mode button:focus {
+body.cyber-mode button:not(:disabled):hover,
+body.cyber-mode button:not(:disabled):focus {
     background: #5a0f89;
     outline-color: #ff5c8a;
 }

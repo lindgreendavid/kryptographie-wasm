@@ -13,13 +13,13 @@ Die Entscheidung lautet deshalb: **Die gesamte Kryptographielogik wird in Rust i
 
 ## 2. Was „Rust als Sprache der Wahl“ konkret bedeutet
 
-| Verantwortung | Rust | JavaScript | HTML/CSS |
-| --- | ---: | ---: | ---: |
-| Caesar, Skytale und Substitution | 100 % | 0 % | 0 % |
-| AES-256-GCM und ChaCha20-Poly1305 | 100 % | 0 % | 0 % |
-| Schlüssel-, Nonce- und Tagvalidierung | 100 % | 0 % | 0 % |
-| strukturiertes Fehlermodell | 100 % | 0 % | 0 % |
-| DOM-Ereignisse und Ergebnisanzeige | 0 % | 100 % | Struktur und Gestaltung |
+| Verantwortung                         |  Rust | JavaScript |                HTML/CSS |
+| ------------------------------------- | ----: | ---------: | ----------------------: |
+| Caesar, Skytale und Substitution      | 100 % |        0 % |                     0 % |
+| AES-256-GCM und ChaCha20-Poly1305     | 100 % |        0 % |                     0 % |
+| Schlüssel-, Nonce- und Tagvalidierung | 100 % |        0 % |                     0 % |
+| strukturiertes Fehlermodell           | 100 % |        0 % |                     0 % |
+| DOM-Ereignisse und Ergebnisanzeige    |   0 % |      100 % | Struktur und Gestaltung |
 
 „Nur Rust“ wäre für eine normale Browseroberfläche technisch irreführend: Der Browser benötigt HTML, CSS und eine kleine JavaScript-Brücke. Entscheidend ist die Architekturgrenze. Sicherheits- und verfahrensrelevante Regeln liegen ausschließlich in Rust; JavaScript darf diese Regeln weder duplizieren noch umgehen.
 
@@ -27,32 +27,32 @@ Die Entscheidung lautet deshalb: **Die gesamte Kryptographielogik wird in Rust i
 
 Stand der Messung ist Version 1.2.0. Die Werte werden mit `python3 scripts/measure_project.py` reproduziert. Für die Artefaktgrößen muss zuvor der Release-Build erzeugt worden sein.
 
-| Kennzahl | Messwert | Bedeutung |
-| --- | ---: | --- |
-| Rust-Dateien unter `src/` | 10 | klar getrennte Domänen-, AEAD- und WASM-Module |
-| Rust-Zeilen unter `src/` | 884 | Fachlogik und modulnahe Tests |
-| Rust-Integrationstestzeilen | 211 | öffentliche API aus Sicht eines Verbrauchers geprüft |
-| Rust-Zeilen insgesamt | 1.095 | rund doppelt so viel wie JavaScript einschließlich E2E-Tests |
-| JavaScript-Zeilen unter `web/js/` | 443 | Browserintegration, Ansicht und DOM-Anbindung |
-| JavaScript-E2E-Testzeilen | 47 | Playwright- und WCAG-Prüfungen |
-| Rust-Tests | 15 | Beispiele, Roundtrips, Grenzen, Manipulation und Testvektoren |
-| Browser- und WCAG-Tests | 8 | vollständiger Weg über WASM, JavaScript und DOM |
-| exportierte WASM-Funktionen | 16 | kleine, kontrollierte Browser-API |
-| `unsafe`-Blöcke im eigenen Rust-Code | **0** | zusätzlich durch `#![forbid(unsafe_code)]` erzwungen |
-| in JavaScript implementierte Kryptoverfahren | **0 von 5** | eine einzige fachliche Quelle statt Doppelimplementierung |
-| Backendprozesse | **0** | Verschlüsselung läuft vollständig lokal im Browser |
-| Netzwerkanfragen je Kryptographieoperation | **0** | Klartext und Schlüssel werden nicht an einen Server gesendet |
-| direkte Rust-Abhängigkeiten | 7 | bewusst kleiner, über `Cargo.lock` fixierter Umfang |
+| Kennzahl                                     |    Messwert | Bedeutung                                                     |
+| -------------------------------------------- | ----------: | ------------------------------------------------------------- |
+| Rust-Dateien unter `src/`                    |          10 | klar getrennte Domänen-, AEAD- und WASM-Module                |
+| Rust-Zeilen unter `src/`                     |         937 | Fachlogik und modulnahe Tests                                 |
+| Rust-Integrationstestzeilen                  |         468 | öffentliche API aus Sicht eines Verbrauchers geprüft          |
+| Rust-Zeilen insgesamt                        |       1.405 | Fachlogik, modulnahe Tests und Integrationsnachweise          |
+| JavaScript-Zeilen unter `web/js/`            |         589 | Browserintegration, Ansicht und DOM-Anbindung                 |
+| JavaScript-E2E-Testzeilen                    |         170 | Playwright- und WCAG-Prüfungen                                |
+| Rust-Tests                                   |          27 | Beispiele, Roundtrips, Grenzen, Manipulation und Testvektoren |
+| Browser- und WCAG-Tests                      |          18 | vollständiger Weg über WASM, JavaScript und DOM               |
+| exportierte WASM-Funktionen                  |          16 | kleine, kontrollierte Browser-API                             |
+| `unsafe`-Blöcke im eigenen Rust-Code         |       **0** | zusätzlich durch `#![forbid(unsafe_code)]` erzwungen          |
+| in JavaScript implementierte Kryptoverfahren | **0 von 5** | eine einzige fachliche Quelle statt Doppelimplementierung     |
+| Backendprozesse                              |       **0** | Verschlüsselung läuft vollständig lokal im Browser            |
+| Netzwerkanfragen je Kryptographieoperation   |       **0** | Klartext und Schlüssel werden nicht an einen Server gesendet  |
+| direkte Rust-Abhängigkeiten                  |           7 | bewusst kleiner, über `Cargo.lock` fixierter Umfang           |
 
 Das veröffentlichte Release-Artefakt wurde zusätzlich bytegenau gemessen:
 
-| Browserartefakt | Rohgröße | deterministisch gzip-komprimiert |
-| --- | ---: | ---: |
-| `krypto_wasm_bg.wasm` | 87.957 Byte | 35.606 Byte |
-| erzeugte JavaScript-Bindings | 26.339 Byte | 4.490 Byte |
-| Summe | 114.296 Byte | 40.096 Byte |
+| Browserartefakt              |     Rohgröße | deterministisch gzip-komprimiert |
+| ---------------------------- | -----------: | -------------------------------: |
+| `krypto_wasm_bg.wasm`        |  87.993 Byte |                      35.663 Byte |
+| erzeugte JavaScript-Bindings |  26.535 Byte |                       4.583 Byte |
+| Summe                        | 114.528 Byte |                      40.246 Byte |
 
-Die komprimierte Rust-/WASM-Laufzeit einschließlich Bindings bleibt damit bei rund **39,2 KiB**. Diese Messung belegt die konkrete Größe dieses Projekts; sie ist kein pauschaler Geschwindigkeitsvergleich mit anderen Sprachen.
+Die komprimierte Rust-/WASM-Laufzeit einschließlich Bindings bleibt damit bei rund **39,3 KiB**. Diese Messung belegt die konkrete Größe dieses Projekts; sie ist kein pauschaler Geschwindigkeitsvergleich mit anderen Sprachen.
 
 ## 4. Quantitative Nutzwertanalyse
 
@@ -62,23 +62,20 @@ Um die Sprachwahl prüfbar zu machen, werden sechs projektspezifische Kriterien 
 \text{Gesamtwert} = \sum \left(\frac{\text{Bewertung}}{5} \times \text{Gewicht}\right)
 \]
 
-| Kriterium | Gewicht | Rust | TypeScript | C++ | Python |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Speicher- und Typsicherheit | 25 % | 5 | 3 | 1 | 3 |
-| Eignung für WebAssembly und statisches Hosting | 20 % | 5 | 2 | 4 | 2 |
-| Abdeckung beider moderner Verfahren | 20 % | 5 | 3 | 4 | 4 |
-| vorhersehbare Laufzeiteigenschaften | 15 % | 5 | 3 | 5 | 1 |
-| Domänenmodellierung und Testbarkeit | 10 % | 5 | 4 | 3 | 3 |
-| reproduzierbares Standardwerkzeug | 10 % | 5 | 4 | 3 | 3 |
-| **Gewichteter Gesamtwert** | **100 %** | **100** | **60** | **64** | **54** |
+| Kriterium                                      |   Gewicht |   Rust | TypeScript |    C++ | Python |
+| ---------------------------------------------- | --------: | -----: | ---------: | -----: | -----: |
+| Speicher- und Typsicherheit                    |      25 % |      5 |          4 |      2 |      4 |
+| Eignung für WebAssembly und statisches Hosting |      20 % |      5 |          1 |      5 |      1 |
+| Abdeckung beider moderner Verfahren            |      20 % |      4 |          3 |      4 |      4 |
+| vorhersehbare Laufzeiteigenschaften            |      15 % |      4 |          4 |      5 |      2 |
+| Domänenmodellierung und Testbarkeit            |      10 % |      5 |          5 |      3 |      4 |
+| reproduzierbares Standardwerkzeug              |      10 % |      5 |          5 |      3 |      4 |
+| **Gewichteter Gesamtwert**                     | **100 %** | **93** |     **68** | **73** | **62** |
 
-In dieser projektbezogenen Analyse liegt Rust:
-
-- **36 Prozentpunkte** vor C++, der zweitplatzierten Alternative;
-- **40 Prozentpunkte** vor TypeScript;
-- **46 Prozentpunkte** vor Python.
-
-Relativ zum jeweiligen Ausgangswert entspricht das einem höheren Nutzwert von 56,3 % gegenüber C++, 66,7 % gegenüber TypeScript und 85,2 % gegenüber Python. Diese Prozentwerte sind Ergebnisse der offengelegten Entscheidungsmatrix und ausdrücklich **keine allgemeinen Laufzeitbenchmarks**.
+In dieser projektbezogenen Analyse liegt Rust 20 Punkte vor C++, 25 vor TypeScript und 31 vor
+Python. Die Matrix macht den Projektfokus sichtbar, bleibt aber eine begründete Entscheidungshilfe
+und ausdrücklich **kein allgemeiner Sprachbenchmark**. Dass Rust nicht künstlich 100 Punkte erhält,
+bildet reale Kosten wie Lernkurve, Buildkomplexität und WASM-Grenze ab.
 
 ## 5. Begründung der Bewertungen
 
@@ -123,11 +120,11 @@ Diese Werte stammen aus Android und werden nicht als Messwerte dieses Hochschulp
 
 ## 7. Warum die Alternativen nicht gewählt wurden
 
-| Alternative | Stärke | Ausschlaggebender Nachteil im Projekt |
-| --- | --- | --- |
-| TypeScript/JavaScript | direkte Browserausführung und einfache DOM-Anbindung | keine standardisierte ChaCha20-Poly1305-Abdeckung; Fachlogik wäre nicht als Rust/WASM-Schicht isoliert |
-| C++/Emscripten | sehr hohe Leistung und WebAssembly-Unterstützung | geringere standardmäßige Speichersicherheit und komplexerer sicherer Integrationsaufwand |
-| Python/Pyodide | gut lesbar und großes Bibliotheksangebot | zusätzliche Browserlaufzeit, größerer Auslieferungsumfang und geringere Eignung für byteorientierte Kernlogik |
+| Alternative           | Stärke                                               | Ausschlaggebender Nachteil im Projekt                                                                         |
+| --------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| TypeScript/JavaScript | direkte Browserausführung und einfache DOM-Anbindung | keine standardisierte ChaCha20-Poly1305-Abdeckung; Fachlogik wäre nicht als Rust/WASM-Schicht isoliert        |
+| C++/Emscripten        | sehr hohe Leistung und WebAssembly-Unterstützung     | geringere standardmäßige Speichersicherheit und komplexerer sicherer Integrationsaufwand                      |
+| Python/Pyodide        | gut lesbar und großes Bibliotheksangebot             | zusätzliche Browserlaufzeit, größerer Auslieferungsumfang und geringere Eignung für byteorientierte Kernlogik |
 
 Die Alternativen sind nicht grundsätzlich schlechte Sprachen. Sie erreichen nur für die konkrete Kombination aus Kryptographie, WebAssembly, statischem Hosting, Typsicherheit und Lehre einen niedrigeren gewichteten Nutzwert.
 
@@ -136,13 +133,17 @@ Die Alternativen sind nicht grundsätzlich schlechte Sprachen. Sie erreichen nur
 - Ownership und Borrowing erzeugen eine höhere anfängliche Lernkurve.
 - Der Build benötigt Rust, das WASM-Target und `wasm-pack`.
 - Jede Browserfunktion braucht eine bewusst gestaltete WASM-Grenze.
-- Der Browser lädt zusätzlich zur Oberfläche rund 39,2 KiB komprimierte WASM-Laufzeit und Bindings.
+- Der Browser lädt zusätzlich zur Oberfläche rund 39,3 KiB komprimierte WASM-Laufzeit und Bindings.
 - Rust verhindert Speicherfehler im sicheren Sprachanteil, aber keine falschen Algorithmen, schwachen Schlüsselkonzepte oder fachlichen Logikfehler.
 
 Diese Kosten sind im Projekt vertretbar, weil Build und Prüfung automatisiert sind, die Grenze nur 16 Exportfunktionen umfasst und die Sicherheits- sowie Lernziele direkt von Rusts Typsystem profitieren.
 
 ## 9. Fazit
 
-Rust gewinnt die offengelegte Nutzwertanalyse mit **100 von 100 Punkten** und mindestens **36 Prozentpunkten Abstand** zur nächsten betrachteten Alternative. Wichtiger als der Punktwert ist der überprüfbare Architekturgewinn: fünf Verfahren besitzen genau eine Fachimplementierung, null davon liegen in JavaScript, alle modernen Eingaben werden durch Rust-Typen validiert, eigener unsicherer Rust-Code ist verboten und die gesamte Anwendung funktioniert ohne Backend.
+Rust gewinnt die offengelegte Nutzwertanalyse mit **93 von 100 Punkten** und **20 Punkten Abstand**
+zur nächsten betrachteten Alternative. Wichtiger als der Punktwert ist der überprüfbare
+Architekturgewinn: fünf Verfahren besitzen genau eine Fachimplementierung, null davon liegen in
+JavaScript, alle modernen Eingaben werden durch Rust-Typen validiert, eigener unsicherer Rust-Code
+ist verboten und die gesamte Anwendung funktioniert ohne Backend.
 
 Damit ist Rust für dieses Projekt die fachlich und technisch begründete Sprache der Wahl – nicht aufgrund eines pauschalen „Rust ist immer schneller“, sondern aufgrund der nachgewiesenen Kombination aus Speichersicherheit, WebAssembly-Eignung, Kryptographie-Ökosystem, Testbarkeit und reproduzierbarer Auslieferung.

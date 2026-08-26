@@ -6,6 +6,8 @@ rust-version = "1.97"
 description = "Didaktische Kryptographie-Webanwendung mit Rust und WebAssembly"
 repository = "https://github.com/lindgreendavid/kryptographie-wasm"
 homepage = "https://lindgreendavid.github.io/kryptographie-wasm/"
+license-file = "LICENSE"
+publish = false
 
 [lib]
 crate-type = ["cdylib", "rlib"]

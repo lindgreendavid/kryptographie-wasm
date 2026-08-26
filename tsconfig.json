@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "checkJs": true,
+        "lib": ["ES2023", "DOM", "DOM.Iterable"],
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "noEmit": true,
+        "noUncheckedIndexedAccess": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "target": "ES2023",
+        "types": ["node"]
+    },
+    "include": [
+        "eslint.config.js",
+        "playwright.config.js",
+        "e2e/**/*.js",
+        "scripts/**/*.mjs",
+        "web/js/**/*.js"
+    ],
+    "exclude": [
+        "node_modules",
+        "web/pkg",
+        "reports",
+        "test-results",
+        "playwright-report",
+        "scripts/generate-presentation.mjs"
+    ]
+}

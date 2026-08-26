@@ -1,19 +1,19 @@
 version: 2
 updates:
-  - package-ecosystem: cargo
-    directory: /
-    schedule:
-      interval: weekly
-    labels: ["abhängigkeiten", "rust"]
+    - package-ecosystem: cargo
+      directory: /
+      schedule:
+          interval: weekly
+      labels: ["abhängigkeiten", "rust"]
 
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: weekly
-    labels: ["abhängigkeiten", "javascript"]
+    - package-ecosystem: npm
+      directory: /
+      schedule:
+          interval: weekly
+      labels: ["abhängigkeiten", "javascript"]
 
-  - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: weekly
-    labels: ["abhängigkeiten", "ci"]
+    - package-ecosystem: github-actions
+      directory: /
+      schedule:
+          interval: weekly
+      labels: ["abhängigkeiten", "ci"]

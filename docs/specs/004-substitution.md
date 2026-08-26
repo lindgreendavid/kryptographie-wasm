@@ -4,6 +4,8 @@
 
 Benutzer können eine einfache monoalphabetische Substitution nutzen.
 
+**IDs:** F-030, F-031, F-060 · **Priorität:** Muss/Soll · **Status:** umgesetzt
+
 ## Benutzeranforderungen
 
 Geheimalphabet eingeben, Beispielalphabet einsetzen, optional zufälliges Alphabet erzeugen.
@@ -26,7 +28,8 @@ Zu kurze Alphabete, doppelte Buchstaben und fehlende Buchstaben werden gemeldet.
 
 ## Tests
 
-Gültige und ungültige Alphabete, Verschlüsselung, Entschlüsselung, Roundtrip.
+Gültige, zufällige und ungültige Alphabete, Unicode/Emoji, Verschlüsselung, Entschlüsselung,
+Roundtrip und verständliche Browserfehler.
 
 ## Akzeptanzkriterien
 
@@ -35,4 +38,3 @@ Ungültige Eingaben führen nicht zu fehlerhaften Ergebnissen.
 ## Definition of Done
 
 Validierung, Verfahren, Tabelle, Buttons und Tests sind vorhanden.
-

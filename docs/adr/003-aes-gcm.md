@@ -15,4 +15,3 @@ Das Projekt verwendet `aes-gcm` aus dem RustCrypto-Ökosystem.
 ## Konsequenzen
 
 Verschlüsselung und Authentifizierung werden über eine etablierte Bibliothek umgesetzt. Schlüssel, Nonce und Tag müssen korrekt behandelt werden.
-

@@ -1,0 +1,26 @@
+Quellen innerhalb des Projekts:
+- docs/projekt-und-architektur.md – Anforderungen, Architektur, Stack, Messwerte, Grenzen.
+- docs/demo-drehbuch.md – siebenminütiger Ablauf und Live-Demo-Akzeptanzkriterien.
+- reports/quality-summary.md – finaler lokaler Qualitätsstand vom 23.08.2026.
+- docs/KI-Nutzung.md – kontrollierte KI-Nutzung und belegte Korrekturbeispiele.
+- docs/anforderungsmatrix.md – Zuordnung von Anforderungen, Code und Tests.
+- reports/presentation/screenshots/startseite.png – lokal aufgenommene Startseite.
+- reports/presentation/screenshots/aes-verschluesselt.png – lokal ausgeführter AES-GCM-Flow.
+
+Messwerte für die Folien:
+- 27/27 Rust-Tests.
+- 18/18 Playwright-/axe-Tests, sechs Seiten in drei Ansichten.
+- Rust-Coverage: 95,99 % Regions, 97,62 % Functions, 98,82 % Lines.
+- Lighthouse Desktop für Startseite und AES: 100/100/100/100.
+- 16 dokumentierte WASM-Exports; eigener Rust-Code ohne unsafe.
+- fünf Verfahren: Caesar, Skytale, Substitution, AES-256-GCM, ChaCha20-Poly1305.
+
+Externe fachliche Grundlagen, im Bericht bereits genannt:
+- NIST-Testvektor für AES-GCM.
+- RFC 8439 für ChaCha20-Poly1305.
+- RustCrypto-Bibliotheken statt selbst entwickelter moderner Primitive.
+
+Transparenz:
+- Das Projekt ist eine Lehranwendung, kein produktives Schlüsselmanagement und kein Sicherheitsaudit.
+- Historische Verfahren sind didaktisch, nicht sicher.
+- Tatsächliche Teamstunden werden nicht erfunden und müssen vom Team ergänzt werden.

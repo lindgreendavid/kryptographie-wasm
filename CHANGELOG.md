@@ -2,6 +2,32 @@
 
 Alle wesentlichen Projektstände werden über fokussierte Commits und direkt verlinkte Versionsmeilensteine nachvollziehbar gemacht.
 
+## Unveröffentlicht – Abgabe-Finalisierung
+
+### Hinzugefügt
+
+- strikte JavaScript-Typprüfung mit TypeScript `checkJs`, ESLint/JSDoc und Prettier
+- Rust-Coverage mit 85-%-Quality-Gate sowie HTML- und LCOV-Berichten
+- 27 Rust-Tests und 18 Playwright-/WCAG-Szenarien einschließlich aller fünf Browser-Roundtrips
+- Lighthouse-Runner mit reproduzierbaren Desktop-Grenzwerten und Berichten
+- sichtbare WASM-Ladezustände und bis zur Initialisierung deaktivierte Controls
+- Anforderungs-/Nachweismatrix, Zeitnachweis, Demo-Drehbuch und Prüfungsfragen
+- finaler Projektbericht und Präsentationsartefakte unter `docs/abgabe/`
+
+### Geändert
+
+- lokale Skripte und CI führen denselben vollständigen Qualitätsweg aus
+- wasm-pack ist reproduzierbar auf die erfolgreich geprüfte Version 0.14.0 festgelegt
+- Release-Workflow ist manuell und erzeugt ausschließlich den aktuellen Release-Tag
+- Dokumentation und Messwerte wurden mit dem finalen Quellstand synchronisiert
+
+### Behoben
+
+- veralteter Healthcheck-Marker in Start- und Lighthouse-Skripten
+- instabile hohe Playwright-Parallelität auf ressourcenbegrenzten Systemen
+- fehlender Ladezustand während der WASM-Initialisierung
+- fehlende Meta-Beschreibungen und Favicon-Anfragen
+
 ## 1.2.0 – Architektur und Qualität
 
 - strukturiertes Fehlermodell und validierte AEAD-Werttypen

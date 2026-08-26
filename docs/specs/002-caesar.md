@@ -4,6 +4,8 @@
 
 Benutzer können Texte mit einer Caesar-Verschiebung verschlüsseln und entschlüsseln.
 
+**IDs:** F-010, F-011, F-060 · **Priorität:** Muss · **Status:** umgesetzt
+
 ## Benutzeranforderungen
 
 Text eingeben, Schlüssel 1 bis 25 wählen, Ergebnis erhalten.
@@ -24,7 +26,8 @@ Schlüssel außerhalb 1 bis 25 wird abgelehnt.
 
 ## Tests
 
-`ABC` mit Schlüssel 3 ergibt `DEF`; Roundtrip wird geprüft.
+`ABC` mit Schlüssel 3 ergibt `DEF`. Geprüft werden Roundtrip, leerer Text, Whitespace, Unicode,
+Emoji, Mehrzeilentext und ungültige Schlüssel sowie der reale Browser-/WASM-Flow.
 
 ## Akzeptanzkriterien
 
@@ -33,4 +36,3 @@ Hin- und Rückverschlüsselung funktioniert ohne Seitenreload.
 ## Definition of Done
 
 Rust-Code, Tests, HTML-Seite und JS-Brücke sind vorhanden.
-

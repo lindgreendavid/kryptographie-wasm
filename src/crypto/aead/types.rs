@@ -87,8 +87,11 @@ impl AuthTag16 {
 /// Verfahrenunabhängiges Ergebnis für die Lernoberfläche.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct AeadEncryptionResult {
+    /// Base64-kodierter Geheimtext ohne den getrennten Authentifizierungstag.
     pub ciphertext: String,
+    /// Base64-kodierte, zufällig erzeugte 96-Bit-Nonce.
     pub nonce: String,
+    /// Base64-kodierter 128-Bit-Authentifizierungstag.
     pub tag: String,
 }
 
@@ -132,4 +135,25 @@ pub(super) fn encode_result(
 fn decode_exact<const SIZE: usize>(input: &str, error: CryptoError) -> CryptoResult<[u8; SIZE]> {
     let bytes = STANDARD.decode(input.trim()).map_err(|_| error)?;
     bytes.try_into().map_err(|_| error)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn unvollstaendiges_aead_ergebnis_wird_abgelehnt() {
+        assert_eq!(
+            split_encrypted(vec![0_u8; TAG_SIZE - 1]),
+            Err(CryptoError::IncompleteEncryptionResult)
+        );
+    }
+
+    #[test]
+    fn ciphertext_decoder_unterscheidet_ungueltiges_base64() {
+        assert_eq!(
+            decode_ciphertext("kein-base64!"),
+            Err(CryptoError::InvalidCiphertextBase64)
+        );
+    }
 }

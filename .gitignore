@@ -4,6 +4,10 @@
 node_modules/
 playwright-report/
 test-results/
+reports/coverage/
+reports/e2e/
+reports/lighthouse/
+.lighthouseci/
 .DS_Store
 Thumbs.db
 *.log
