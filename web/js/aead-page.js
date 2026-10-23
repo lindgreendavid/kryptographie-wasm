@@ -19,7 +19,7 @@ import { element, setDisabled, setText, setValue, showMessage, value } from "./d
 /**
  * Bindet eine AEAD-Seite an ihre WASM-Funktionen, ohne AES und ChaCha in der
  * fachlichen Rust-Schicht gleichzusetzen.
-
+ *
  * @param {AeadPageOptions} options - Verfahren und DOM-Präfix der Seite.
  * @returns {void}
  */

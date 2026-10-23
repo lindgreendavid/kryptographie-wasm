@@ -14,7 +14,7 @@ export function element(id) {
 
 /**
  * Liest den Wert eines Formularfelds.
-
+ *
  * @param {string} id - ID des Eingabefelds.
  * @returns {string} Aktueller Feldwert.
  */
@@ -32,7 +32,7 @@ export function value(id) {
 
 /**
  * Setzt den Wert eines Formularfelds.
-
+ *
  * @param {string} id - ID des Eingabefelds.
  * @param {string} text - Neuer Feldwert.
  * @returns {void}
@@ -51,7 +51,7 @@ export function setValue(id, text) {
 
 /**
  * Schreibt Text sicher in ein Ausgabeelement.
-
+ *
  * @param {string} id - ID des Ausgabeelements.
  * @param {string} text - Anzuzeigender Text.
  * @returns {void}
@@ -77,7 +77,7 @@ export function setDisabled(id, disabled) {
 
 /**
  * Aktualisiert eine Status- oder Fehlermeldung.
-
+ *
  * @param {string} id - ID des Meldungselements.
  * @param {string} message - Anzuzeigende Meldung.
  * @returns {void}

@@ -11,7 +11,7 @@ const exampleAlphabet = "QWERTZUIOPASDFGHJKLYXCVBNM";
 
 /**
  * Zeigt Normal- und Geheimalphabet als Zuordnungstabelle.
-
+ *
  * @param {string} secret - Geheimalphabet oder aktuelle Teileingabe.
  * @returns {void}
  */

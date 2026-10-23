@@ -7,7 +7,7 @@ function columns() {
 
 /**
  * Rendert die aus Rust gelieferte Skytale-Matrix.
-
+ *
  * @param {Array<Array<string | null>>} rows - Zeilen und optionale Leerzellen.
  * @returns {void}
  */
@@ -35,7 +35,7 @@ function renderTable(rows) {
 
 /**
  * Berechnet und aktualisiert die didaktische Tabellenansicht.
-
+ *
  * @param {string} input - Darzustellender Klartext.
  * @returns {void}
  */

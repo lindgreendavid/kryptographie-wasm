@@ -2,7 +2,7 @@ const themeStorageKey = "krypto-theme";
 
 /**
  * Speichert die gewählte Ansicht, sofern Web Storage verfügbar ist.
-
+ *
  * @param {string} theme - Name der Ansicht.
  * @returns {void}
  */
@@ -24,7 +24,7 @@ function loadTheme() {
 
 /**
  * Aktiviert eine geprüfte Ansicht und synchronisiert die Schaltflächen.
-
+ *
  * @param {string} theme - Gewünschte Ansicht.
  * @returns {void}
  */
