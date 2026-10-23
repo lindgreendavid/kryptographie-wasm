@@ -4,9 +4,7 @@ import path from "node:path";
 const artifactToolSpecifier = process.env.ARTIFACT_TOOL_MODULE ?? "@oai/artifact-tool";
 const { Presentation, PresentationFile } = await import(artifactToolSpecifier);
 
-const ROOT = process.env.PROJECT_ROOT
-    ? path.resolve(process.env.PROJECT_ROOT)
-    : process.cwd();
+const ROOT = process.env.PROJECT_ROOT ? path.resolve(process.env.PROJECT_ROOT) : process.cwd();
 const OUTPUT = process.env.PRESENTATION_OUTPUT_DIR
     ? path.resolve(process.env.PRESENTATION_OUTPUT_DIR)
     : path.join(ROOT, "docs", "abgabe");
